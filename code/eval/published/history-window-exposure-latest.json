@@ -1,0 +1,144 @@
+{
+  "id": "E17",
+  "title": "What a forward-only grant withholds, measured on real repositories",
+  "meta": {
+    "generated_by": "scripts/history_window_exposure.py",
+    "method": "object-graph reachability over real corpora: blobs and paths reachable from history but not from the tip tree",
+    "reps": 1,
+    "machine": "AWS Graviton4 (c8g.8xlarge)",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "AWS Graviton4 (c8g.8xlarge)",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-19T02:15:11.399605+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-19T02:15:31.701993+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "definition": {
+    "withheld": "A forward-only member receives a grafted snapshot of the tip, so it sees every blob and path reachable from HEAD. What the window withholds is the complement: superseded blob versions and paths deleted before the join epoch.",
+    "not_withheld": "Current code, current secrets, and the present directory structure are all disclosed by the grafted snapshot. A history window bounds historical exposure, not present exposure."
+  },
+  "cells": [
+    {
+      "repository": "click",
+      "commits": 3328,
+      "blobs_in_tip": 162,
+      "blobs_in_history": 5466,
+      "blobs_history_only": 5304,
+      "fraction_of_blobs_withheld_by_forward_only": 0.9704,
+      "paths_in_tip": 165,
+      "paths_ever_present": 298,
+      "paths_deleted_before_tip": 136,
+      "fraction_of_paths_withheld_by_forward_only": 0.4564,
+      "secret_markers_history_only": {
+        "aws_access_key_id": 0,
+        "github_token": 0,
+        "slack_token": 0,
+        "private_key_block": 0,
+        "google_api_key": 0
+      },
+      "secret_markers_in_tip": {
+        "aws_access_key_id": 0,
+        "github_token": 0,
+        "slack_token": 0,
+        "private_key_block": 0,
+        "google_api_key": 0
+      },
+      "secret_markers_scanned_blobs": 5304,
+      "secret_scan_capped": false,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "repository": "ripgrep-full",
+      "commits": 2327,
+      "blobs_in_tip": 214,
+      "blobs_in_history": 5112,
+      "blobs_history_only": 4898,
+      "fraction_of_blobs_withheld_by_forward_only": 0.9581,
+      "paths_in_tip": 237,
+      "paths_ever_present": 401,
+      "paths_deleted_before_tip": 187,
+      "fraction_of_paths_withheld_by_forward_only": 0.4663,
+      "secret_markers_history_only": {
+        "aws_access_key_id": 0,
+        "github_token": 0,
+        "slack_token": 0,
+        "private_key_block": 0,
+        "google_api_key": 0
+      },
+      "secret_markers_in_tip": {
+        "aws_access_key_id": 0,
+        "github_token": 0,
+        "slack_token": 0,
+        "private_key_block": 0,
+        "google_api_key": 0
+      },
+      "secret_markers_scanned_blobs": 4898,
+      "secret_scan_capped": false,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "repository": "git",
+      "commits": 85328,
+      "blobs_in_tip": 4730,
+      "blobs_in_history": 165204,
+      "blobs_history_only": 160474,
+      "fraction_of_blobs_withheld_by_forward_only": 0.9714,
+      "paths_in_tip": 4846,
+      "paths_ever_present": 6975,
+      "paths_deleted_before_tip": 2244,
+      "fraction_of_paths_withheld_by_forward_only": 0.3217,
+      "secret_markers_history_only": {
+        "aws_access_key_id": 0,
+        "github_token": 0,
+        "slack_token": 0,
+        "private_key_block": 0,
+        "google_api_key": 0
+      },
+      "secret_markers_in_tip": {
+        "aws_access_key_id": 0,
+        "github_token": 0,
+        "slack_token": 0,
+        "private_key_block": 1,
+        "google_api_key": 0
+      },
+      "secret_markers_scanned_blobs": 20000,
+      "secret_scan_capped": true,
+      "measured": true,
+      "status": "measured"
+    }
+  ],
+  "notes": [
+    "Structural counts are the primary result and cannot be empty for an uninteresting reason.",
+    "Secret-marker counts are secondary: public repositories are routinely scrubbed, so a low count is evidence about public corpora rather than about the mechanism. Meli et al. (2019) is the motivating evidence for the secrets case.",
+    "Only high-confidence patterns are counted; a broad entropy sweep would inflate the count with minified assets and test vectors."
+  ]
+}

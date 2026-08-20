@@ -1,0 +1,30 @@
+[package]
+name = "safehub-eval"
+description = "Evaluation harness: fixture generator, smoke runner, paper timing driver"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+
+[[bin]]
+name = "safehub-eval"
+path = "src/main.rs"
+
+[dependencies]
+anyhow.workspace = true
+blake3.workspace = true
+chrono.workspace = true
+clap.workspace = true
+hex.workspace = true
+rand.workspace = true
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
+sha2.workspace = true
+# Prefer real Category-5 OpenMLS timings for the join sweep.
+safehub-crypto = { workspace = true, features = ["openmls"] }
+safehub-types.workspace = true
+tempfile = "3"
+
+[dev-dependencies]
+tempfile = "3"

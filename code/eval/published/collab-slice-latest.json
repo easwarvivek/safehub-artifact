@@ -1,0 +1,275 @@
+{
+  "id": "E13",
+  "title": "Collaboration slice: issue/PR comment crypto + fanout",
+  "meta": {
+    "generated_by": "scripts/gen_collab_slice_latest.py",
+    "method": "comment seal/open calibrated to measured AEAD; fanout modeled vs n",
+    "reps": 7,
+    "machine": "AWS Graviton4 (c8g.8xlarge)",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "AWS Graviton4 (c8g.8xlarge)",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-19T03:16:14.265696+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-19T03:16:34.321341+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "aead_anchor": {
+    "seal_1kib_ms": 0.011899,
+    "open_1kib_ms": 0.01183,
+    "seal_1mib_ms": 8.086611,
+    "status": "measured",
+    "source": "code/eval/published/smoke-latest.json"
+  },
+  "comment_seal_open": [
+    {
+      "path": "issue_comment_1kib",
+      "plaintext_bytes": 1024,
+      "seal_ms": {
+        "value": 0.0119,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "open_ms": {
+        "value": 0.0118,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "proxy_shape_seal_ms": {
+        "n": 7,
+        "unit": "ms",
+        "median": 0.0743,
+        "p25": 0.0736,
+        "p75": 0.0745,
+        "iqr": 0.0009,
+        "mean": 0.0785,
+        "stdev": 0.0122,
+        "ci95_half_width": 0.009,
+        "min": 0.0731,
+        "max": 0.1061,
+        "samples": [
+          0.1061,
+          0.0745,
+          0.0739,
+          0.0731,
+          0.0733,
+          0.0744,
+          0.0743
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Calibrated to measured CommittingAead 1KiB seal/open (code/eval/published/smoke-latest.json); linear in comment size."
+    },
+    {
+      "path": "pr_comment_4kib",
+      "plaintext_bytes": 4096,
+      "seal_ms": {
+        "value": 0.0476,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "open_ms": {
+        "value": 0.0473,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "proxy_shape_seal_ms": {
+        "n": 7,
+        "unit": "ms",
+        "median": 0.2877,
+        "p25": 0.2865,
+        "p75": 0.2924,
+        "iqr": 0.0059,
+        "mean": 0.294,
+        "stdev": 0.0147,
+        "ci95_half_width": 0.0109,
+        "min": 0.2858,
+        "max": 0.3265,
+        "samples": [
+          0.3265,
+          0.2892,
+          0.2858,
+          0.2858,
+          0.2877,
+          0.2956,
+          0.2872
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Calibrated to measured CommittingAead 1KiB seal/open (code/eval/published/smoke-latest.json); linear in comment size."
+    },
+    {
+      "path": "pr_review_16kib",
+      "plaintext_bytes": 16384,
+      "seal_ms": {
+        "value": 0.1904,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "open_ms": {
+        "value": 0.1893,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "proxy_shape_seal_ms": {
+        "n": 7,
+        "unit": "ms",
+        "median": 1.1338,
+        "p25": 1.1293,
+        "p75": 1.1376,
+        "iqr": 0.0083,
+        "mean": 1.1332,
+        "stdev": 0.0055,
+        "ci95_half_width": 0.0041,
+        "min": 1.1255,
+        "max": 1.1395,
+        "samples": [
+          1.1395,
+          1.1359,
+          1.131,
+          1.1255,
+          1.1276,
+          1.1392,
+          1.1338
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Calibrated to measured CommittingAead 1KiB seal/open (code/eval/published/smoke-latest.json); linear in comment size."
+    }
+  ],
+  "fanout_vs_group_size": [
+    {
+      "group_size_n": 3,
+      "comment_bytes": 4096,
+      "fanout_ms": {
+        "value": 0.1422,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "model": "seal_once + (n-1)*open",
+      "status": "model",
+      "label": "model",
+      "note": "Application-message fanout lower bound from AEAD rates; excludes MLS framing / DS delivery latency."
+    },
+    {
+      "group_size_n": 10,
+      "comment_bytes": 4096,
+      "fanout_ms": {
+        "value": 0.4735,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "model": "seal_once + (n-1)*open",
+      "status": "model",
+      "label": "model",
+      "note": "Application-message fanout lower bound from AEAD rates; excludes MLS framing / DS delivery latency."
+    },
+    {
+      "group_size_n": 30,
+      "comment_bytes": 4096,
+      "fanout_ms": {
+        "value": 1.4199,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "model": "seal_once + (n-1)*open",
+      "status": "model",
+      "label": "model",
+      "note": "Application-message fanout lower bound from AEAD rates; excludes MLS framing / DS delivery latency."
+    },
+    {
+      "group_size_n": 50,
+      "comment_bytes": 4096,
+      "fanout_ms": {
+        "value": 2.3663,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "model": "seal_once + (n-1)*open",
+      "status": "model",
+      "label": "model",
+      "note": "Application-message fanout lower bound from AEAD rates; excludes MLS framing / DS delivery latency."
+    },
+    {
+      "group_size_n": 100,
+      "comment_bytes": 4096,
+      "fanout_ms": {
+        "value": 4.7323,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "model": "seal_once + (n-1)*open",
+      "status": "model",
+      "label": "model",
+      "note": "Application-message fanout lower bound from AEAD rates; excludes MLS framing / DS delivery latency."
+    }
+  ],
+  "notes": [
+    "Collab surfaces exist in safehub-browse/CLI; this artifact supplies the missing microbench evidence for Table III / conclusion."
+  ]
+}

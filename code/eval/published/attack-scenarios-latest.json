@@ -1,0 +1,209 @@
+{
+  "id": "E12",
+  "title": "Attack / scenario table (rebuilt)",
+  "meta": {
+    "generated_by": "scripts/gen_attack_scenarios_latest.py",
+    "method": "relabel S1\u2013S7; reframe S6; add S8\u2013S11 with analytic/design labels",
+    "reps": 5,
+    "machine": "AWS Graviton4 (c8g.8xlarge)",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "AWS Graviton4 (c8g.8xlarge)",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-19T03:16:54.471140+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-19T03:17:14.526592+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "label_legend": {
+    "measured": "wall-clock or harness outcome on this artifact",
+    "design-enforced": "enforced by protocol/design; timing optional",
+    "analytic": "threat analysis / deployment prescription; no E2E cell"
+  },
+  "rows": [
+    {
+      "id": "S1",
+      "name": "Malicious-host fork / tip equivocation",
+      "mechanism": "Encrypted RefHead hash chain + verify + ML-DSA leaf sig",
+      "outcome": "detectable",
+      "evidence_ms": {
+        "value": 0.5,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Harness injects broken prev_head_hash; verify detects."
+    },
+    {
+      "id": "S2",
+      "name": "Removed member + server collusion",
+      "mechanism": "Membership revoke \u2192 HTTP 403; DKR forward-block",
+      "outcome": "prevented",
+      "evidence_ms": {
+        "value": 19.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured"
+    },
+    {
+      "id": "S3",
+      "name": "Forward-only / CI history containment",
+      "mechanism": "DKR window + grafted forward-only invite",
+      "outcome": "contained",
+      "evidence_ms": {
+        "value": 38.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured"
+    },
+    {
+      "id": "S4",
+      "name": "Force-push without admin co-signature",
+      "mechanism": "Verifier FF check + ML-DSA-87 admin_cosig",
+      "outcome": "rejected",
+      "evidence_ms": {
+        "value": 178.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured"
+    },
+    {
+      "id": "S5",
+      "name": "Concurrent push / CAS rollback race",
+      "mechanism": "Server CAS on H(head) + client retry (\u22648)",
+      "outcome": "recovered",
+      "evidence_ms": {
+        "value": 64.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured"
+    },
+    {
+      "id": "S6",
+      "name": "Post-Remove ciphertext lag until consolidation",
+      "mechanism": "Immediate rotate; tip consolidate available; full-history rewrite optional if lag allowed",
+      "outcome": "lag-until-consolidate",
+      "evidence_ms": {
+        "value": 216.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "design-enforced",
+      "label": "design-enforced",
+      "note": "Reframed from prior 'compaction' row: revocation is immediate for membership; storage rewrite is best-effort / scheduled."
+    },
+    {
+      "id": "S7",
+      "name": "Stale tip / rollback to old seq",
+      "mechanism": "Hash-chained RefHead + client anchors",
+      "outcome": "detectable",
+      "evidence_ms": {
+        "value": 0.5,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured"
+    },
+    {
+      "id": "S8",
+      "name": "KeyPackage substitution by host-as-IdP",
+      "mechanism": "External IdP / KT / safety numbers required in deployment; Theorem 1 hybrid assumes authentic KeyPackages via F_ca",
+      "outcome": "out-of-scope-without-KT",
+      "evidence_ms": null,
+      "status": "analytic",
+      "label": "analytic",
+      "note": "Host substituting KeyPackages yields plaintext under TOFU. Not prevented by core protocol alone; deployment must-do."
+    },
+    {
+      "id": "S9",
+      "name": "Selective-acceptance / MLS DS partition",
+      "mechanism": "mls_epoch-bound RefHead; Compare raises Forked on divergence",
+      "outcome": "detectable-under-compare",
+      "evidence_ms": null,
+      "status": "design-enforced",
+      "label": "design-enforced",
+      "note": "Malicious DS Commit partition surfaces when honest members Compare; silent subgroup divergence blocked by epoch binding."
+    },
+    {
+      "id": "S10",
+      "name": "Malicious-member consolidation",
+      "mechanism": "Restrict consolidators (admin/threshold) + window-verifiable bindings (upgrade path)",
+      "outcome": "rejected-or-unverified",
+      "evidence_ms": null,
+      "status": "analytic",
+      "label": "analytic",
+      "note": "Window-limited members cannot check outside win(u); design requires consolidator restriction / binding upgrade (C07)."
+    },
+    {
+      "id": "S11",
+      "name": "Grafted-member force-push / incomplete FF",
+      "mechanism": "Grafted verifiers must-reject non_ff when ancestry incomplete",
+      "outcome": "rejected",
+      "evidence_ms": null,
+      "status": "design-enforced",
+      "label": "design-enforced",
+      "note": "FF-under-graft policy: unverifiable ancestry \u21d2 reject (or require admin cosig). Matches C05 upgrade."
+    }
+  ],
+  "prior_scenarios_retained_count": 7,
+  "notes": [
+    "S6 reframed (not dropped): honest-storage lag is design, not a failed prevention claim.",
+    "S8\u2013S11 close the Downloads C4 gap."
+  ]
+}

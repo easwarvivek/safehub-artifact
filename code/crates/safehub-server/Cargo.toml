@@ -1,0 +1,48 @@
+[package]
+name = "safehub-server"
+description = "SafeHub server: blob store, head log, MLS delivery over HTTP"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "safehub-server"
+path = "src/main.rs"
+
+[[bin]]
+name = "safehub-local-ui"
+path = "src/bin/safehub-local-ui.rs"
+
+[lib]
+name = "safehub_server"
+path = "src/lib.rs"
+
+[dependencies]
+safehub-api.workspace = true
+safehub-storage.workspace = true
+safehub-types.workspace = true
+anyhow.workspace = true
+argon2 = { version = "0.5", features = ["std"] }
+axum.workspace = true
+base64.workspace = true
+bytes.workspace = true
+chrono.workspace = true
+clap.workspace = true
+hex.workspace = true
+blake3.workspace = true
+rand.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+uuid.workspace = true
+
+[dev-dependencies]
+http-body-util = "0.1"
+tempfile = "3"
+tower = { workspace = true, features = ["util"] }

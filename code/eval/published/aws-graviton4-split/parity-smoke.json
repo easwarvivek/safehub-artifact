@@ -1,0 +1,161 @@
+{
+  "mode": "git-parity-phase1",
+  "sizes": [
+    {
+      "size_mb": 5,
+      "files": 100,
+      "pushes": 10,
+      "delta_bytes": 524288,
+      "status": "measured",
+      "safehub": {
+        "push_ms": {
+          "n": 10,
+          "sum": 594,
+          "mean": 59.4,
+          "median": 59.5,
+          "p95": 62
+        },
+        "pull_ms": {
+          "n": 10,
+          "sum": 402,
+          "mean": 40.2,
+          "median": 40.5,
+          "p95": 42
+        },
+        "clone_cold_ms": 187,
+        "clone_warm_ms": [
+          187,
+          188
+        ],
+        "fetch_ms": 18,
+        "fetch_samples": [
+          18,
+          18,
+          18,
+          18,
+          18
+        ],
+        "fixed_cost_ms": 18,
+        "server_bytes": 6899278,
+        "headlog_bytes": 75040
+      },
+      "git": {
+        "push_ms": {
+          "n": 10,
+          "sum": 553,
+          "mean": 55.3,
+          "median": 50.0,
+          "p95": 106
+        },
+        "pull_ms": {
+          "n": 10,
+          "sum": 1137,
+          "mean": 113.7,
+          "median": 105.0,
+          "p95": 153
+        },
+        "clone_cold_ms": 571,
+        "clone_warm_ms": [
+          576,
+          574
+        ],
+        "fetch_ms": 65.8,
+        "fetch_samples": [
+          61,
+          64,
+          65,
+          74,
+          65
+        ],
+        "fixed_cost_ms": 65.8,
+        "server_bytes": 6823750,
+        "gc_ms": 14,
+        "server_bytes_packed": 6823750,
+        "clone_packed_ms": 572
+      },
+      "raw": {
+        "sit_push": [
+          59,
+          61,
+          59,
+          58,
+          60,
+          62,
+          61,
+          61,
+          56,
+          57
+        ],
+        "sit_pull": [
+          36,
+          41,
+          42,
+          40,
+          41,
+          42,
+          39,
+          40,
+          40,
+          41
+        ],
+        "git_push": [
+          50,
+          49,
+          50,
+          51,
+          49,
+          50,
+          49,
+          49,
+          50,
+          106
+        ],
+        "git_pull": [
+          105,
+          103,
+          103,
+          102,
+          115,
+          153,
+          148,
+          105,
+          95,
+          108
+        ]
+      },
+      "identical_content": true,
+      "corrected": {
+        "note": "each system minus its own measured no-op floor; transport_delta_ms is sit floor minus git floor (signed)",
+        "transport_delta_ms": -47.8,
+        "sit_push_work_ms": 41.4,
+        "git_push_work_ms": 0.0,
+        "sit_pull_work_ms": 22.2,
+        "git_pull_work_ms": 47.9,
+        "corrected_basis_valid": false,
+        "corrected_basis_note": "a measured no-op floor exceeded the operation it corrects; corrected ratios are undefined for this cell"
+      },
+      "ratio": {
+        "push_mean": 1.074,
+        "push_steady": null,
+        "push_work": null,
+        "pull_work": 0.463,
+        "push_median": 1.19,
+        "push_total": 1.074,
+        "pull_mean": 0.354,
+        "pull_steady": null,
+        "pull_median": 0.386,
+        "clone_cold": 0.327,
+        "clone_vs_packed": 0.327,
+        "storage": 1.011,
+        "storage_vs_packed": 1.011
+      }
+    }
+  ],
+  "machine": {
+    "os": "Linux 6.1.177-224.371.amzn2023.aarch64",
+    "arch": "aarch64",
+    "git": "git version 2.50.1",
+    "load_before": "0.08, 0.95, 1.57",
+    "measured_at_utc": "2026-08-18T19:48:25Z"
+  }
+}

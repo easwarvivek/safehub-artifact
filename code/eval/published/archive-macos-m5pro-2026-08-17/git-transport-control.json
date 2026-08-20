@@ -1,0 +1,25 @@
+{
+  "delta_kb": 1024,
+  "pushes": 40,
+  "http": {
+    "n": 40,
+    "mean": 131,
+    "median": 130.0,
+    "sum": 5240
+  },
+  "daemon": {
+    "n": 40,
+    "mean": 96.7,
+    "median": 96.0,
+    "sum": 3867
+  },
+  "local": {
+    "n": 40,
+    "mean": 85.7,
+    "median": 85.5,
+    "sum": 3427
+  },
+  "wrapper_penalty_ms": 34.3,
+  "wrapper_penalty_x": 1.355,
+  "protocol_penalty_ms": 11.0
+}

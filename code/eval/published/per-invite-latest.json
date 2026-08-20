@@ -1,0 +1,261 @@
+{
+  "id": "E10",
+  "title": "Per-invite cost vs current group size n",
+  "meta": {
+    "generated_by": "scripts/gen_per_invite_latest.py",
+    "method": "marginalize measured cumulative OpenMLS join sweep; reconcile 28\u201338 ms",
+    "reps": 5,
+    "machine": "AWS Graviton4 (c8g.8xlarge)",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "AWS Graviton4 (c8g.8xlarge)",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-19T03:16:34.367975+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-19T03:16:54.423597+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "cells": [
+    {
+      "n": 10,
+      "cumulative_grow_1_to_n_ms": 150.0,
+      "marginal_per_invite_ms": {
+        "value": 16.6667,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 20,
+      "cumulative_grow_1_to_n_ms": 392.0,
+      "marginal_per_invite_ms": {
+        "value": 24.2,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 30,
+      "cumulative_grow_1_to_n_ms": 739.0,
+      "marginal_per_invite_ms": {
+        "value": 34.7,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 40,
+      "cumulative_grow_1_to_n_ms": 1155.0,
+      "marginal_per_invite_ms": {
+        "value": 41.6,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 50,
+      "cumulative_grow_1_to_n_ms": 1653.0,
+      "marginal_per_invite_ms": {
+        "value": 49.8,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 60,
+      "cumulative_grow_1_to_n_ms": 2223.0,
+      "marginal_per_invite_ms": {
+        "value": 57.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 70,
+      "cumulative_grow_1_to_n_ms": 2890.0,
+      "marginal_per_invite_ms": {
+        "value": 66.7,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 80,
+      "cumulative_grow_1_to_n_ms": 3663.0,
+      "marginal_per_invite_ms": {
+        "value": 77.3,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 90,
+      "cumulative_grow_1_to_n_ms": 4504.0,
+      "marginal_per_invite_ms": {
+        "value": 84.1,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 100,
+      "cumulative_grow_1_to_n_ms": 5412.0,
+      "marginal_per_invite_ms": {
+        "value": 90.8,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    }
+  ],
+  "reconciliation": {
+    "claim_28_38_ms": {
+      "range_ms": [
+        28,
+        38
+      ],
+      "refers_to": "Control-plane invite (~36\u201338 ms) and remove-member (~28 ms) on the localhost fullstack harness \u2014 NOT the marginal MLS add_member cost at large n.",
+      "control_plane_invite_ms": {
+        "value": 38.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "control_plane_invite_forward_only_ms": {
+        "value": 40.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "remove_member_ms": {
+        "value": 28.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "source": "fullstack-latest.json"
+    },
+    "why_table_vi_was_misleading": "Table VI reported cumulative grow 1\u2192n. Dividing by n understates late invites (tree grows). Publish marginal_per_invite_ms vs n.",
+    "marginal_at_n100_ms": {
+      "value": 90.8,
+      "unit": "ms",
+      "n": 1,
+      "dispersion": null,
+      "kind": "analytic",
+      "note": "analytically derived; no replicates, no synthesized spread"
+    },
+    "marginal_at_n10_ms": {
+      "value": 16.6667,
+      "unit": "ms",
+      "n": 1,
+      "dispersion": null,
+      "kind": "analytic",
+      "note": "analytically derived; no replicates, no synthesized spread"
+    }
+  },
+  "notes": [
+    "Conclusion language should cite control-plane 28\u201338 ms separately from MLS marginal cost, which increases with n."
+  ]
+}

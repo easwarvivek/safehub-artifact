@@ -1,0 +1,957 @@
+{
+  "id": "E02",
+  "title": "Size vs per-push delta, decoupled",
+  "meta": {
+    "generated_by": "scripts/gen_depth_delta_latest.py",
+    "method": "model cells from measured AEAD rates; optional e2e via SAFEHUB_DD_MODE=e2e ./scripts/e2e_depth_delta_sweep.sh",
+    "reps": 5,
+    "machine": "AWS Graviton4 (c8g.8xlarge)",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "AWS Graviton4 (c8g.8xlarge)",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-19T03:14:53.685355+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-19T03:15:13.741923+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "micro_anchor": {
+    "aead_seal_1mib_ms": {
+      "value": 8.0866,
+      "unit": "ms",
+      "n": 1,
+      "dispersion": null,
+      "kind": "analytic",
+      "note": "analytically derived; no replicates, no synthesized spread"
+    },
+    "aead_open_1mib_ms": {
+      "value": 8.0735,
+      "unit": "ms",
+      "n": 1,
+      "dispersion": null,
+      "kind": "analytic",
+      "note": "analytically derived; no replicates, no synthesized spread"
+    },
+    "status": "measured",
+    "label": "measured",
+    "source": "code/eval/published/smoke-latest.json",
+    "runs_in_source": 25
+  },
+  "methodology": {
+    "base_tree_mib": 4,
+    "arm_a": {
+      "name": "fixed-delta-varying-depth",
+      "fixed_delta_kib": 64,
+      "depths": [
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        40,
+        50,
+        75,
+        100
+      ]
+    },
+    "arm_b": {
+      "name": "fixed-depth-varying-delta",
+      "fixed_depth": 20,
+      "deltas_kib": [
+        8,
+        16,
+        32,
+        48,
+        64,
+        96,
+        128,
+        192,
+        256,
+        512,
+        1024
+      ]
+    },
+    "reps_per_cell": 5,
+    "payload": "source-shaped compressible text model (not random bytes)",
+    "e2e_harness": "scripts/e2e_depth_delta_sweep.sh"
+  },
+  "cells": [
+    {
+      "arm": "fixed-delta-varying-depth",
+      "history_depth": 5,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 327680,
+      "working_tree_bytes": 4521984,
+      "server_ciphertext_delta_bytes": 328772,
+      "ciphertext_bytes_per_push": 65754.4,
+      "ciphertext_over_delta": 1.0033,
+      "push_ms": {
+        "value": 8.6554,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 40.817,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.5046,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 8.1634,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-delta-varying-depth",
+      "history_depth": 10,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 655360,
+      "working_tree_bytes": 4849664,
+      "server_ciphertext_delta_bytes": 657452,
+      "ciphertext_bytes_per_push": 65745.2,
+      "ciphertext_over_delta": 1.0032,
+      "push_ms": {
+        "value": 8.6554,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 49.3399,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.5046,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 4.934,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-delta-varying-depth",
+      "history_depth": 15,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 983040,
+      "working_tree_bytes": 5177344,
+      "server_ciphertext_delta_bytes": 986132,
+      "ciphertext_bytes_per_push": 65742.1,
+      "ciphertext_over_delta": 1.0031,
+      "push_ms": {
+        "value": 8.6554,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 57.8629,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.5046,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 3.8575,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-delta-varying-depth",
+      "history_depth": 20,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 1310720,
+      "working_tree_bytes": 5505024,
+      "server_ciphertext_delta_bytes": 1314812,
+      "ciphertext_bytes_per_push": 65740.6,
+      "ciphertext_over_delta": 1.0031,
+      "push_ms": {
+        "value": 8.6554,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 66.3859,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.5046,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 3.3193,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-delta-varying-depth",
+      "history_depth": 25,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 1638400,
+      "working_tree_bytes": 5832704,
+      "server_ciphertext_delta_bytes": 1643492,
+      "ciphertext_bytes_per_push": 65739.7,
+      "ciphertext_over_delta": 1.0031,
+      "push_ms": {
+        "value": 8.6554,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 74.9088,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.5046,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 2.9964,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-delta-varying-depth",
+      "history_depth": 30,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 1966080,
+      "working_tree_bytes": 6160384,
+      "server_ciphertext_delta_bytes": 1972172,
+      "ciphertext_bytes_per_push": 65739.1,
+      "ciphertext_over_delta": 1.0031,
+      "push_ms": {
+        "value": 8.6554,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 83.4318,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.5046,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 2.7811,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-delta-varying-depth",
+      "history_depth": 40,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 2621440,
+      "working_tree_bytes": 6815744,
+      "server_ciphertext_delta_bytes": 2629532,
+      "ciphertext_bytes_per_push": 65738.3,
+      "ciphertext_over_delta": 1.0031,
+      "push_ms": {
+        "value": 8.6554,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 100.4777,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.5046,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 2.5119,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-delta-varying-depth",
+      "history_depth": 50,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 3276800,
+      "working_tree_bytes": 7471104,
+      "server_ciphertext_delta_bytes": 3286892,
+      "ciphertext_bytes_per_push": 65737.8,
+      "ciphertext_over_delta": 1.0031,
+      "push_ms": {
+        "value": 8.6554,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 117.5237,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.5046,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 2.3505,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-delta-varying-depth",
+      "history_depth": 75,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 4915200,
+      "working_tree_bytes": 9109504,
+      "server_ciphertext_delta_bytes": 4930384,
+      "ciphertext_bytes_per_push": 65738.5,
+      "ciphertext_over_delta": 1.0031,
+      "push_ms": {
+        "value": 8.6554,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 160.1385,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.5046,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 2.1352,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-delta-varying-depth",
+      "history_depth": 100,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 6553600,
+      "working_tree_bytes": 10747904,
+      "server_ciphertext_delta_bytes": 6573784,
+      "ciphertext_bytes_per_push": 65737.8,
+      "ciphertext_over_delta": 1.0031,
+      "push_ms": {
+        "value": 8.6554,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 202.7534,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.5046,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 2.0275,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-depth-varying-delta",
+      "history_depth": 20,
+      "per_push_delta_kib": 8,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 163840,
+      "working_tree_bytes": 4358144,
+      "server_ciphertext_delta_bytes": 167932,
+      "ciphertext_bytes_per_push": 8396.6,
+      "ciphertext_over_delta": 1.025,
+      "push_ms": {
+        "value": 8.2132,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 57.5555,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.0631,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 2.8778,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-depth-varying-delta",
+      "history_depth": 20,
+      "per_push_delta_kib": 16,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 327680,
+      "working_tree_bytes": 4521984,
+      "server_ciphertext_delta_bytes": 331772,
+      "ciphertext_bytes_per_push": 16588.6,
+      "ciphertext_over_delta": 1.0125,
+      "push_ms": {
+        "value": 8.2764,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 58.817,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.1261,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 2.9409,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-depth-varying-delta",
+      "history_depth": 20,
+      "per_push_delta_kib": 32,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 655360,
+      "working_tree_bytes": 4849664,
+      "server_ciphertext_delta_bytes": 659452,
+      "ciphertext_bytes_per_push": 32972.6,
+      "ciphertext_over_delta": 1.0062,
+      "push_ms": {
+        "value": 8.4027,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 61.3399,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.2523,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 3.067,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-depth-varying-delta",
+      "history_depth": 20,
+      "per_push_delta_kib": 48,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 983040,
+      "working_tree_bytes": 5177344,
+      "server_ciphertext_delta_bytes": 987132,
+      "ciphertext_bytes_per_push": 49356.6,
+      "ciphertext_over_delta": 1.0042,
+      "push_ms": {
+        "value": 8.5291,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 63.8629,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.3784,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 3.1931,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-depth-varying-delta",
+      "history_depth": 20,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 1310720,
+      "working_tree_bytes": 5505024,
+      "server_ciphertext_delta_bytes": 1314812,
+      "ciphertext_bytes_per_push": 65740.6,
+      "ciphertext_over_delta": 1.0031,
+      "push_ms": {
+        "value": 8.6554,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 66.3859,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.5046,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 3.3193,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-depth-varying-delta",
+      "history_depth": 20,
+      "per_push_delta_kib": 96,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 1966080,
+      "working_tree_bytes": 6160384,
+      "server_ciphertext_delta_bytes": 1970172,
+      "ciphertext_bytes_per_push": 98508.6,
+      "ciphertext_over_delta": 1.0021,
+      "push_ms": {
+        "value": 8.9081,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 71.4318,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 5.7569,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 3.5716,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-depth-varying-delta",
+      "history_depth": 20,
+      "per_push_delta_kib": 128,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 2621440,
+      "working_tree_bytes": 6815744,
+      "server_ciphertext_delta_bytes": 2625532,
+      "ciphertext_bytes_per_push": 131276.6,
+      "ciphertext_over_delta": 1.0016,
+      "push_ms": {
+        "value": 9.1608,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 76.4777,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 6.0092,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 3.8239,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-depth-varying-delta",
+      "history_depth": 20,
+      "per_push_delta_kib": 192,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 3932160,
+      "working_tree_bytes": 8126464,
+      "server_ciphertext_delta_bytes": 3936252,
+      "ciphertext_bytes_per_push": 196812.6,
+      "ciphertext_over_delta": 1.001,
+      "push_ms": {
+        "value": 9.6662,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 86.5696,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 6.5138,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 4.3285,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-depth-varying-delta",
+      "history_depth": 20,
+      "per_push_delta_kib": 256,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 5242880,
+      "working_tree_bytes": 9437184,
+      "server_ciphertext_delta_bytes": 5247064,
+      "ciphertext_bytes_per_push": 262353.2,
+      "ciphertext_over_delta": 1.0008,
+      "push_ms": {
+        "value": 10.1717,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 96.6615,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 7.0184,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 4.8331,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-depth-varying-delta",
+      "history_depth": 20,
+      "per_push_delta_kib": 512,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 10485760,
+      "working_tree_bytes": 14680064,
+      "server_ciphertext_delta_bytes": 10490036,
+      "ciphertext_bytes_per_push": 524501.8,
+      "ciphertext_over_delta": 1.0004,
+      "push_ms": {
+        "value": 12.1933,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 137.029,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 9.0367,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 6.8514,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    },
+    {
+      "arm": "fixed-depth-varying-delta",
+      "history_depth": 20,
+      "per_push_delta_kib": 1024,
+      "base_tree_mib": 4,
+      "total_delta_bytes": 20971520,
+      "working_tree_bytes": 25165824,
+      "server_ciphertext_delta_bytes": 20975980,
+      "ciphertext_bytes_per_push": 1048799.0,
+      "ciphertext_over_delta": 1.0002,
+      "push_ms": {
+        "value": 16.2366,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms": {
+        "value": 217.764,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "fetch_ms": {
+        "value": 13.0735,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "clone_ms_per_head": 10.8882,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "Analytical fullstack push/clone from measured AEAD seal/open rates (code/eval/published/smoke-latest.json); control-plane constants from prior E2E."
+    }
+  ],
+  "attribution": {
+    "clone_ms_per_extra_head": 1.7046,
+    "push_ms_per_extra_kib_of_delta": 0.0079,
+    "ciphertext_bytes_per_extra_kib_of_delta": 1024.019,
+    "note": "Arm A holds delta constant so trend is depth; arm B holds depth constant so trend is delta. Slopes are least-squares over medians."
+  },
+  "notes": [
+    "Existing size sweep remains in additive-scale-latest.json (additive).",
+    "All fullstack cells are status=model; AEAD micro_anchor is measured.",
+    "Re-run with SAFEHUB_DD_MODE=e2e for wall-clock sit:// cells."
+  ]
+}

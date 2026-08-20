@@ -1,0 +1,72 @@
+{
+  "mode": "smoke",
+  "machine": {
+    "os": "linux",
+    "arch": "aarch64",
+    "hostname": "ip-10-90-133-86.us-west-1.compute.internal",
+    "cpu_hint": "AWS Graviton4 (c8g.8xlarge)",
+    "build_profile": "release",
+    "measured_at": "2026-08-19T01:36:17.151791723+00:00",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "hardware_aes_likely": false,
+    "rustc_release": "release: 1.97.1"
+  },
+  "experimental": {
+    "narrative_collaborators": 3,
+    "target_files": 200,
+    "size_sweep_mib": [
+      5,
+      10,
+      50,
+      100,
+      200,
+      250,
+      300
+    ],
+    "join_sweep": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+    ]
+  },
+  "fixtures": [
+    {
+      "path": "eval/results/tmp-smoke-eval/fixture-smoke",
+      "file_count": 22,
+      "total_bytes": 1050250,
+      "commit_depth": 5,
+      "seed": 1526657037,
+      "content_hash": "2902eccbcfce930394048a77b6d138c07f7b2f1af7c9c1c23f6b4f75e9b95c41",
+      "target_files": 20,
+      "target_bytes": 1048576
+    }
+  ],
+  "micro": {
+    "aead_seal_1kib_ns": 11899,
+    "aead_open_1kib_ns": 11830,
+    "aead_seal_1mib_ns": 8086611,
+    "aead_open_1mib_ns": 8073498,
+    "refhead_hash_ns": 1035,
+    "head_verify_100_ns": 197553,
+    "runs": 25,
+    "warmups": 3,
+    "median_of": 25,
+    "build_profile": "release",
+    "status": "measured"
+  },
+  "size_ops": [],
+  "join_ops": [],
+  "notes": [
+    "Smoke uses reduced fixture (20 files / 1 MiB).",
+    "Full size sweep: 5/10/50/100/200/250/300 MiB (E2E via --mode full-stack).",
+    "Join sweep: n=10..100 step 10 via OpenMLS Category-5."
+  ],
+  "elapsed_ms": 483
+}

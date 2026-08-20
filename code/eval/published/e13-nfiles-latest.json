@@ -1,0 +1,463 @@
+{
+  "id": "E13-A3",
+  "title": "Update cost versus number of files touched",
+  "meta": {
+    "generated_by": "scripts/e2e_e13_edit.sh",
+    "method": "wall-clock E2E; four arms on identical content per point; every operation asserts a DAG or working-tree postcondition; corrected values use that operation's own zero-payload floor on that same tool",
+    "reps": 3,
+    "machine": "Apple M5 Pro",
+    "machine_detail": {
+      "os": "darwin",
+      "os_release": "25.5.0",
+      "arch": "arm64",
+      "cpu_hint": "Apple M5 Pro",
+      "cpu_count": 18,
+      "ram_bytes": 51539607552,
+      "ram_gib": 48.0,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.6",
+      "measured_at": "2026-08-19T20:15:16.957306+00:00"
+    },
+    "provenance": {
+      "git_commit": "599bd82d3c90f60052cc30845aff279136f6d0c9",
+      "git_describe": "599bd82-dirty",
+      "git_dirty": true,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1 (Apple Git-155)",
+      "mls_ciphersuite": "MLS_256_MLKEM1024_AES256GCM_SHA512_MLDSA87",
+      "mls_backend": "vendored OpenMLS (draft-ietf-mls-pq-ciphersuites)",
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": [
+        "openmls",
+        "stub"
+      ],
+      "stub_linked": true
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-19T20:15:17.468529+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "axis": {
+    "mode": "nfiles",
+    "arms": [
+      "gcrypt",
+      "git",
+      "gitcrypt",
+      "safehub",
+      "sgitchar",
+      "sgitline"
+    ],
+    "reps": 3,
+    "gcrypt_reps": 1,
+    "note": "Cells do not share an n: gcrypt is measured with fewer repetitions, so each cell records its own n and every ratio spans two. Raw samples are retained per cell so gcrypt can be topped up later without re-running the other arms."
+  },
+  "predicted_shape": "all rise; git-crypt's slope ~ (file size / edit size) times the others",
+  "cells": [
+    {
+      "arm": "git",
+      "mode": "nfiles",
+      "point": 20,
+      "bytes_changed": 20480,
+      "base_repo_mb": 1,
+      "edit_kib": 1,
+      "nfile_kib": 100,
+      "reps_requested": 3,
+      "update_ms": {
+        "n": 3,
+        "median": 126.0,
+        "p25": 125.0,
+        "p75": 131.5,
+        "iqr": 6.5,
+        "mean": 129.0,
+        "stdev": 7.0,
+        "ci95_half_width": 7.921,
+        "min": 124.0,
+        "max": 137.0,
+        "samples": [
+          137.0,
+          124.0,
+          126.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "update_floor_ms": {
+        "n": 3,
+        "median": 35.0,
+        "p25": 34.5,
+        "p75": 35.0,
+        "iqr": 0.5,
+        "mean": 34.667,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 34.0,
+        "max": 35.0,
+        "samples": [
+          35.0,
+          34.0,
+          35.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "push_noop",
+      "update_corrected_ms": 91.0,
+      "n_update": 3,
+      "thin_dispersion": true,
+      "remote_bytes_before": 246015,
+      "remote_bytes_after": 417821,
+      "remote_growth_bytes": 171806,
+      "wire_bytes_total": 19856,
+      "measured": true,
+      "status": "measured",
+      "wire_bytes_per_update": 6618.7,
+      "remote_growth_per_update": 57268.7
+    },
+    {
+      "arm": "gitcrypt",
+      "mode": "nfiles",
+      "point": 20,
+      "bytes_changed": 20480,
+      "base_repo_mb": 1,
+      "edit_kib": 1,
+      "nfile_kib": 100,
+      "reps_requested": 3,
+      "update_ms": {
+        "n": 3,
+        "median": 669.0,
+        "p25": 647.0,
+        "p75": 671.0,
+        "iqr": 24.0,
+        "mean": 655.667,
+        "stdev": 26.633,
+        "ci95_half_width": 30.138,
+        "min": 625.0,
+        "max": 673.0,
+        "samples": [
+          625.0,
+          673.0,
+          669.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "update_floor_ms": {
+        "n": 3,
+        "median": 35.0,
+        "p25": 35.0,
+        "p75": 35.0,
+        "iqr": 0.0,
+        "mean": 35.0,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 35.0,
+        "max": 35.0,
+        "samples": [
+          35.0,
+          35.0,
+          35.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "push_noop",
+      "update_corrected_ms": 634.0,
+      "n_update": 3,
+      "thin_dispersion": true,
+      "remote_bytes_before": 3105668,
+      "remote_bytes_after": 9261742,
+      "remote_growth_bytes": 6156074,
+      "wire_bytes_total": 6153184,
+      "measured": true,
+      "status": "measured",
+      "wire_bytes_per_update": 2051061.3,
+      "remote_growth_per_update": 2052024.7
+    },
+    {
+      "arm": "gcrypt",
+      "mode": "nfiles",
+      "point": 20,
+      "bytes_changed": 20480,
+      "base_repo_mb": 1,
+      "edit_kib": 1,
+      "nfile_kib": 100,
+      "reps_requested": 1,
+      "update_ms": {
+        "n": 1,
+        "median": 531.0,
+        "p25": 531.0,
+        "p75": 531.0,
+        "iqr": 0.0,
+        "mean": 531.0,
+        "stdev": 0.0,
+        "ci95_half_width": null,
+        "min": 531.0,
+        "max": 531.0,
+        "samples": [
+          531.0
+        ],
+        "dispersion": "single shot (label microbench-only)"
+      },
+      "update_floor_ms": {
+        "n": 3,
+        "median": 197.0,
+        "p25": 196.5,
+        "p75": 199.5,
+        "iqr": 3.0,
+        "mean": 198.333,
+        "stdev": 3.215,
+        "ci95_half_width": 3.638,
+        "min": 196.0,
+        "max": 202.0,
+        "samples": [
+          196.0,
+          197.0,
+          202.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "push_noop",
+      "update_corrected_ms": 334.0,
+      "n_update": 1,
+      "thin_dispersion": true,
+      "remote_bytes_before": 246335,
+      "remote_bytes_after": 411888,
+      "remote_growth_bytes": 165553,
+      "wire_bytes_total": null,
+      "measured": true,
+      "status": "measured",
+      "wire_bytes_per_update": null,
+      "remote_growth_per_update": 165553.0
+    },
+    {
+      "arm": "safehub",
+      "mode": "nfiles",
+      "point": 20,
+      "bytes_changed": 20480,
+      "base_repo_mb": 1,
+      "edit_kib": 1,
+      "nfile_kib": 100,
+      "reps_requested": 3,
+      "update_ms": {
+        "n": 3,
+        "median": 141.0,
+        "p25": 140.5,
+        "p75": 142.5,
+        "iqr": 2.0,
+        "mean": 141.667,
+        "stdev": 2.082,
+        "ci95_half_width": 2.356,
+        "min": 140.0,
+        "max": 144.0,
+        "samples": [
+          144.0,
+          141.0,
+          140.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "update_floor_ms": {
+        "n": 3,
+        "median": 33.0,
+        "p25": 32.0,
+        "p75": 33.5,
+        "iqr": 1.5,
+        "mean": 32.667,
+        "stdev": 1.528,
+        "ci95_half_width": 1.729,
+        "min": 31.0,
+        "max": 34.0,
+        "samples": [
+          34.0,
+          31.0,
+          33.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "push_noop",
+      "update_corrected_ms": 108.0,
+      "n_update": 3,
+      "thin_dispersion": true,
+      "remote_bytes_before": 275075,
+      "remote_bytes_after": 312416,
+      "remote_growth_bytes": 37341,
+      "wire_bytes_total": null,
+      "measured": true,
+      "status": "measured",
+      "wire_bytes_per_update": null,
+      "remote_growth_per_update": 12447.0
+    },
+    {
+      "arm": "sgitchar",
+      "mode": "nfiles",
+      "point": 20,
+      "bytes_changed": 20480,
+      "base_repo_mb": 1,
+      "edit_kib": 1,
+      "nfile_kib": 100,
+      "reps_requested": 3,
+      "update_ms": {
+        "n": 3,
+        "median": 339.0,
+        "p25": 337.5,
+        "p75": 342.0,
+        "iqr": 4.5,
+        "mean": 340.0,
+        "stdev": 4.583,
+        "ci95_half_width": 5.186,
+        "min": 336.0,
+        "max": 345.0,
+        "samples": [
+          339.0,
+          336.0,
+          345.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "update_floor_ms": {
+        "n": 3,
+        "median": 41.0,
+        "p25": 40.5,
+        "p75": 41.0,
+        "iqr": 0.5,
+        "mean": 40.667,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 40.0,
+        "max": 41.0,
+        "samples": [
+          40.0,
+          41.0,
+          41.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "push_noop",
+      "update_corrected_ms": 298.0,
+      "n_update": 3,
+      "thin_dispersion": true,
+      "remote_bytes_before": 3137253,
+      "remote_bytes_after": 3686928,
+      "remote_growth_bytes": 549675,
+      "wire_bytes_total": 554237,
+      "measured": true,
+      "status": "measured",
+      "wire_bytes_per_update": 184745.7,
+      "remote_growth_per_update": 183225.0
+    },
+    {
+      "arm": "sgitline",
+      "mode": "nfiles",
+      "point": 20,
+      "bytes_changed": 20480,
+      "base_repo_mb": 1,
+      "edit_kib": 1,
+      "nfile_kib": 100,
+      "reps_requested": 3,
+      "update_ms": {
+        "n": 3,
+        "median": 638.0,
+        "p25": 637.5,
+        "p75": 638.5,
+        "iqr": 1.0,
+        "mean": 638.0,
+        "stdev": 1.0,
+        "ci95_half_width": 1.132,
+        "min": 637.0,
+        "max": 639.0,
+        "samples": [
+          639.0,
+          638.0,
+          637.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "update_floor_ms": {
+        "n": 3,
+        "median": 42.0,
+        "p25": 41.5,
+        "p75": 42.5,
+        "iqr": 1.0,
+        "mean": 42.0,
+        "stdev": 1.0,
+        "ci95_half_width": 1.132,
+        "min": 41.0,
+        "max": 43.0,
+        "samples": [
+          42.0,
+          43.0,
+          41.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "push_noop",
+      "update_corrected_ms": 596.0,
+      "n_update": 3,
+      "thin_dispersion": true,
+      "remote_bytes_before": 5079078,
+      "remote_bytes_after": 15164156,
+      "remote_growth_bytes": 10085078,
+      "wire_bytes_total": 10081964,
+      "measured": true,
+      "status": "measured",
+      "wire_bytes_per_update": 3360654.7,
+      "remote_growth_per_update": 3361692.7
+    }
+  ],
+  "fit": {
+    "primary": {
+      "gcrypt": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "git": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "gitcrypt": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "safehub": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "sgitchar": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "sgitline": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      }
+    }
+  },
+  "integrity": {
+    "arms_present": [
+      "gcrypt",
+      "git",
+      "gitcrypt",
+      "safehub",
+      "sgitchar",
+      "sgitline"
+    ],
+    "failed_cells": [],
+    "thin_dispersion_arms": [
+      "gcrypt",
+      "git",
+      "gitcrypt",
+      "safehub",
+      "sgitchar",
+      "sgitline"
+    ],
+    "note": "A failed cell publishes no numbers. A corrected value appears only where that operation's own zero-payload floor was measured on the same tool -- a floor taken from a different operation is refused by the harness, which is the defect the withdrawn corrected columns had. Clones are asserted to have produced a non-empty working tree, because a git clone of a gcrypt remote exits zero having checked out nothing."
+  },
+  "notes": [
+    "Measured only; no modelled or extrapolated cell appears here.",
+    "Tools absent from the host are reported absent, never as a zero.",
+    "Predicted shapes were recorded before the run, so a curve that contradicts one indicates a broken arm rather than a finding."
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://safehub.dev/eval/schema-1.0.0.json",
+  "title": "SafeHubEvalReport",
+  "type": "object",
+  "required": ["mode", "machine", "experimental", "fixtures", "micro", "size_ops", "join_ops", "notes", "elapsed_ms"],
+  "properties": {
+    "mode": { "enum": ["smoke", "full"] },
+    "machine": {
+      "type": "object",
+      "properties": {
+        "os": { "type": "string" },
+        "arch": { "type": "string" },
+        "hostname": { "type": "string" },
+        "cpu_hint": { "type": "string" }
+      }
+    },
+    "experimental": {
+      "type": "object",
+      "description": "Locked eval axes",
+      "properties": {
+        "narrative_collaborators": { "const": 3 },
+        "target_files": { "const": 200 },
+        "size_sweep_mib": {
+          "type": "array",
+          "items": { "type": "integer" },
+          "description": "Must include 8, 10, 12"
+        },
+        "join_sweep": {
+          "type": "array",
+          "items": { "type": "integer" },
+          "description": "n = 10..100 step 10"
+        }
+      }
+    },
+    "fixtures": { "type": "array" },
+    "micro": { "type": "object" },
+    "size_ops": { "type": "array" },
+    "join_ops": { "type": "array" },
+    "notes": { "type": "array", "items": { "type": "string" } },
+    "elapsed_ms": { "type": "integer" }
+  }
+}

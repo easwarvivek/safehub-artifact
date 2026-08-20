@@ -1,0 +1,965 @@
+{
+  "id": "E12",
+  "title": "Merge, rebase, and force-push versus history depth, to depth 10^3",
+  "meta": {
+    "generated_by": "scripts/e2e_history_ops.sh",
+    "method": "wall-clock E2E; one monotonically grown lineage; each operation performed on a scratch branch at log-spaced depth checkpoints on both arms, with a DAG postcondition asserted per operation",
+    "reps": 3,
+    "machine": "unspecified",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "unspecified",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-19T14:36:58.415750+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-19T14:37:18.470887+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "axis": {
+    "per_push_delta_kib": 64,
+    "rebase_commits": 3,
+    "git_pinned_gc": true,
+    "note": "Per-revision delta is fixed, so history depth is the only axis. `main` is grown once and never modified afterwards; every operation runs on a scratch branch created at the checkpoint and deleted after, so each depth measures the linear history it claims."
+  },
+  "operations": {
+    "merge": "Topic branch off the tip plus one revision, merged --no-ff into a scratch integration branch, then pushed. Clean merges only: a conflicted merge costs what human resolution costs, which is not a system property. merge_push_ms is the push of the two-parent commit; merge_local_ms is git's own merge.",
+    "rebase": "A branch of rebase_commits revisions is pushed as-is, then rebased onto the advanced tip and pushed again. The timing is the SECOND push, which is non-fast-forward.",
+    "force_push": "Scratch branch pushed, tip amended, pushed again. Minimal object change, so the timing is the gate and the ref update rather than the payload."
+  },
+  "cells": [
+    {
+      "history_depth": 10,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "rebase_commits": 3,
+      "merge_push_ms": {
+        "n": 3,
+        "median": 32.0,
+        "p25": 31.0,
+        "p75": 34.0,
+        "iqr": 3.0,
+        "mean": 32.667,
+        "stdev": 3.055,
+        "ci95_half_width": 3.457,
+        "min": 30.0,
+        "max": 36.0,
+        "samples": [
+          30.0,
+          32.0,
+          36.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_merge_push_ms": {
+        "n": 3,
+        "median": 71.0,
+        "p25": 68.5,
+        "p75": 71.5,
+        "iqr": 3.0,
+        "mean": 69.667,
+        "stdev": 3.215,
+        "ci95_half_width": 3.638,
+        "min": 66.0,
+        "max": 72.0,
+        "samples": [
+          72.0,
+          71.0,
+          66.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "merge_local_ms": {
+        "n": 3,
+        "median": 18.0,
+        "p25": 18.0,
+        "p75": 18.0,
+        "iqr": 0.0,
+        "mean": 18.0,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 18.0,
+        "max": 18.0,
+        "samples": [
+          18.0,
+          18.0,
+          18.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "merge_ratio_over_git": 0.451,
+      "rebase_push_ms": {
+        "n": 3,
+        "median": 43.0,
+        "p25": 41.0,
+        "p75": 43.5,
+        "iqr": 2.5,
+        "mean": 42.0,
+        "stdev": 2.646,
+        "ci95_half_width": 2.994,
+        "min": 39.0,
+        "max": 44.0,
+        "samples": [
+          39.0,
+          43.0,
+          44.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_rebase_push_ms": {
+        "n": 3,
+        "median": 66.0,
+        "p25": 66.0,
+        "p75": 66.0,
+        "iqr": 0.0,
+        "mean": 66.0,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 66.0,
+        "max": 66.0,
+        "samples": [
+          66.0,
+          66.0,
+          66.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "rebase_local_ms": {
+        "n": 3,
+        "median": 23.0,
+        "p25": 23.0,
+        "p75": 23.0,
+        "iqr": 0.0,
+        "mean": 23.0,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 23.0,
+        "max": 23.0,
+        "samples": [
+          23.0,
+          23.0,
+          23.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "rebase_ratio_over_git": 0.652,
+      "force_push_ms": {
+        "n": 3,
+        "median": 39.0,
+        "p25": 37.0,
+        "p75": 40.0,
+        "iqr": 3.0,
+        "mean": 38.333,
+        "stdev": 3.055,
+        "ci95_half_width": 3.457,
+        "min": 35.0,
+        "max": 41.0,
+        "samples": [
+          35.0,
+          39.0,
+          41.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_force_push_ms": {
+        "n": 3,
+        "median": 73.0,
+        "p25": 68.0,
+        "p75": 73.5,
+        "iqr": 5.5,
+        "mean": 70.0,
+        "stdev": 6.083,
+        "ci95_half_width": 6.883,
+        "min": 63.0,
+        "max": 74.0,
+        "samples": [
+          74.0,
+          63.0,
+          73.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "force_ratio_over_git": 0.534,
+      "git_pinned_gc": true,
+      "git_gc_ms": 122,
+      "head_log_seq_before": 11,
+      "head_log_seq_after": 26,
+      "head_log_seq_added_by_ops": 15,
+      "non_ff_cosig_on_sit_only": true,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "history_depth": 32,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "rebase_commits": 3,
+      "merge_push_ms": {
+        "n": 3,
+        "median": 41.0,
+        "p25": 39.5,
+        "p75": 42.5,
+        "iqr": 3.0,
+        "mean": 41.0,
+        "stdev": 3.0,
+        "ci95_half_width": 3.395,
+        "min": 38.0,
+        "max": 44.0,
+        "samples": [
+          38.0,
+          41.0,
+          44.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_merge_push_ms": {
+        "n": 3,
+        "median": 78.0,
+        "p25": 74.5,
+        "p75": 79.5,
+        "iqr": 5.0,
+        "mean": 76.667,
+        "stdev": 5.132,
+        "ci95_half_width": 5.807,
+        "min": 71.0,
+        "max": 81.0,
+        "samples": [
+          81.0,
+          71.0,
+          78.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "merge_local_ms": {
+        "n": 3,
+        "median": 18.0,
+        "p25": 18.0,
+        "p75": 18.0,
+        "iqr": 0.0,
+        "mean": 18.0,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 18.0,
+        "max": 18.0,
+        "samples": [
+          18.0,
+          18.0,
+          18.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "merge_ratio_over_git": 0.526,
+      "rebase_push_ms": {
+        "n": 3,
+        "median": 49.0,
+        "p25": 49.0,
+        "p75": 51.0,
+        "iqr": 2.0,
+        "mean": 50.333,
+        "stdev": 2.309,
+        "ci95_half_width": 2.613,
+        "min": 49.0,
+        "max": 53.0,
+        "samples": [
+          49.0,
+          49.0,
+          53.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_rebase_push_ms": {
+        "n": 3,
+        "median": 76.0,
+        "p25": 71.0,
+        "p75": 76.0,
+        "iqr": 5.0,
+        "mean": 72.667,
+        "stdev": 5.774,
+        "ci95_half_width": 6.533,
+        "min": 66.0,
+        "max": 76.0,
+        "samples": [
+          66.0,
+          76.0,
+          76.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "rebase_local_ms": {
+        "n": 3,
+        "median": 23.0,
+        "p25": 23.0,
+        "p75": 23.5,
+        "iqr": 0.5,
+        "mean": 23.333,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 23.0,
+        "max": 24.0,
+        "samples": [
+          23.0,
+          23.0,
+          24.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "rebase_ratio_over_git": 0.645,
+      "force_push_ms": {
+        "n": 3,
+        "median": 48.0,
+        "p25": 46.0,
+        "p75": 49.0,
+        "iqr": 3.0,
+        "mean": 47.333,
+        "stdev": 3.055,
+        "ci95_half_width": 3.457,
+        "min": 44.0,
+        "max": 50.0,
+        "samples": [
+          44.0,
+          48.0,
+          50.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_force_push_ms": {
+        "n": 3,
+        "median": 63.0,
+        "p25": 63.0,
+        "p75": 63.0,
+        "iqr": 0.0,
+        "mean": 63.0,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 63.0,
+        "max": 63.0,
+        "samples": [
+          63.0,
+          63.0,
+          63.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "force_ratio_over_git": 0.762,
+      "git_pinned_gc": true,
+      "git_gc_ms": 153,
+      "head_log_seq_before": 48,
+      "head_log_seq_after": 63,
+      "head_log_seq_added_by_ops": 15,
+      "non_ff_cosig_on_sit_only": true,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "history_depth": 100,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "rebase_commits": 3,
+      "merge_push_ms": {
+        "n": 3,
+        "median": 50.0,
+        "p25": 48.5,
+        "p75": 51.5,
+        "iqr": 3.0,
+        "mean": 50.0,
+        "stdev": 3.0,
+        "ci95_half_width": 3.395,
+        "min": 47.0,
+        "max": 53.0,
+        "samples": [
+          47.0,
+          50.0,
+          53.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_merge_push_ms": {
+        "n": 3,
+        "median": 78.0,
+        "p25": 75.5,
+        "p75": 78.5,
+        "iqr": 3.0,
+        "mean": 76.667,
+        "stdev": 3.215,
+        "ci95_half_width": 3.638,
+        "min": 73.0,
+        "max": 79.0,
+        "samples": [
+          79.0,
+          78.0,
+          73.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "merge_local_ms": {
+        "n": 3,
+        "median": 18.0,
+        "p25": 18.0,
+        "p75": 19.0,
+        "iqr": 1.0,
+        "mean": 18.667,
+        "stdev": 1.155,
+        "ci95_half_width": 1.307,
+        "min": 18.0,
+        "max": 20.0,
+        "samples": [
+          20.0,
+          18.0,
+          18.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "merge_ratio_over_git": 0.641,
+      "rebase_push_ms": {
+        "n": 3,
+        "median": 60.0,
+        "p25": 58.0,
+        "p75": 61.0,
+        "iqr": 3.0,
+        "mean": 59.333,
+        "stdev": 3.055,
+        "ci95_half_width": 3.457,
+        "min": 56.0,
+        "max": 62.0,
+        "samples": [
+          56.0,
+          60.0,
+          62.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_rebase_push_ms": {
+        "n": 3,
+        "median": 65.0,
+        "p25": 65.0,
+        "p75": 65.5,
+        "iqr": 0.5,
+        "mean": 65.333,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 65.0,
+        "max": 66.0,
+        "samples": [
+          65.0,
+          66.0,
+          65.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "rebase_local_ms": {
+        "n": 3,
+        "median": 24.0,
+        "p25": 24.0,
+        "p75": 25.0,
+        "iqr": 1.0,
+        "mean": 24.667,
+        "stdev": 1.155,
+        "ci95_half_width": 1.307,
+        "min": 24.0,
+        "max": 26.0,
+        "samples": [
+          26.0,
+          24.0,
+          24.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "rebase_ratio_over_git": 0.923,
+      "force_push_ms": {
+        "n": 3,
+        "median": 57.0,
+        "p25": 55.5,
+        "p75": 58.0,
+        "iqr": 2.5,
+        "mean": 56.667,
+        "stdev": 2.517,
+        "ci95_half_width": 2.848,
+        "min": 54.0,
+        "max": 59.0,
+        "samples": [
+          54.0,
+          57.0,
+          59.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_force_push_ms": {
+        "n": 3,
+        "median": 63.0,
+        "p25": 63.0,
+        "p75": 63.0,
+        "iqr": 0.0,
+        "mean": 63.0,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 63.0,
+        "max": 63.0,
+        "samples": [
+          63.0,
+          63.0,
+          63.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "force_ratio_over_git": 0.905,
+      "git_pinned_gc": true,
+      "git_gc_ms": 212,
+      "head_log_seq_before": 131,
+      "head_log_seq_after": 146,
+      "head_log_seq_added_by_ops": 15,
+      "non_ff_cosig_on_sit_only": true,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "history_depth": 316,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "rebase_commits": 3,
+      "merge_push_ms": {
+        "n": 3,
+        "median": 57.0,
+        "p25": 56.5,
+        "p75": 59.5,
+        "iqr": 3.0,
+        "mean": 58.333,
+        "stdev": 3.215,
+        "ci95_half_width": 3.638,
+        "min": 56.0,
+        "max": 62.0,
+        "samples": [
+          56.0,
+          57.0,
+          62.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_merge_push_ms": {
+        "n": 3,
+        "median": 72.0,
+        "p25": 70.0,
+        "p75": 75.5,
+        "iqr": 5.5,
+        "mean": 73.0,
+        "stdev": 5.568,
+        "ci95_half_width": 6.301,
+        "min": 68.0,
+        "max": 79.0,
+        "samples": [
+          79.0,
+          68.0,
+          72.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "merge_local_ms": {
+        "n": 3,
+        "median": 19.0,
+        "p25": 19.0,
+        "p75": 19.5,
+        "iqr": 0.5,
+        "mean": 19.333,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 19.0,
+        "max": 20.0,
+        "samples": [
+          20.0,
+          19.0,
+          19.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "merge_ratio_over_git": 0.792,
+      "rebase_push_ms": {
+        "n": 3,
+        "median": 69.0,
+        "p25": 68.0,
+        "p75": 71.5,
+        "iqr": 3.5,
+        "mean": 70.0,
+        "stdev": 3.606,
+        "ci95_half_width": 4.08,
+        "min": 67.0,
+        "max": 74.0,
+        "samples": [
+          67.0,
+          69.0,
+          74.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_rebase_push_ms": {
+        "n": 3,
+        "median": 65.0,
+        "p25": 64.5,
+        "p75": 74.0,
+        "iqr": 9.5,
+        "mean": 70.667,
+        "stdev": 10.693,
+        "ci95_half_width": 12.1,
+        "min": 64.0,
+        "max": 83.0,
+        "samples": [
+          64.0,
+          83.0,
+          65.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "rebase_local_ms": {
+        "n": 3,
+        "median": 25.0,
+        "p25": 24.5,
+        "p75": 25.0,
+        "iqr": 0.5,
+        "mean": 24.667,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 24.0,
+        "max": 25.0,
+        "samples": [
+          24.0,
+          25.0,
+          25.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "rebase_ratio_over_git": 1.062,
+      "force_push_ms": {
+        "n": 3,
+        "median": 65.0,
+        "p25": 63.5,
+        "p75": 67.0,
+        "iqr": 3.5,
+        "mean": 65.333,
+        "stdev": 3.512,
+        "ci95_half_width": 3.974,
+        "min": 62.0,
+        "max": 69.0,
+        "samples": [
+          62.0,
+          65.0,
+          69.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_force_push_ms": {
+        "n": 3,
+        "median": 63.0,
+        "p25": 63.0,
+        "p75": 67.5,
+        "iqr": 4.5,
+        "mean": 66.0,
+        "stdev": 5.196,
+        "ci95_half_width": 5.88,
+        "min": 63.0,
+        "max": 72.0,
+        "samples": [
+          63.0,
+          63.0,
+          72.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "force_ratio_over_git": 1.032,
+      "git_pinned_gc": true,
+      "git_gc_ms": 426,
+      "head_log_seq_before": 362,
+      "head_log_seq_after": 377,
+      "head_log_seq_added_by_ops": 15,
+      "non_ff_cosig_on_sit_only": true,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "history_depth": 1000,
+      "per_push_delta_kib": 64,
+      "base_tree_mib": 4,
+      "rebase_commits": 3,
+      "merge_push_ms": {
+        "n": 3,
+        "median": 71.0,
+        "p25": 69.0,
+        "p75": 114.0,
+        "iqr": 45.0,
+        "mean": 98.333,
+        "stdev": 50.846,
+        "ci95_half_width": 57.538,
+        "min": 67.0,
+        "max": 157.0,
+        "samples": [
+          157.0,
+          67.0,
+          71.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_merge_push_ms": {
+        "n": 3,
+        "median": 76.0,
+        "p25": 72.5,
+        "p75": 76.0,
+        "iqr": 3.5,
+        "mean": 73.667,
+        "stdev": 4.041,
+        "ci95_half_width": 4.573,
+        "min": 69.0,
+        "max": 76.0,
+        "samples": [
+          76.0,
+          69.0,
+          76.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "merge_local_ms": {
+        "n": 3,
+        "median": 20.0,
+        "p25": 20.0,
+        "p75": 20.5,
+        "iqr": 0.5,
+        "mean": 20.333,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 20.0,
+        "max": 21.0,
+        "samples": [
+          21.0,
+          20.0,
+          20.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "merge_ratio_over_git": 0.934,
+      "rebase_push_ms": {
+        "n": 3,
+        "median": 77.0,
+        "p25": 75.0,
+        "p75": 79.0,
+        "iqr": 4.0,
+        "mean": 77.0,
+        "stdev": 4.0,
+        "ci95_half_width": 4.526,
+        "min": 73.0,
+        "max": 81.0,
+        "samples": [
+          73.0,
+          77.0,
+          81.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_rebase_push_ms": {
+        "n": 3,
+        "median": 70.0,
+        "p25": 70.0,
+        "p75": 70.0,
+        "iqr": 0.0,
+        "mean": 70.0,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 70.0,
+        "max": 70.0,
+        "samples": [
+          70.0,
+          70.0,
+          70.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "rebase_local_ms": {
+        "n": 3,
+        "median": 28.0,
+        "p25": 28.0,
+        "p75": 28.5,
+        "iqr": 0.5,
+        "mean": 28.333,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 28.0,
+        "max": 29.0,
+        "samples": [
+          29.0,
+          28.0,
+          28.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "rebase_ratio_over_git": 1.1,
+      "force_push_ms": {
+        "n": 3,
+        "median": 71.0,
+        "p25": 70.0,
+        "p75": 74.0,
+        "iqr": 4.0,
+        "mean": 72.333,
+        "stdev": 4.163,
+        "ci95_half_width": 4.711,
+        "min": 69.0,
+        "max": 77.0,
+        "samples": [
+          69.0,
+          71.0,
+          77.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "git_force_push_ms": {
+        "n": 3,
+        "median": 72.0,
+        "p25": 72.0,
+        "p75": 77.0,
+        "iqr": 5.0,
+        "mean": 75.333,
+        "stdev": 5.774,
+        "ci95_half_width": 6.533,
+        "min": 72.0,
+        "max": 82.0,
+        "samples": [
+          72.0,
+          82.0,
+          72.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "force_ratio_over_git": 0.986,
+      "git_pinned_gc": true,
+      "git_gc_ms": 1164,
+      "head_log_seq_before": 1061,
+      "head_log_seq_after": 1076,
+      "head_log_seq_added_by_ops": 15,
+      "non_ff_cosig_on_sit_only": true,
+      "measured": true,
+      "status": "measured"
+    }
+  ],
+  "fit": {
+    "merge_push": {
+      "ms_per_head": 0.03274,
+      "intercept_ms": 40.654,
+      "n_points": 5,
+      "depths": [
+        10,
+        32,
+        100,
+        316,
+        1000
+      ],
+      "method": "least squares over measured checkpoints only",
+      "status": "derived-from-measured"
+    },
+    "git_merge_push": {
+      "ms_per_head": 0.00059,
+      "intercept_ms": 74.827,
+      "n_points": 5,
+      "depths": [
+        10,
+        32,
+        100,
+        316,
+        1000
+      ],
+      "method": "least squares over measured checkpoints only",
+      "status": "derived-from-measured"
+    },
+    "rebase_push": {
+      "ms_per_head": 0.02902,
+      "intercept_ms": 51.137,
+      "n_points": 5,
+      "depths": [
+        10,
+        32,
+        100,
+        316,
+        1000
+      ],
+      "method": "least squares over measured checkpoints only",
+      "status": "derived-from-measured"
+    },
+    "git_rebase_push": {
+      "ms_per_head": 0.00059,
+      "intercept_ms": 68.228,
+      "n_points": 5,
+      "depths": [
+        10,
+        32,
+        100,
+        316,
+        1000
+      ],
+      "method": "least squares over measured checkpoints only",
+      "status": "derived-from-measured"
+    },
+    "force_push": {
+      "ms_per_head": 0.02554,
+      "intercept_ms": 48.552,
+      "n_points": 5,
+      "depths": [
+        10,
+        32,
+        100,
+        316,
+        1000
+      ],
+      "method": "least squares over measured checkpoints only",
+      "status": "derived-from-measured"
+    },
+    "git_force_push": {
+      "ms_per_head": 0.00519,
+      "intercept_ms": 65.287,
+      "n_points": 5,
+      "depths": [
+        10,
+        32,
+        100,
+        316,
+        1000
+      ],
+      "method": "least squares over measured checkpoints only",
+      "status": "derived-from-measured"
+    }
+  },
+  "integrity": {
+    "every_operation_asserted_its_postcondition": true,
+    "checkpoints_measured": [
+      10,
+      32,
+      100,
+      316,
+      1000
+    ],
+    "checkpoints_failed": [],
+    "note": "A merge must produce a two-parent commit, a rebase must rewrite commit ids onto the new base, and a force-push's old tip must not be an ancestor of the new one; the SafeHub side additionally confirms from the pushed head's own metadata that it was sent as forced. An operation that fails its postcondition publishes no timing. Guards are in scripts/lib/history_ops_lib.sh and tested by scripts/tests/test_history_ops.sh."
+  },
+  "notes": [
+    "Measured only. A failed arm nulls its numbers and the row is marked failed; a status is not a measurement.",
+    "The arms are not symmetric on the non-fast-forward operations: SafeHub's rebase and force-push carry an ML-DSA-87 admin co-signature and git's carry nothing comparable. That is the cost of the branch-protection guarantee, so the ratio columns should be read as including it rather than as like-for-like.",
+    "SafeHub's head log is append-only and per repository, so the scratch-branch pushes lengthen it even though `main` is untouched. head_log_seq_added_by_ops reports that footprint per checkpoint.",
+    "git's arm is measured against a freshly packed bare repository when git_pinned_gc is true, because receive.autogc firing between checkpoints otherwise makes git's cost non-monotonic in depth."
+  ]
+}

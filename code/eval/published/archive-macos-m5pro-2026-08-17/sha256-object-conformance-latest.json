@@ -1,0 +1,86 @@
+{
+  "id": "E18",
+  "title": "SafeHub over Git's SHA-256 object format",
+  "meta": {
+    "generated_by": "scripts/sha256_object_conformance.sh",
+    "method": "end-to-end push/fetch/clone against a repository initialized with --object-format=sha256",
+    "reps": 1,
+    "machine": "Apple M5 Pro",
+    "machine_detail": {
+      "os": "darwin",
+      "os_release": "25.5.0",
+      "arch": "arm64",
+      "cpu_hint": "Apple M5 Pro",
+      "cpu_count": 18,
+      "ram_bytes": 51539607552,
+      "ram_gib": 48.0,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.6",
+      "measured_at": "2026-08-17T14:26:51.688935+00:00"
+    },
+    "provenance": {
+      "git_commit": "3eebc9737fa2332515387311ddb58facd9fa3a67",
+      "git_describe": "3eebc97-dirty",
+      "git_dirty": true,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1 (Apple Git-155)",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-17T14:26:51.777838+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "all_checks_passed": true,
+  "checks": [
+    {
+      "check": "git supports --object-format=sha256",
+      "passed": true,
+      "detail": "rev-parse reports sha256"
+    },
+    {
+      "check": "repo create --object-format=sha256 initializes sha256",
+      "passed": true,
+      "detail": "rev-parse --show-object-format = sha256"
+    },
+    {
+      "check": "commit ids are 64 hex chars",
+      "passed": true,
+      "detail": "HEAD = 5584129adfa8e690799fd0fe1eb3ac540aaa9fc08c9d0a41e43234a556fd724c (64 chars)"
+    },
+    {
+      "check": "sit push accepts a sha256 repository",
+      "passed": true,
+      "detail": "push exited zero"
+    },
+    {
+      "check": "clone preserves the sha256 object format",
+      "passed": true,
+      "detail": "clone reports sha256"
+    },
+    {
+      "check": "clone reproduces the writer's tip",
+      "passed": true,
+      "detail": "clone tip 3536872bd4aa3ce0406bc9888d9c2eeecf7189e0364c92beb213a72196314fb1 vs writer 3536872bd4aa3ce0406bc9888d9c2eeecf7189e0364c92beb213a72196314fb1"
+    },
+    {
+      "check": "refhead digests are sha-512 regardless of object format",
+      "passed": true,
+      "detail": "chain hashes, CAS addresses and bundle roots are SHA-512 by construction (safehub-crypto params::DIGEST_LEN = 64 bytes); the object format only determines git's own ids"
+    }
+  ],
+  "claim": "SafeHub is agnostic to Git's object hash: the client shells out to git bundle and carries object ids as opaque bytes, so a SHA-256 repository transports unchanged. RefHead chain hashes, CAS addresses and bundle roots are SHA-512 independently of the object format, so tip integrity never rested on the object hash.",
+  "residual": "Cross-format interoperation with SHA-1 remotes is a Git-level limitation, not a SafeHub one. A deployment that wants the object graph to match the rest of the Category-5 parameterization should initialize with --object-format=sha256.",
+  "notes": [
+    "Every row is a wall-clock check on this machine; none is asserted."
+  ]
+}

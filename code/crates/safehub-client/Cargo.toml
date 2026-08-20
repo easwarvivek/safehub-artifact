@@ -1,0 +1,37 @@
+[package]
+name = "safehub-client"
+description = "Client library: auth, push/fetch orchestration, remote helpers"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[features]
+default = ["openmls"]
+## Real Category-5 OpenMLS group + exporters (required for product builds).
+openmls = ["safehub-crypto/openmls"]
+
+[dependencies]
+safehub-api.workspace = true
+safehub-crypto = { workspace = true, features = ["openmls"] }
+safehub-types.workspace = true
+anyhow.workspace = true
+base64.workspace = true
+blake3.workspace = true
+bytes.workspace = true
+directories.workspace = true
+hex.workspace = true
+hmac.workspace = true
+rand.workspace = true
+reqwest.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+zeroize.workspace = true
+futures = "0.3"
+
+[dev-dependencies]
+libc = "0.2"

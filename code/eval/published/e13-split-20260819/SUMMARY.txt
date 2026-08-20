@@ -1,0 +1,78 @@
+
+E13-A1  update vs size of NEW content (KiB)
+  median update, ms
+    arm               5       50      500     1024     2048     3072
+    git              90       90      102      131      164      187
+    safehub          43       44       62       79      111      128
+    sgitchar        231      235      330      430      613      815
+    gcrypt          505      519      524      479      539      561
+    gitcrypt        121      110      191      282      343      401
+    sgitline        280      278      396      630      954     1304
+  wire bytes per update (thin pack; blank where the transport is not plain git)
+    arm               5       50      500     1024     2048     3072
+    git             870     4312    39865    82606   165888   249427
+    safehub           -        -        -        -        -        -
+    sgitchar       5902    52434   517841  1059755  2118790  3177861
+    gcrypt            -        -        -        -        -        -
+    gitcrypt       5585    51664   512611  1049343  2098271  3147160
+    sgitline       9158    84522   832937  1703536  3387870  5070474
+  remote storage growth per update, bytes
+    arm               5       50      500     1024     2048     3072
+    git            1141     4653    41164    75653   151484   222658
+    safehub        6711     9955    42250    79751   151830   223743
+    sgitchar       6247    52798   518187  1060120  2119133  3178228
+    gcrypt         1249     4506    36817    74400   146496   218467
+    gitcrypt       5862    51937   512905  1049615  2098575  3147433
+    sgitline       9504    84887   833283  1703901  3388213  5070841
+
+E13-A2  update vs FILE SIZE at a fixed 1 KiB edit (KiB)
+  median update, ms
+    arm              10      100     1024     4096     8192
+    git              97       97      124      172      305
+    safehub          42       45       63      131      220
+    sgitchar        237      246      340      718     1284
+    gcrypt          524      518      491      584      750
+    gitcrypt        106      117      225      577     1063
+    sgitline        277      306      643     1804     3352
+  wire bytes per update (thin pack; blank where the transport is not plain git)
+    arm              10      100     1024     4096     8192
+    git             589      601      640      727      843
+    safehub           -        -        -        -        -
+    sgitchar       1439     1449     1488     1595     1728
+    gcrypt            -        -        -        -        -
+    gitcrypt      10719   102851  1049340  4196014  8391672
+    sgitline      17500   165268  1683333  6693321 13371915
+  remote storage growth per update, bytes
+    arm              10      100     1024     4096     8192
+    git            1043     2450      930     1015     1131
+    safehub        6421     6432     6470     6558     6676
+    sgitchar       1767     1785     1826     1903     2045
+    gcrypt         1767     8173    71243   278008   553689
+    gitcrypt      11003   103155  1049622  4196292  8391954
+    sgitline      17856   165640  1683708  6693675 13372290
+
+E13-A3  update vs NUMBER OF FILES, 1 KiB edit each
+  median update, ms
+    arm               1        5       20       50      100
+    git              87       97      131      180      376
+    safehub          39       47       68       92      279
+    sgitchar        235      298      477      927     1854
+    gcrypt          488      453      558      786     1096
+    gitcrypt        106      161      486      757     1210
+    sgitline        299      426     1097     2021     3038
+  wire bytes per update (thin pack; blank where the transport is not plain git)
+    arm               1        5       20       50      100
+    git             595     1870     6630    16118   105733
+    safehub           -        -        -        -        -
+    sgitchar       1468     4989    18166    44478  1082090
+    gcrypt            -        -        -        -        -
+    gitcrypt     102879   512953  2051057  5127136 10254477
+    sgitline     168604   840626  3360695  8401115 16802573
+  remote storage growth per update, bytes
+    arm               1        5       20       50      100
+    git            2463     8184    27786    54604   292628
+    safehub        6427     7700    12448    21897   390737
+    sgitchar       1788     5306    18512    44864    91698
+    gcrypt         8356    41614   165550   413888   822773
+    gitcrypt     103162   410837  1539267  3077802  5129777
+    sgitline     168959   841122  3361751  8403255 16806533

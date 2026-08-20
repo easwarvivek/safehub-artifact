@@ -1,0 +1,21 @@
+[package]
+name = "sgit-rs"
+version = "0.1.0"
+edition = "2021"
+description = "Independent reimplementation of SGitChar/SGitLine (Li, Song, Tang, Yung, CCS'25) for comparative evaluation. The original authors state their code will be open-sourced but it is not available; this follows their Figure 6 and section 5 parameters."
+
+[dependencies]
+aes = "0.8"
+ctr = "0.9"
+sha2.workspace = true
+hkdf.workspace = true
+base64.workspace = true
+rand.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+hex.workspace = true
+p256 = { version = "0.13", features = ["ecdsa"] }
+
+[dev-dependencies]
+tempfile = "3"

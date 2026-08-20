@@ -1,0 +1,162 @@
+{
+  "id": "E09/E14",
+  "title": "Design-implied costs and metadata-leakage padding option",
+  "meta": {
+    "generated_by": "scripts/gen_design_costs_latest.py",
+    "method": "mix of measured micro/security cells and AEAD-rate models",
+    "reps": 5,
+    "machine": "unspecified",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "unspecified",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-18T21:00:21.261539+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-18T21:00:41.310387+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "cells": [
+    {
+      "id": "grafted_snapshot_inviter",
+      "description": "Inviter builds grafted snapshot (O(repo) seal of tip)",
+      "repo_mib": 12,
+      "cost_ms": {
+        "value": 110.0782,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "complexity": "O(repo_bytes)",
+      "status": "model",
+      "label": "model",
+      "note": "Anchored to measured AEAD seal rate \u00d7 tip bytes."
+    },
+    {
+      "id": "force_push_admin_cosig",
+      "description": "Force-push with ML-DSA-87 admin co-signature",
+      "local_verify_ms": {
+        "value": 154.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "with_80ms_rtt_ms": {
+        "value": 234.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Local verify from fullstack security.force_push_policy (154.0 ms); RTT cell adds emulated 80 ms."
+    },
+    {
+      "id": "refhead_verify_1e4",
+      "description": "RefHead hash-chain verify over 10^4 links",
+      "links": 10000,
+      "cost_ms": {
+        "value": 19.7432,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "per_link_ns": 1974.32,
+      "status": "measured",
+      "label": "measured",
+      "note": "Linear scale from measured head_verify_100_ns.",
+      "source": "code/eval/published/smoke-latest.json"
+    },
+    {
+      "id": "padding_cost",
+      "description": "Per-push bucket padding to 256 KiB",
+      "avg_push_bytes": 65536,
+      "bucket_bytes": 262144,
+      "pad_bytes": 196608,
+      "extra_ms": {
+        "value": 1.4856,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "storage_expansion_x": 4.0,
+      "status": "model",
+      "label": "model"
+    },
+    {
+      "id": "churn_workload",
+      "description": "remove-member + invite + rotate (n\u224820)",
+      "cost_ms": {
+        "value": 95.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "components_ms": {
+        "remove": 28,
+        "invite": 36,
+        "rotate": 31
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Component medians from fullstack security + invite_path."
+    },
+    {
+      "id": "metadata_leakage_padding_option",
+      "threat": "Push size/timing/device-linked metadata fingerprint",
+      "option": "Bucket-pad sealed push bodies to 256 KiB + optional batching",
+      "pad_bytes_per_push_avg": 196608,
+      "extra_seal_ms": {
+        "value": 1.4856,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "storage_expansion_x": 4.0,
+      "status": "model",
+      "label": "model",
+      "note": "Costed mitigation option; not enabled by default in prototype."
+    }
+  ],
+  "notes": [
+    "Grafted inviter and padding are models; RefHead 1e4 and cosig local are measured (scaled micro / fullstack)."
+  ]
+}

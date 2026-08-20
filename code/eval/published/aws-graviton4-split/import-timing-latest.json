@@ -1,0 +1,141 @@
+{
+  "id": "E15",
+  "title": "Import timing for an existing git repository",
+  "meta": {
+    "generated_by": "scripts/gen_import_timing_latest.py",
+    "method": "measured git bundle pack on 4 MiB sample; seal/import modeled",
+    "reps": 5,
+    "machine": "unspecified",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "unspecified",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-18T21:00:41.506275+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-18T21:01:01.555696+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "sample_repo": {
+    "files": 200,
+    "bytes": 4194304,
+    "objects_approx": 205
+  },
+  "cells": [
+    {
+      "phase": "git_bundle_pack",
+      "description": "Pack existing git history (measured local bundle)",
+      "repo_files": 200,
+      "repo_bytes": 4194304,
+      "bundle_bytes": 10364,
+      "wall_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 13.5333,
+        "p25": 13.4765,
+        "p75": 13.6273,
+        "iqr": 0.1509,
+        "mean": 13.9211,
+        "stdev": 0.936,
+        "ci95_half_width": 0.8205,
+        "min": 13.3806,
+        "max": 15.5879,
+        "samples": [
+          15.5879,
+          13.4765,
+          13.6273,
+          13.3806,
+          13.5333
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured"
+    },
+    {
+      "phase": "safehub_seal_import",
+      "description": "Seal imported objects under CommittingAead",
+      "wall_ms": {
+        "value": 71.6927,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "model",
+      "label": "model",
+      "note": "AEAD-rate \u00d7 working-tree bytes + control-plane constant."
+    },
+    {
+      "phase": "end_to_end_import",
+      "description": "bundle pack + seal + initial push model",
+      "wall_ms": {
+        "value": 85.226,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "model",
+      "label": "model",
+      "note": "sit import (or equiv) end-to-end; issues/PRs metadata out of scope for migration claims."
+    },
+    {
+      "phase": "end_to_end_import_50mib",
+      "repo_mib": 50,
+      "wall_ms": {
+        "value": 565.3255,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "model",
+      "label": "model"
+    },
+    {
+      "phase": "end_to_end_import_500mib",
+      "repo_mib": 500,
+      "wall_ms": {
+        "value": 5653.255,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "extrapolated",
+      "label": "extrapolated"
+    }
+  ],
+  "notes": [
+    "Adoption claims should cite this import cost; forge issues/PRs metadata migration remains out of scope."
+  ]
+}

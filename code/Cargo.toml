@@ -1,0 +1,66 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/safehub-types",
+    "crates/safehub-browse",
+    "crates/safehub-crypto",
+    "crates/safehub-storage",
+    "crates/safehub-api",
+    "crates/safehub-client",
+    "crates/safehub-server",
+    "crates/safehub-cli",
+    "crates/sit-remote-safehub",
+    "eval",
+    "crates/sgit-rs",
+]
+exclude = ["vendor/openmls"]
+# OpenMLS lives under vendor/ as its own workspace; we path-depend via
+# safehub-crypto's `openmls` feature rather than absorbing those members here.
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0 OR MIT"
+rust-version = "1.85"
+authors = ["SafeHub contributors"]
+repository = "https://github.com/safehub/safehub"
+
+[workspace.dependencies]
+safehub-types = { path = "crates/safehub-types" }
+safehub-crypto = { path = "crates/safehub-crypto" }
+safehub-storage = { path = "crates/safehub-storage" }
+safehub-api = { path = "crates/safehub-api" }
+safehub-client = { path = "crates/safehub-client" }
+sgit-rs = { path = "crates/sgit-rs" }
+
+anyhow = "1"
+async-trait = "0.1"
+axum = { version = "0.8", features = ["macros", "form"] }
+base64 = "0.22"
+blake3 = "1"
+bytes = "1"
+chrono = { version = "0.4", features = ["serde"] }
+clap = { version = "4", features = ["derive", "env"] }
+directories = "6"
+hex = "0.4"
+rand = "0.8"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+thiserror = "2"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "fs", "io-util", "signal", "sync", "time"] }
+tower = "0.5"
+tower-http = { version = "0.6", features = ["trace", "cors"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1", features = ["serde", "v4"] }
+aes-gcm = "0.10"
+aws-lc-rs = "1"
+hkdf = "0.12"
+hmac = "0.12"
+zeroize = { version = "1", features = ["derive"] }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1

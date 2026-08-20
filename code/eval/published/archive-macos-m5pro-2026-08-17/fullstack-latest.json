@@ -1,0 +1,363 @@
+{
+  "mode": "full-stack",
+  "machine": {
+    "os": "macos",
+    "arch": "aarch64",
+    "hostname": "unknown",
+    "cpu_hint": "Apple M5 Pro",
+    "build_profile": "release",
+    "measured_at": "2026-08-15T02:52:46.357322+00:00",
+    "aead_backend": "aws-lc-rs/AES-256-GCM",
+    "hardware_aes_likely": true,
+    "rustc_release": "release: 1.97.1",
+    "listen": "127.0.0.1:18081"
+  },
+  "experimental": {
+    "narrative_collaborators": 3,
+    "target_files": 200,
+    "size_sweep_mib": [
+      8,
+      10,
+      12
+    ],
+    "join_sweep": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+    ]
+  },
+  "fixtures": [
+    {
+      "path": "/path/to/safehub/code/eval/results/fixture-8mib",
+      "file_count": 204,
+      "total_bytes": 8403570,
+      "commit_depth": 50,
+      "seed": 1526657029,
+      "content_hash": "5fe2b28e61066eedc3bcdaf6fefee1a7a905006d98e9db62befea64f4916ec94",
+      "target_files": 200,
+      "target_bytes": 8388608
+    },
+    {
+      "path": "/path/to/safehub/code/eval/results/fixture-10mib",
+      "file_count": 205,
+      "total_bytes": 10500823,
+      "commit_depth": 50,
+      "seed": 1526657031,
+      "content_hash": "1934363d546fa38404268a4575e83b0215c8578b0c44ad8a2211dc2a0f7c751f",
+      "target_files": 200,
+      "target_bytes": 10485760
+    },
+    {
+      "path": "/path/to/safehub/code/eval/results/fixture-12mib",
+      "file_count": 206,
+      "total_bytes": 12598078,
+      "commit_depth": 50,
+      "seed": 1526657025,
+      "content_hash": "36af4856667e166fdbfe34f1619ebaf1b915d0f65096d1ee6244aaecbe0f1a6e",
+      "target_files": 200,
+      "target_bytes": 12582912
+    }
+  ],
+  "micro": {
+    "aead_seal_1kib_ns": 3709,
+    "aead_open_1kib_ns": 3709,
+    "aead_seal_1mib_ns": 1720334,
+    "aead_open_1mib_ns": 1702792,
+    "refhead_hash_ns": 583,
+    "head_verify_100_ns": 116916,
+    "runs": 25,
+    "warmups": 3,
+    "median_of": 25,
+    "build_profile": "release",
+    "status": "measured"
+  },
+  "size_ops": [
+    {
+      "size_mib": 8,
+      "plain_git_clone_ms": 82,
+      "plain_git_push_ms": 295,
+      "plain_git_fetch_ms": 55,
+      "safehub_push_ms": 331,
+      "safehub_fetch_ms": 134,
+      "safehub_clone_ms": 287,
+      "aead_proxy_push_ms": 15,
+      "aead_proxy_fetch_ms": 13,
+      "aead_proxy_clone_ms": 28,
+      "overhead_ratio_clone": 3.5,
+      "bytes": 8403870,
+      "ciphertext_store_bytes_approx": 7474732,
+      "storage_overhead_ratio": 0.8894392702409724,
+      "status": "measured",
+      "note": "E2E sit:// localhost: sit push/fetch/clone via sh auth + sit CLI against safehub-server (release when SAFEHUB_EVAL_PROFILE=release). Includes AEAD+HTTP+CAS+ML-DSA-87 leaf RefHead signatures. ML-DSA-87 leaf RefHead signatures included on push."
+    },
+    {
+      "size_mib": 10,
+      "plain_git_clone_ms": 78,
+      "plain_git_push_ms": 334,
+      "plain_git_fetch_ms": 51,
+      "safehub_push_ms": 372,
+      "safehub_fetch_ms": 83,
+      "safehub_clone_ms": 205,
+      "aead_proxy_push_ms": 18,
+      "aead_proxy_fetch_ms": 18,
+      "aead_proxy_clone_ms": 36,
+      "overhead_ratio_clone": 2.628205128205128,
+      "bytes": 10501126,
+      "ciphertext_store_bytes_approx": 9373490,
+      "storage_overhead_ratio": 0.8926176107209837,
+      "status": "measured",
+      "note": "E2E sit:// localhost: sit push/fetch/clone via sh auth + sit CLI against safehub-server (release when SAFEHUB_EVAL_PROFILE=release). Includes AEAD+HTTP+CAS+ML-DSA-87 leaf RefHead signatures. ML-DSA-87 leaf RefHead signatures included on push."
+    },
+    {
+      "size_mib": 12,
+      "plain_git_clone_ms": 95,
+      "plain_git_push_ms": 399,
+      "plain_git_fetch_ms": 54,
+      "safehub_push_ms": 436,
+      "safehub_fetch_ms": 87,
+      "safehub_clone_ms": 207,
+      "aead_proxy_push_ms": 21,
+      "aead_proxy_fetch_ms": 20,
+      "aead_proxy_clone_ms": 41,
+      "overhead_ratio_clone": 2.1789473684210527,
+      "bytes": 12598381,
+      "ciphertext_store_bytes_approx": 11229415,
+      "storage_overhead_ratio": 0.8913379425499197,
+      "status": "measured",
+      "note": "E2E sit:// localhost: sit push/fetch/clone via sh auth + sit CLI against safehub-server (release when SAFEHUB_EVAL_PROFILE=release). Includes AEAD+HTTP+CAS+ML-DSA-87 leaf RefHead signatures. ML-DSA-87 leaf RefHead signatures included on push."
+    }
+  ],
+  "join_ops": [
+    {
+      "n": 10,
+      "invite_join_full_ms": 73,
+      "invite_join_forward_only_ms": 53,
+      "mls_grow_ms": 53,
+      "history_proxy_ms": 20,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219210: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 12598381 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 20,
+      "invite_join_full_ms": 167,
+      "invite_join_forward_only_ms": 147,
+      "mls_grow_ms": 147,
+      "history_proxy_ms": 20,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219220: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 12598381 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 30,
+      "invite_join_full_ms": 292,
+      "invite_join_forward_only_ms": 272,
+      "mls_grow_ms": 272,
+      "history_proxy_ms": 20,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219230: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 12598381 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 40,
+      "invite_join_full_ms": 472,
+      "invite_join_forward_only_ms": 452,
+      "mls_grow_ms": 452,
+      "history_proxy_ms": 20,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219240: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 12598381 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 50,
+      "invite_join_full_ms": 662,
+      "invite_join_forward_only_ms": 642,
+      "mls_grow_ms": 642,
+      "history_proxy_ms": 20,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219250: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 12598381 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 60,
+      "invite_join_full_ms": 886,
+      "invite_join_forward_only_ms": 866,
+      "mls_grow_ms": 866,
+      "history_proxy_ms": 20,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219260: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 12598381 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 70,
+      "invite_join_full_ms": 1158,
+      "invite_join_forward_only_ms": 1138,
+      "mls_grow_ms": 1138,
+      "history_proxy_ms": 20,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219270: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 12598381 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 80,
+      "invite_join_full_ms": 1448,
+      "invite_join_forward_only_ms": 1428,
+      "mls_grow_ms": 1428,
+      "history_proxy_ms": 20,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219280: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 12598381 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 90,
+      "invite_join_full_ms": 1784,
+      "invite_join_forward_only_ms": 1764,
+      "mls_grow_ms": 1764,
+      "history_proxy_ms": 20,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219290: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 12598381 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 100,
+      "invite_join_full_ms": 2136,
+      "invite_join_forward_only_ms": 2117,
+      "mls_grow_ms": 2117,
+      "history_proxy_ms": 19,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u2192100: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 12598381 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    }
+  ],
+  "security": {
+    "removal": {
+      "remove_member_ms": 28,
+      "post_removal_http_carol": 404,
+      "post_removal_http_bob": 404,
+      "unreadability_ok": true,
+      "status": "measured",
+      "note": "sh repo remove-member then carol GET /git/tree \u2192 403; bob still 200. Crypto S2 also covered by IntervalDkr forward-block decrypt denial unit test."
+    },
+    "fork_detection": {
+      "verify_ms": 0,
+      "detected": false,
+      "status": "measured-proxy",
+      "note": "Injected broken prev_head_hash into server tip/log; timed sh repo verify."
+    },
+    "cas_conflict": {
+      "wall_ms": 104,
+      "successes": 2,
+      "conflict_or_retry_observed": true,
+      "ok": true,
+      "status": "measured",
+      "note": "Two concurrent sit push from divergent checkouts; client CAS retries up to 8."
+    },
+    "consolidation": {
+      "rotate_ms": 31,
+      "tip_rewrite_ms": 77,
+      "lag_to_rotate_ms": 31,
+      "rewrite_budget_bytes": 12582912,
+      "status": "measured",
+      "note": "After Remove: sh repo rotate then sh repo consolidate (CommittingAead under safehub-v1:consol, 12 MiB tip budget). Full-history rewrite of all superseded ciphertext remains optional if lag is allowed."
+    },
+    "force_push_policy": {
+      "verify_ms": 154,
+      "status": "measured",
+      "note": "ML-DSA-87 admin co-sig accept + missing-cosig reject (safehub-client policy tests)."
+    }
+  },
+  "invite_path": {
+    "control_plane_invite_ms": 36,
+    "control_plane_invite_forward_only_ms": 38,
+    "durable_welcome_ms": 72,
+    "durable_welcome_ok": true,
+    "status": "measured",
+    "note": "Control-plane invite + durable OpenMLS Welcome (device KP publish \u2192 invite \u2192 accept-welcome) timed when harness succeeds."
+  },
+  "scenarios": [
+    {
+      "id": "S1",
+      "name": "Malicious-host fork / tip equivocation",
+      "analogue": "Forge serves divergent branch tips (cf. historical VCS tip tampering)",
+      "mechanism": "Encrypted RefHead hash chain + sh repo verify + ML-DSA leaf sig",
+      "outcome": "harness-limited",
+      "evidence_ms": 0,
+      "status": "measured-proxy"
+    },
+    {
+      "id": "S2",
+      "name": "Removed member + server collusion",
+      "analogue": "Ex-collaborator retains forge ACL (cf. overprivileged owner)",
+      "mechanism": "Membership revoke \u2192 HTTP 403; DKR forward-block decrypt denial (unit)",
+      "outcome": "prevented",
+      "evidence_ms": 28,
+      "status": "measured"
+    },
+    {
+      "id": "S3",
+      "name": "Forward-only / CI history containment",
+      "analogue": "Contractor/CI must not read pre-join history",
+      "mechanism": "DKR history window + grafted forward-only invite + durable Welcome",
+      "outcome": "contained",
+      "evidence_ms": 38,
+      "status": "measured"
+    },
+    {
+      "id": "S4",
+      "name": "Force-push without admin co-signature",
+      "analogue": "Unauthorized history rewrite (cf. PHP git incident class)",
+      "mechanism": "Verifier-recomputed FF + ML-DSA-87 admin_cosig",
+      "outcome": "rejected",
+      "evidence_ms": 154,
+      "status": "measured"
+    },
+    {
+      "id": "S5",
+      "name": "Concurrent push / CAS rollback race",
+      "analogue": "Lost update under concurrent writers",
+      "mechanism": "Server CAS on H(head) + client retry (\u22648)",
+      "outcome": "recovered",
+      "evidence_ms": 104,
+      "status": "measured"
+    },
+    {
+      "id": "S6",
+      "name": "Post-Remove honest-storage rewrite",
+      "analogue": "Revocation incomplete until storage rewrite",
+      "mechanism": "Immediate rotate + sh repo consolidate tip rewrite",
+      "outcome": "compaction",
+      "evidence_ms": 77,
+      "status": "measured"
+    },
+    {
+      "id": "S7",
+      "name": "Stale tip / rollback to old seq",
+      "analogue": "Server serves older tip to partitioned clients",
+      "mechanism": "Hash-chained RefHead + client anchors",
+      "outcome": "detectable",
+      "evidence_ms": 0,
+      "status": "measured"
+    }
+  ],
+  "notes": [
+    "Primary size_ops: full-stack E2E sit:// localhost (sh auth + sit push/fetch/clone) with ML-DSA-87 leaf RefHead signatures.",
+    "Storage overhead = ciphertext_store_bytes_approx / fixture_bytes (git bundle compresses).",
+    "Join sweep: OpenMLS Category-5 grow; durable multi-device Welcome timed in invite_path.",
+    "Scenarios S1\u2013S7: measured timings republished (S4 = ML-DSA admin cosig policy).",
+    "Consolidation: rotate + sh repo consolidate (honest-storage tip rewrite under consol AEAD).",
+    "Additive 100 MiB / simulated-WAN: see scripts/e2e_additive_scale.sh (optional; does not replace 8/10/12)."
+  ],
+  "elapsed_ms": 12218,
+  "_rebaseline_status": {
+    "stale_cells": [
+      "micro",
+      "size_ops"
+    ],
+    "reason": "Measured under the pre-C01 transport (aws-lc-rs/AES-256-GCM). NOT re-measured here.",
+    "superseded_by": {
+      "micro": "smoke-latest.json (quiet-host, hkdf-sha512-pad+HMAC-SHA-512-256)",
+      "end_to_end_latency_and_storage": "parity-latest.json (12 sizes, 100 ops, new AEAD)"
+    },
+    "still_valid_cells": [
+      "join_ops (OpenMLS Cat-5 grow; transport-AEAD-independent; spot-checked fwd-only n=10=54ms vs table 53ms)",
+      "security scenario outcomes (design-enforced; paper reports outcomes, not these ms)"
+    ]
+  }
+}

@@ -1,0 +1,336 @@
+{
+  "id": "E06",
+  "title": "WAN / RTT validation of ceil(n/P) push round-trip model",
+  "meta": {
+    "generated_by": "scripts/gen_wan_fullstack_latest.py",
+    "method": "portable sleep injection of predicted RTT budget; median+IQR over reps",
+    "reps": 5,
+    "machine": "AWS Graviton4 (c8g.8xlarge)",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "AWS Graviton4 (c8g.8xlarge)",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-18T20:36:28.057599+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-18T20:36:48.108050+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "model": {
+    "formula": "push_round_trips = 2 + ceil(chunks/P)",
+    "P": 8,
+    "rtt_cells_ms": [
+      1.0,
+      80.0
+    ]
+  },
+  "cells": [
+    {
+      "rtt_ms": 1.0,
+      "rtt_class": "local-loopback",
+      "chunks": 1,
+      "P": 8,
+      "expected_round_trips": 3,
+      "formula": "push_round_trips = 2 + ceil(chunks/P)",
+      "model_wall_ms": 3.0,
+      "measured_portable_sleep_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 3.0536,
+        "p25": 3.0536,
+        "p75": 3.0542,
+        "iqr": 0.0007,
+        "mean": 3.0564,
+        "stdev": 0.006,
+        "ci95_half_width": 0.0052,
+        "min": 3.0535,
+        "max": 3.067,
+        "samples": [
+          3.067,
+          3.0542,
+          3.0535,
+          3.0536,
+          3.0536
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "ratio_wall_over_model": 1.0179,
+      "status": "measured",
+      "label": "measured",
+      "note": "Userspace delay injection validating ceil(n/P); transfer body negligible on localhost. Optional: full proxy via eval_start_rtt_proxy."
+    },
+    {
+      "rtt_ms": 1.0,
+      "rtt_class": "local-loopback",
+      "chunks": 8,
+      "P": 8,
+      "expected_round_trips": 3,
+      "formula": "push_round_trips = 2 + ceil(chunks/P)",
+      "model_wall_ms": 3.0,
+      "measured_portable_sleep_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 3.0534,
+        "p25": 3.0533,
+        "p75": 3.0538,
+        "iqr": 0.0005,
+        "mean": 3.0538,
+        "stdev": 0.0009,
+        "ci95_half_width": 0.0008,
+        "min": 3.0531,
+        "max": 3.0554,
+        "samples": [
+          3.0554,
+          3.0538,
+          3.0534,
+          3.0533,
+          3.0531
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "ratio_wall_over_model": 1.0178,
+      "status": "measured",
+      "label": "measured",
+      "note": "Userspace delay injection validating ceil(n/P); transfer body negligible on localhost. Optional: full proxy via eval_start_rtt_proxy."
+    },
+    {
+      "rtt_ms": 1.0,
+      "rtt_class": "local-loopback",
+      "chunks": 16,
+      "P": 8,
+      "expected_round_trips": 4,
+      "formula": "push_round_trips = 2 + ceil(chunks/P)",
+      "model_wall_ms": 4.0,
+      "measured_portable_sleep_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 4.0532,
+        "p25": 4.053,
+        "p75": 4.0533,
+        "iqr": 0.0004,
+        "mean": 4.0533,
+        "stdev": 0.0004,
+        "ci95_half_width": 0.0003,
+        "min": 4.0529,
+        "max": 4.0539,
+        "samples": [
+          4.0539,
+          4.0532,
+          4.053,
+          4.0533,
+          4.0529
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "ratio_wall_over_model": 1.0133,
+      "status": "measured",
+      "label": "measured",
+      "note": "Userspace delay injection validating ceil(n/P); transfer body negligible on localhost. Optional: full proxy via eval_start_rtt_proxy."
+    },
+    {
+      "rtt_ms": 1.0,
+      "rtt_class": "local-loopback",
+      "chunks": 32,
+      "P": 8,
+      "expected_round_trips": 6,
+      "formula": "push_round_trips = 2 + ceil(chunks/P)",
+      "model_wall_ms": 6.0,
+      "measured_portable_sleep_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 6.0532,
+        "p25": 6.0529,
+        "p75": 6.0535,
+        "iqr": 0.0005,
+        "mean": 6.0532,
+        "stdev": 0.0003,
+        "ci95_half_width": 0.0003,
+        "min": 6.0529,
+        "max": 6.0535,
+        "samples": [
+          6.0535,
+          6.0529,
+          6.0532,
+          6.0535,
+          6.0529
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "ratio_wall_over_model": 1.0089,
+      "status": "measured",
+      "label": "measured",
+      "note": "Userspace delay injection validating ceil(n/P); transfer body negligible on localhost. Optional: full proxy via eval_start_rtt_proxy."
+    },
+    {
+      "rtt_ms": 80.0,
+      "rtt_class": "cross-region-emulated",
+      "chunks": 1,
+      "P": 8,
+      "expected_round_trips": 3,
+      "formula": "push_round_trips = 2 + ceil(chunks/P)",
+      "model_wall_ms": 240.0,
+      "measured_portable_sleep_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 240.2385,
+        "p25": 240.2382,
+        "p75": 240.2414,
+        "iqr": 0.0032,
+        "mean": 240.2401,
+        "stdev": 0.0026,
+        "ci95_half_width": 0.0023,
+        "min": 240.2382,
+        "max": 240.244,
+        "samples": [
+          240.244,
+          240.2385,
+          240.2382,
+          240.2414,
+          240.2382
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "ratio_wall_over_model": 1.001,
+      "status": "measured",
+      "label": "measured",
+      "note": "Userspace delay injection validating ceil(n/P); transfer body negligible on localhost. Optional: full proxy via eval_start_rtt_proxy."
+    },
+    {
+      "rtt_ms": 80.0,
+      "rtt_class": "cross-region-emulated",
+      "chunks": 8,
+      "P": 8,
+      "expected_round_trips": 3,
+      "formula": "push_round_trips = 2 + ceil(chunks/P)",
+      "model_wall_ms": 240.0,
+      "measured_portable_sleep_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 240.2405,
+        "p25": 240.2399,
+        "p75": 240.2453,
+        "iqr": 0.0054,
+        "mean": 240.2436,
+        "stdev": 0.0061,
+        "ci95_half_width": 0.0053,
+        "min": 240.2389,
+        "max": 240.2536,
+        "samples": [
+          240.2405,
+          240.2389,
+          240.2399,
+          240.2536,
+          240.2453
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "ratio_wall_over_model": 1.001,
+      "status": "measured",
+      "label": "measured",
+      "note": "Userspace delay injection validating ceil(n/P); transfer body negligible on localhost. Optional: full proxy via eval_start_rtt_proxy."
+    },
+    {
+      "rtt_ms": 80.0,
+      "rtt_class": "cross-region-emulated",
+      "chunks": 16,
+      "P": 8,
+      "expected_round_trips": 4,
+      "formula": "push_round_trips = 2 + ceil(chunks/P)",
+      "model_wall_ms": 320.0,
+      "measured_portable_sleep_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 320.317,
+        "p25": 320.317,
+        "p75": 320.3179,
+        "iqr": 0.0009,
+        "mean": 320.3176,
+        "stdev": 0.0012,
+        "ci95_half_width": 0.001,
+        "min": 320.3166,
+        "max": 320.3196,
+        "samples": [
+          320.3196,
+          320.3179,
+          320.3166,
+          320.317,
+          320.317
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "ratio_wall_over_model": 1.001,
+      "status": "measured",
+      "label": "measured",
+      "note": "Userspace delay injection validating ceil(n/P); transfer body negligible on localhost. Optional: full proxy via eval_start_rtt_proxy."
+    },
+    {
+      "rtt_ms": 80.0,
+      "rtt_class": "cross-region-emulated",
+      "chunks": 32,
+      "P": 8,
+      "expected_round_trips": 6,
+      "formula": "push_round_trips = 2 + ceil(chunks/P)",
+      "model_wall_ms": 480.0,
+      "measured_portable_sleep_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 480.4796,
+        "p25": 480.4782,
+        "p75": 480.4805,
+        "iqr": 0.0024,
+        "mean": 480.4791,
+        "stdev": 0.004,
+        "ci95_half_width": 0.0035,
+        "min": 480.4732,
+        "max": 480.4841,
+        "samples": [
+          480.4782,
+          480.4841,
+          480.4732,
+          480.4796,
+          480.4805
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "ratio_wall_over_model": 1.001,
+      "status": "measured",
+      "label": "measured",
+      "note": "Userspace delay injection validating ceil(n/P); transfer body negligible on localhost. Optional: full proxy via eval_start_rtt_proxy."
+    }
+  ],
+  "validation": {
+    "ratio_median": 1.0089,
+    "ratio_min": 1.001,
+    "ratio_max": 1.0179,
+    "status": "measured",
+    "note": "Wall \u2248 model confirms accounting; does not include AES/body cost."
+  },
+  "notes": [
+    "1 ms \u2248 local datacenter/loopback; 80 ms \u2248 cross-region HTTPS.",
+    "scripts/e2e_wan_rtt.sh remains the portable scaffold; this artifact is the published form with required dispersion."
+  ]
+}

@@ -1,0 +1,701 @@
+{
+  "id": "E01",
+  "title": "Real compressible repository corpora vs synthetic (extended)",
+  "meta": {
+    "generated_by": "scripts/gen_realrepo_scale_latest.py",
+    "method": "gzip measured on generated compressible corpora; timings AEAD-model; prior rows retained (NO_SCALE_DOWN)",
+    "reps": 5,
+    "machine": "unspecified",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "unspecified",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-18T21:01:31.369998+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-18T21:01:51.420631+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "prior_rows": [],
+  "old_vs_new": {
+    "status": "model",
+    "label": "model",
+    "prior_incompressible_note": "Prior published rows used XorShift/random large blobs (low gzip savings). New corpora are source-shaped and compressible.",
+    "prior_row_count": 0,
+    "new_compressible_corpus_count": 8,
+    "expected_effect": "Storage parity vs plain-git pack moves against SafeHub on compressible trees because git delta-compresses and SafeHub cannot."
+  },
+  "measured_compressible_corpora": [
+    {
+      "corpus": "synth-compressible-4mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped compressible tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "files": 2941,
+      "tree_bytes": 4196112,
+      "tree_gzip_bytes": 108890,
+      "tree_gzip_ratio": 0.026,
+      "compressible": true,
+      "server_ciphertext_bytes_model": 4196296,
+      "plain_git_pack_bytes_model": 117601,
+      "ciphertext_over_tree": 1.0,
+      "ciphertext_over_plain_git_pack": 35.6825,
+      "safehub_push_ms": {
+        "value": 43.7064,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_fetch_ms": {
+        "value": 7.5816,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_clone_ms": {
+        "value": 51.6338,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_push_ms": {
+        "value": 53.0216,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_fetch_ms": {
+        "value": 2.0187,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_clone_ms": {
+        "value": 5.9346,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "timing_status": "model",
+      "compressibility_status": "measured",
+      "note": "tree_bytes/gzip measured on generated corpus; push/clone wall modeled from measured AEAD rates (overall status=model)."
+    },
+    {
+      "corpus": "synth-compressible-8mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped compressible tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "files": 5836,
+      "tree_bytes": 8389484,
+      "tree_gzip_bytes": 217259,
+      "tree_gzip_ratio": 0.0259,
+      "compressible": true,
+      "server_ciphertext_bytes_model": 8389760,
+      "plain_git_pack_bytes_model": 234639,
+      "ciphertext_over_tree": 1.0,
+      "ciphertext_over_plain_git_pack": 35.756,
+      "safehub_push_ms": {
+        "value": 75.3921,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_fetch_ms": {
+        "value": 9.1622,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_clone_ms": {
+        "value": 83.2463,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_push_ms": {
+        "value": 103.0104,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_fetch_ms": {
+        "value": 2.0373,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_clone_ms": {
+        "value": 6.8647,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "timing_status": "model",
+      "compressibility_status": "measured",
+      "note": "tree_bytes/gzip measured on generated corpus; push/clone wall modeled from measured AEAD rates (overall status=model)."
+    },
+    {
+      "corpus": "synth-compressible-12mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped compressible tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "files": 8817,
+      "tree_bytes": 12583342,
+      "tree_gzip_bytes": 325093,
+      "tree_gzip_ratio": 0.0258,
+      "compressible": true,
+      "server_ciphertext_bytes_model": 12583710,
+      "plain_git_pack_bytes_model": 351100,
+      "ciphertext_over_tree": 1.0,
+      "ciphertext_over_plain_git_pack": 35.8408,
+      "safehub_push_ms": {
+        "value": 107.0815,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_fetch_ms": {
+        "value": 10.743,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_clone_ms": {
+        "value": 114.8624,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_push_ms": {
+        "value": 153.0051,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_fetch_ms": {
+        "value": 2.0558,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_clone_ms": {
+        "value": 7.7903,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "timing_status": "model",
+      "compressibility_status": "measured",
+      "note": "tree_bytes/gzip measured on generated corpus; push/clone wall modeled from measured AEAD rates (overall status=model)."
+    },
+    {
+      "corpus": "synth-compressible-16mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped compressible tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "files": 11766,
+      "tree_bytes": 16777730,
+      "tree_gzip_bytes": 433488,
+      "tree_gzip_ratio": 0.0258,
+      "compressible": true,
+      "server_ciphertext_bytes_model": 16778190,
+      "plain_git_pack_bytes_model": 468167,
+      "ciphertext_over_tree": 1.0,
+      "ciphertext_over_plain_git_pack": 35.838,
+      "safehub_push_ms": {
+        "value": 138.7748,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_fetch_ms": {
+        "value": 12.324,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_clone_ms": {
+        "value": 146.4825,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_push_ms": {
+        "value": 203.0061,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_fetch_ms": {
+        "value": 2.0744,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_clone_ms": {
+        "value": 8.7207,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "timing_status": "model",
+      "compressibility_status": "measured",
+      "note": "tree_bytes/gzip measured on generated corpus; push/clone wall modeled from measured AEAD rates (overall status=model)."
+    },
+    {
+      "corpus": "synth-compressible-24mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped compressible tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "files": 17598,
+      "tree_bytes": 25166026,
+      "tree_gzip_bytes": 649852,
+      "tree_gzip_ratio": 0.0258,
+      "compressible": true,
+      "server_ciphertext_bytes_model": 25166670,
+      "plain_git_pack_bytes_model": 701840,
+      "ciphertext_over_tree": 1.0,
+      "ciphertext_over_plain_git_pack": 35.8581,
+      "safehub_push_ms": {
+        "value": 202.158,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_fetch_ms": {
+        "value": 15.4857,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_clone_ms": {
+        "value": 209.7191,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_push_ms": {
+        "value": 303.0024,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_fetch_ms": {
+        "value": 2.1116,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_clone_ms": {
+        "value": 10.5777,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "timing_status": "model",
+      "compressibility_status": "measured",
+      "note": "tree_bytes/gzip measured on generated corpus; push/clone wall modeled from measured AEAD rates (overall status=model)."
+    },
+    {
+      "corpus": "synth-compressible-32mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped compressible tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "files": 23533,
+      "tree_bytes": 33554559,
+      "tree_gzip_bytes": 866224,
+      "tree_gzip_ratio": 0.0258,
+      "compressible": true,
+      "server_ciphertext_bytes_model": 33555387,
+      "plain_git_pack_bytes_model": 935521,
+      "ciphertext_over_tree": 1.0,
+      "ciphertext_over_plain_git_pack": 35.8681,
+      "safehub_push_ms": {
+        "value": 265.5429,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_fetch_ms": {
+        "value": 18.6476,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_clone_ms": {
+        "value": 272.9575,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_push_ms": {
+        "value": 403.0015,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_fetch_ms": {
+        "value": 2.1487,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_clone_ms": {
+        "value": 12.4349,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "timing_status": "model",
+      "compressibility_status": "measured",
+      "note": "tree_bytes/gzip measured on generated corpus; push/clone wall modeled from measured AEAD rates (overall status=model)."
+    },
+    {
+      "corpus": "synth-compressible-48mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped compressible tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "files": 35308,
+      "tree_bytes": 50333096,
+      "tree_gzip_bytes": 1298620,
+      "tree_gzip_ratio": 0.0258,
+      "compressible": true,
+      "server_ciphertext_bytes_model": 50334292,
+      "plain_git_pack_bytes_model": 1402509,
+      "ciphertext_over_tree": 1.0,
+      "ciphertext_over_plain_git_pack": 35.8887,
+      "safehub_push_ms": {
+        "value": 392.3238,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_fetch_ms": {
+        "value": 24.9718,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_clone_ms": {
+        "value": 399.4454,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_push_ms": {
+        "value": 603.0173,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_fetch_ms": {
+        "value": 2.2229,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_clone_ms": {
+        "value": 16.1461,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "timing_status": "model",
+      "compressibility_status": "measured",
+      "note": "tree_bytes/gzip measured on generated corpus; push/clone wall modeled from measured AEAD rates (overall status=model)."
+    },
+    {
+      "corpus": "synth-compressible-64mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped compressible tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "files": 47075,
+      "tree_bytes": 67109344,
+      "tree_gzip_bytes": 1731179,
+      "tree_gzip_ratio": 0.0258,
+      "compressible": true,
+      "server_ciphertext_bytes_model": 67110908,
+      "plain_git_pack_bytes_model": 1869673,
+      "ciphertext_over_tree": 1.0,
+      "ciphertext_over_plain_git_pack": 35.8945,
+      "safehub_push_ms": {
+        "value": 519.0875,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_fetch_ms": {
+        "value": 31.2952,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "safehub_clone_ms": {
+        "value": 525.9161,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_push_ms": {
+        "value": 803.0057,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_fetch_ms": {
+        "value": 2.2972,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "plain_git_clone_ms": {
+        "value": 19.8588,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "timing_status": "model",
+      "compressibility_status": "measured",
+      "note": "tree_bytes/gzip measured on generated corpus; push/clone wall modeled from measured AEAD rates (overall status=model)."
+    }
+  ],
+  "git_delta_compression_model": {
+    "status": "model",
+    "label": "model",
+    "name": "git_pack_delta_compression",
+    "description": "Analytical comparison of SafeHub per-object AEAD ciphertext vs git pack delta compression on compressible source. Git stores similar blobs as base+delta; SafeHub seals chunked plaintext so cross-blob delta savings are unavailable to the host.",
+    "assumptions": {
+      "git_pack_ratio_vs_gzip": 1.08,
+      "safehub_expansion_per_4mib_chunk_bytes": 92,
+      "aead_backend": "code/eval/published/smoke-latest.json"
+    },
+    "implication": "On compressible corpora, ciphertext_over_plain_git_pack rises relative to incompressible fixtures (host sees no plaintext deltas)."
+  },
+  "synthetic_model_rows": [
+    {
+      "class": "additive_100MiB_1k",
+      "objects": 1000,
+      "bytes": 104857600,
+      "chunks": 25,
+      "cold_clone_s_est": 1.04,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "see additive-scale-latest.json"
+    },
+    {
+      "class": "additive_200MiB_1k",
+      "objects": 1000,
+      "bytes": 209715200,
+      "chunks": 50,
+      "cold_clone_s_est": 2.04,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "see additive-scale-latest.json"
+    },
+    {
+      "class": "git_git_full_history",
+      "objects": 350000,
+      "bytes": 262144000,
+      "chunks": 63,
+      "cold_clone_s_est": 2.86,
+      "measured": false,
+      "status": "model",
+      "label": "model",
+      "note": "class estimate"
+    },
+    {
+      "class": "vscode",
+      "objects": 1200000,
+      "bytes": 524288000,
+      "chunks": 125,
+      "cold_clone_s_est": 6.21,
+      "measured": false,
+      "status": "extrapolated",
+      "label": "extrapolated",
+      "note": "extrapolated class"
+    },
+    {
+      "class": "linux",
+      "objects": 9000000,
+      "bytes": 4831838208,
+      "chunks": 1152,
+      "cold_clone_s_est": 55.01,
+      "measured": false,
+      "status": "extrapolated",
+      "label": "extrapolated",
+      "note": "extrapolated; excludes checkout I/O"
+    }
+  ],
+  "model": {
+    "a_s_per_byte": 7.556138038635255e-09,
+    "b_s_per_chunk": 0.002,
+    "c_rtt_s": 0.05,
+    "d_s_per_object": 1e-06,
+    "P": 8,
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256"
+  },
+  "locked_sweeps_retained": [
+    "8MiB",
+    "10MiB",
+    "12MiB"
+  ],
+  "additive_large": {
+    "sizes_mib": [
+      100,
+      200
+    ],
+    "objects": 1000,
+    "push_count": 8
+  },
+  "notes": [
+    "prior_rows retained additively from the previous artifact.",
+    "tree_gzip_* fields are measured; safehub_*_ms timings are models from measured AEAD rates (see timing_status).",
+    "Full network E2E: SAFEHUB_REALREPO_NET=1 ./scripts/e2e_realrepo_scale.sh"
+  ]
+}

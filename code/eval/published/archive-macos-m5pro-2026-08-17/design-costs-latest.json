@@ -1,0 +1,241 @@
+{
+  "id": "E09/E14",
+  "title": "Design-implied costs and metadata-leakage padding option",
+  "meta": {
+    "generated_by": "scripts/gen_design_costs_latest.py",
+    "method": "mix of measured micro/security cells and AEAD-rate models",
+    "reps": 5,
+    "machine": "Apple M5 Pro",
+    "machine_detail": {
+      "os": "darwin",
+      "os_release": "25.5.0",
+      "arch": "arm64",
+      "cpu_hint": "Apple M5 Pro",
+      "cpu_count": 18,
+      "ram_bytes": 51539607552,
+      "ram_gib": 48.0,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.6",
+      "measured_at": "2026-08-17T00:17:20.995410+00:00"
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-17T00:17:20.995570+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "cells": [
+    {
+      "id": "grafted_snapshot_inviter",
+      "description": "Inviter builds grafted snapshot (O(repo) seal of tip)",
+      "repo_mib": 12,
+      "cost_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 15.4707,
+        "p25": 14.8611,
+        "p75": 15.5717,
+        "iqr": 0.7106,
+        "mean": 15.2588,
+        "stdev": 0.4136,
+        "ci95_half_width": 0.3625,
+        "min": 14.7622,
+        "max": 15.6284,
+        "samples": [
+          15.6284,
+          14.7622,
+          15.5717,
+          14.8611,
+          15.4707
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "complexity": "O(repo_bytes)",
+      "status": "model",
+      "label": "model",
+      "note": "Anchored to measured AEAD seal rate \u00d7 tip bytes."
+    },
+    {
+      "id": "force_push_admin_cosig",
+      "description": "Force-push with ML-DSA-87 admin co-signature",
+      "local_verify_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 154.5679,
+        "p25": 153.495,
+        "p75": 156.2912,
+        "iqr": 2.7963,
+        "mean": 154.7477,
+        "stdev": 1.9112,
+        "ci95_half_width": 1.6752,
+        "min": 152.3879,
+        "max": 156.9966,
+        "samples": [
+          156.2912,
+          153.495,
+          152.3879,
+          154.5679,
+          156.9966
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "with_80ms_rtt_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 236.768,
+        "p25": 233.3006,
+        "p75": 237.0453,
+        "iqr": 3.7447,
+        "mean": 234.8908,
+        "stdev": 4.0842,
+        "ci95_half_width": 3.58,
+        "min": 228.5198,
+        "max": 238.8201,
+        "samples": [
+          236.768,
+          233.3006,
+          237.0453,
+          238.8201,
+          228.5198
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Local verify from fullstack security.force_push_policy (154.0 ms); RTT cell adds emulated 80 ms."
+    },
+    {
+      "id": "refhead_verify_1e4",
+      "description": "RefHead hash-chain verify over 10^4 links",
+      "links": 10000,
+      "cost_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 12.0284,
+        "p25": 11.9935,
+        "p75": 12.149,
+        "iqr": 0.1556,
+        "mean": 12.064,
+        "stdev": 0.0833,
+        "ci95_half_width": 0.073,
+        "min": 11.9907,
+        "max": 12.1585,
+        "samples": [
+          12.149,
+          12.1585,
+          11.9907,
+          12.0284,
+          11.9935
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "per_link_ns": 1199.59,
+      "status": "measured",
+      "label": "measured",
+      "note": "Linear scale from measured head_verify_100_ns.",
+      "source": "code/eval/published/smoke-latest.json"
+    },
+    {
+      "id": "padding_cost",
+      "description": "Per-push bucket padding to 256 KiB",
+      "avg_push_bytes": 65536,
+      "bucket_bytes": 262144,
+      "pad_bytes": 196608,
+      "extra_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 0.0022,
+        "p25": 0.0021,
+        "p75": 0.0022,
+        "iqr": 0.0,
+        "mean": 0.0022,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 0.0021,
+        "max": 0.0022,
+        "samples": [
+          0.0021,
+          0.0022,
+          0.0022,
+          0.0022,
+          0.0021
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "storage_expansion_x": 4.0,
+      "status": "model",
+      "label": "model"
+    },
+    {
+      "id": "churn_workload",
+      "description": "remove-member + invite + rotate (n\u224820)",
+      "cost_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 95.4051,
+        "p25": 91.2272,
+        "p75": 98.1985,
+        "iqr": 6.9712,
+        "mean": 94.79,
+        "stdev": 3.7413,
+        "ci95_half_width": 3.2794,
+        "min": 90.6104,
+        "max": 98.5089,
+        "samples": [
+          91.2272,
+          98.5089,
+          98.1985,
+          95.4051,
+          90.6104
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "components_ms": {
+        "remove": 28,
+        "invite": 36,
+        "rotate": 31
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Component medians from fullstack security + invite_path."
+    },
+    {
+      "id": "metadata_leakage_padding_option",
+      "threat": "Push size/timing/device-linked metadata fingerprint",
+      "option": "Bucket-pad sealed push bodies to 256 KiB + optional batching",
+      "pad_bytes_per_push_avg": 196608,
+      "extra_seal_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 0.0022,
+        "p25": 0.0022,
+        "p75": 0.0022,
+        "iqr": 0.0,
+        "mean": 0.0022,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 0.0022,
+        "max": 0.0022,
+        "samples": [
+          0.0022,
+          0.0022,
+          0.0022,
+          0.0022,
+          0.0022
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "storage_expansion_x": 4.0,
+      "status": "model",
+      "label": "model",
+      "note": "Costed mitigation option; not enabled by default in prototype."
+    }
+  ],
+  "notes": [
+    "Grafted inviter and padding are models; RefHead 1e4 and cosig local are measured (scaled micro / fullstack)."
+  ]
+}

@@ -1,0 +1,1143 @@
+{
+  "id": "E01",
+  "title": "Real compressible repository corpora vs synthetic",
+  "machine": {
+    "os": "darwin",
+    "os_release": "25.5.0",
+    "arch": "arm64",
+    "cpu_hint": "Apple M5 Pro",
+    "cpu_count": 18,
+    "ram_bytes": 51539607552,
+    "storage_hint": "local SSD (APFS/ext4)",
+    "hardware_aes_on_transport": false,
+    "hardware_aes": "n/a for transport (see aes_note)",
+    "aes_note": "Transport AEAD is hkdf-sha512-pad+HMAC-SHA-512-256; hardware AES unused on application transport hot path",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "build_profile": "release",
+    "python": "3.9.6",
+    "measured_at": "2026-08-17T02:35:37.082340+00:00"
+  },
+  "methodology": {
+    "reps_per_cell": 3,
+    "dispersion": "median + IQR over reps; every timed cell carries n",
+    "network_available": false,
+    "clone_depth": 1,
+    "content_only": "Public trees are cloned for *content*; SafeHub and the plain-git arm each build their own single-commit history over the identical tree so the two columns cover the same work.",
+    "plain_git_arm": "local bare repo, gc'd before clone, cloned over file://",
+    "labels": {
+      "measured": "wall-clock on this machine",
+      "model": "analytical cold-clone estimate, retained from the prior artifact"
+    }
+  },
+  "measured_real_corpora": [],
+  "measured_synthetic_compressible_corpora": [
+    {
+      "corpus": "synth-compressible-4mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": true,
+      "status": "measured",
+      "clone_depth": 1,
+      "files": 1135,
+      "tree_bytes": 4196434,
+      "tree_gzip_bytes": 145427,
+      "tree_gzip_ratio": 0.0347,
+      "compressible": true,
+      "server_ciphertext_bytes": 363109,
+      "plain_git_pack_bytes": 397118,
+      "ciphertext_over_tree": 0.0865,
+      "ciphertext_over_plain_git_pack": 0.9144,
+      "safehub_push_ms": {
+        "n": 3,
+        "median": 166.0,
+        "p25": 164.5,
+        "p75": 336.0,
+        "iqr": 171.5,
+        "mean": 278.333,
+        "stdev": 197.171,
+        "ci95_half_width": 223.12,
+        "min": 163.0,
+        "max": 506.0,
+        "samples": [
+          506.0,
+          163.0,
+          166.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_fetch_ms": {
+        "n": 3,
+        "median": 23.0,
+        "p25": 22.5,
+        "p75": 23.5,
+        "iqr": 1.0,
+        "mean": 23.0,
+        "stdev": 1.0,
+        "ci95_half_width": 1.132,
+        "min": 22.0,
+        "max": 24.0,
+        "samples": [
+          22.0,
+          23.0,
+          24.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_clone_ms": {
+        "n": 3,
+        "median": 133.0,
+        "p25": 132.5,
+        "p75": 143.5,
+        "iqr": 11.0,
+        "mean": 139.667,
+        "stdev": 12.423,
+        "ci95_half_width": 14.058,
+        "min": 132.0,
+        "max": 154.0,
+        "samples": [
+          154.0,
+          132.0,
+          133.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_push_ms": {
+        "n": 3,
+        "median": 139.0,
+        "p25": 138.0,
+        "p75": 142.0,
+        "iqr": 4.0,
+        "mean": 140.333,
+        "stdev": 4.163,
+        "ci95_half_width": 4.711,
+        "min": 137.0,
+        "max": 145.0,
+        "samples": [
+          137.0,
+          139.0,
+          145.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_fetch_ms": {
+        "n": 3,
+        "median": 39.0,
+        "p25": 38.5,
+        "p75": 39.0,
+        "iqr": 0.5,
+        "mean": 38.667,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 38.0,
+        "max": 39.0,
+        "samples": [
+          38.0,
+          39.0,
+          39.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_clone_ms": {
+        "n": 3,
+        "median": 120.0,
+        "p25": 119.0,
+        "p75": 121.5,
+        "iqr": 2.5,
+        "mean": 120.333,
+        "stdev": 2.517,
+        "ci95_half_width": 2.848,
+        "min": 118.0,
+        "max": 123.0,
+        "samples": [
+          120.0,
+          118.0,
+          123.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "push_overhead_x": 1.1942,
+      "fetch_overhead_x": 0.5897,
+      "clone_overhead_x": 1.1083
+    },
+    {
+      "corpus": "synth-compressible-8mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": true,
+      "status": "measured",
+      "clone_depth": 1,
+      "files": 2257,
+      "tree_bytes": 8390011,
+      "tree_gzip_bytes": 289724,
+      "tree_gzip_ratio": 0.0345,
+      "compressible": true,
+      "server_ciphertext_bytes": 709640,
+      "plain_git_pack_bytes": 785337,
+      "ciphertext_over_tree": 0.0846,
+      "ciphertext_over_plain_git_pack": 0.9036,
+      "safehub_push_ms": {
+        "n": 3,
+        "median": 252.0,
+        "p25": 252.0,
+        "p75": 254.0,
+        "iqr": 2.0,
+        "mean": 253.333,
+        "stdev": 2.309,
+        "ci95_half_width": 2.613,
+        "min": 252.0,
+        "max": 256.0,
+        "samples": [
+          256.0,
+          252.0,
+          252.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_fetch_ms": {
+        "n": 3,
+        "median": 24.0,
+        "p25": 23.0,
+        "p75": 29.0,
+        "iqr": 6.0,
+        "mean": 26.667,
+        "stdev": 6.429,
+        "ci95_half_width": 7.275,
+        "min": 22.0,
+        "max": 34.0,
+        "samples": [
+          34.0,
+          24.0,
+          22.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_clone_ms": {
+        "n": 3,
+        "median": 210.0,
+        "p25": 205.5,
+        "p75": 213.5,
+        "iqr": 8.0,
+        "mean": 209.333,
+        "stdev": 8.021,
+        "ci95_half_width": 9.076,
+        "min": 201.0,
+        "max": 217.0,
+        "samples": [
+          210.0,
+          217.0,
+          201.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_push_ms": {
+        "n": 3,
+        "median": 223.0,
+        "p25": 222.5,
+        "p75": 224.0,
+        "iqr": 1.5,
+        "mean": 223.333,
+        "stdev": 1.528,
+        "ci95_half_width": 1.729,
+        "min": 222.0,
+        "max": 225.0,
+        "samples": [
+          225.0,
+          223.0,
+          222.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_fetch_ms": {
+        "n": 3,
+        "median": 41.0,
+        "p25": 41.0,
+        "p75": 42.5,
+        "iqr": 1.5,
+        "mean": 42.0,
+        "stdev": 1.732,
+        "ci95_half_width": 1.96,
+        "min": 41.0,
+        "max": 44.0,
+        "samples": [
+          44.0,
+          41.0,
+          41.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_clone_ms": {
+        "n": 3,
+        "median": 192.0,
+        "p25": 192.0,
+        "p75": 193.0,
+        "iqr": 1.0,
+        "mean": 192.667,
+        "stdev": 1.155,
+        "ci95_half_width": 1.307,
+        "min": 192.0,
+        "max": 194.0,
+        "samples": [
+          194.0,
+          192.0,
+          192.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "push_overhead_x": 1.13,
+      "fetch_overhead_x": 0.5854,
+      "clone_overhead_x": 1.0938
+    },
+    {
+      "corpus": "synth-compressible-12mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": true,
+      "status": "measured",
+      "clone_depth": 1,
+      "files": 3372,
+      "tree_bytes": 12587424,
+      "tree_gzip_bytes": 434061,
+      "tree_gzip_ratio": 0.0345,
+      "compressible": true,
+      "server_ciphertext_bytes": 1046006,
+      "plain_git_pack_bytes": 1163132,
+      "ciphertext_over_tree": 0.0831,
+      "ciphertext_over_plain_git_pack": 0.8993,
+      "safehub_push_ms": {
+        "n": 3,
+        "median": 366.0,
+        "p25": 348.0,
+        "p75": 376.0,
+        "iqr": 28.0,
+        "mean": 360.667,
+        "stdev": 28.378,
+        "ci95_half_width": 32.113,
+        "min": 330.0,
+        "max": 386.0,
+        "samples": [
+          330.0,
+          386.0,
+          366.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_fetch_ms": {
+        "n": 3,
+        "median": 26.0,
+        "p25": 24.5,
+        "p75": 26.5,
+        "iqr": 2.0,
+        "mean": 25.333,
+        "stdev": 2.082,
+        "ci95_half_width": 2.356,
+        "min": 23.0,
+        "max": 27.0,
+        "samples": [
+          23.0,
+          27.0,
+          26.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_clone_ms": {
+        "n": 3,
+        "median": 288.0,
+        "p25": 278.0,
+        "p75": 290.5,
+        "iqr": 12.5,
+        "mean": 283.0,
+        "stdev": 13.229,
+        "ci95_half_width": 14.97,
+        "min": 268.0,
+        "max": 293.0,
+        "samples": [
+          268.0,
+          293.0,
+          288.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_push_ms": {
+        "n": 3,
+        "median": 337.0,
+        "p25": 326.0,
+        "p75": 339.5,
+        "iqr": 13.5,
+        "mean": 331.333,
+        "stdev": 14.364,
+        "ci95_half_width": 16.255,
+        "min": 315.0,
+        "max": 342.0,
+        "samples": [
+          315.0,
+          342.0,
+          337.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_fetch_ms": {
+        "n": 3,
+        "median": 47.0,
+        "p25": 43.5,
+        "p75": 47.5,
+        "iqr": 4.0,
+        "mean": 45.0,
+        "stdev": 4.359,
+        "ci95_half_width": 4.933,
+        "min": 40.0,
+        "max": 48.0,
+        "samples": [
+          40.0,
+          48.0,
+          47.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_clone_ms": {
+        "n": 3,
+        "median": 269.0,
+        "p25": 261.5,
+        "p75": 269.5,
+        "iqr": 8.0,
+        "mean": 264.333,
+        "stdev": 8.963,
+        "ci95_half_width": 10.142,
+        "min": 254.0,
+        "max": 270.0,
+        "samples": [
+          254.0,
+          270.0,
+          269.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "push_overhead_x": 1.0861,
+      "fetch_overhead_x": 0.5532,
+      "clone_overhead_x": 1.0706
+    },
+    {
+      "corpus": "synth-compressible-16mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": true,
+      "status": "measured",
+      "clone_depth": 1,
+      "files": 4513,
+      "tree_bytes": 16780149,
+      "tree_gzip_bytes": 578387,
+      "tree_gzip_ratio": 0.0345,
+      "compressible": true,
+      "server_ciphertext_bytes": 1384781,
+      "plain_git_pack_bytes": 1543699,
+      "ciphertext_over_tree": 0.0825,
+      "ciphertext_over_plain_git_pack": 0.8971,
+      "safehub_push_ms": {
+        "n": 3,
+        "median": 454.0,
+        "p25": 452.0,
+        "p75": 457.5,
+        "iqr": 5.5,
+        "mean": 455.0,
+        "stdev": 5.568,
+        "ci95_half_width": 6.301,
+        "min": 450.0,
+        "max": 461.0,
+        "samples": [
+          461.0,
+          454.0,
+          450.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_fetch_ms": {
+        "n": 3,
+        "median": 27.0,
+        "p25": 27.0,
+        "p75": 27.0,
+        "iqr": 0.0,
+        "mean": 27.0,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 27.0,
+        "max": 27.0,
+        "samples": [
+          27.0,
+          27.0,
+          27.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_clone_ms": {
+        "n": 3,
+        "median": 370.0,
+        "p25": 364.0,
+        "p75": 370.5,
+        "iqr": 6.5,
+        "mean": 366.333,
+        "stdev": 7.234,
+        "ci95_half_width": 8.186,
+        "min": 358.0,
+        "max": 371.0,
+        "samples": [
+          371.0,
+          358.0,
+          370.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_push_ms": {
+        "n": 3,
+        "median": 434.0,
+        "p25": 433.0,
+        "p75": 434.0,
+        "iqr": 1.0,
+        "mean": 433.333,
+        "stdev": 1.155,
+        "ci95_half_width": 1.307,
+        "min": 432.0,
+        "max": 434.0,
+        "samples": [
+          434.0,
+          432.0,
+          434.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_fetch_ms": {
+        "n": 3,
+        "median": 47.0,
+        "p25": 46.5,
+        "p75": 47.5,
+        "iqr": 1.0,
+        "mean": 47.0,
+        "stdev": 1.0,
+        "ci95_half_width": 1.132,
+        "min": 46.0,
+        "max": 48.0,
+        "samples": [
+          47.0,
+          48.0,
+          46.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_clone_ms": {
+        "n": 3,
+        "median": 340.0,
+        "p25": 336.0,
+        "p75": 342.5,
+        "iqr": 6.5,
+        "mean": 339.0,
+        "stdev": 6.557,
+        "ci95_half_width": 7.42,
+        "min": 332.0,
+        "max": 345.0,
+        "samples": [
+          340.0,
+          332.0,
+          345.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "push_overhead_x": 1.0461,
+      "fetch_overhead_x": 0.5745,
+      "clone_overhead_x": 1.0882
+    },
+    {
+      "corpus": "synth-compressible-24mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": true,
+      "status": "measured",
+      "clone_depth": 1,
+      "files": 6682,
+      "tree_bytes": 25166803,
+      "tree_gzip_bytes": 868598,
+      "tree_gzip_ratio": 0.0345,
+      "compressible": true,
+      "server_ciphertext_bytes": 2061041,
+      "plain_git_pack_bytes": 2300540,
+      "ciphertext_over_tree": 0.0819,
+      "ciphertext_over_plain_git_pack": 0.8959,
+      "safehub_push_ms": {
+        "n": 3,
+        "median": 641.0,
+        "p25": 634.5,
+        "p75": 642.0,
+        "iqr": 7.5,
+        "mean": 637.333,
+        "stdev": 8.145,
+        "ci95_half_width": 9.216,
+        "min": 628.0,
+        "max": 643.0,
+        "samples": [
+          628.0,
+          641.0,
+          643.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_fetch_ms": {
+        "n": 3,
+        "median": 27.0,
+        "p25": 26.5,
+        "p75": 27.0,
+        "iqr": 0.5,
+        "mean": 26.667,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 26.0,
+        "max": 27.0,
+        "samples": [
+          27.0,
+          26.0,
+          27.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_clone_ms": {
+        "n": 3,
+        "median": 495.0,
+        "p25": 493.0,
+        "p75": 495.5,
+        "iqr": 2.5,
+        "mean": 494.0,
+        "stdev": 2.646,
+        "ci95_half_width": 2.994,
+        "min": 491.0,
+        "max": 496.0,
+        "samples": [
+          491.0,
+          496.0,
+          495.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_push_ms": {
+        "n": 3,
+        "median": 616.0,
+        "p25": 615.0,
+        "p75": 617.0,
+        "iqr": 2.0,
+        "mean": 616.0,
+        "stdev": 2.0,
+        "ci95_half_width": 2.263,
+        "min": 614.0,
+        "max": 618.0,
+        "samples": [
+          614.0,
+          618.0,
+          616.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_fetch_ms": {
+        "n": 3,
+        "median": 48.0,
+        "p25": 47.5,
+        "p75": 48.5,
+        "iqr": 1.0,
+        "mean": 48.0,
+        "stdev": 1.0,
+        "ci95_half_width": 1.132,
+        "min": 47.0,
+        "max": 49.0,
+        "samples": [
+          48.0,
+          47.0,
+          49.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_clone_ms": {
+        "n": 3,
+        "median": 478.0,
+        "p25": 476.0,
+        "p75": 487.0,
+        "iqr": 11.0,
+        "mean": 482.667,
+        "stdev": 11.719,
+        "ci95_half_width": 13.261,
+        "min": 474.0,
+        "max": 496.0,
+        "samples": [
+          496.0,
+          474.0,
+          478.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "push_overhead_x": 1.0406,
+      "fetch_overhead_x": 0.5625,
+      "clone_overhead_x": 1.0356
+    },
+    {
+      "corpus": "synth-compressible-32mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": true,
+      "status": "measured",
+      "clone_depth": 1,
+      "files": 8970,
+      "tree_bytes": 33556602,
+      "tree_gzip_bytes": 1154966,
+      "tree_gzip_ratio": 0.0344,
+      "compressible": true,
+      "server_ciphertext_bytes": 2741949,
+      "plain_git_pack_bytes": 3063693,
+      "ciphertext_over_tree": 0.0817,
+      "ciphertext_over_plain_git_pack": 0.895,
+      "safehub_push_ms": {
+        "n": 3,
+        "median": 989.0,
+        "p25": 983.5,
+        "p75": 994.0,
+        "iqr": 10.5,
+        "mean": 988.667,
+        "stdev": 10.504,
+        "ci95_half_width": 11.886,
+        "min": 978.0,
+        "max": 999.0,
+        "samples": [
+          978.0,
+          999.0,
+          989.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_fetch_ms": {
+        "n": 3,
+        "median": 29.0,
+        "p25": 29.0,
+        "p75": 29.0,
+        "iqr": 0.0,
+        "mean": 29.0,
+        "stdev": 0.0,
+        "ci95_half_width": 0.0,
+        "min": 29.0,
+        "max": 29.0,
+        "samples": [
+          29.0,
+          29.0,
+          29.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_clone_ms": {
+        "n": 3,
+        "median": 694.0,
+        "p25": 689.5,
+        "p75": 694.5,
+        "iqr": 5.0,
+        "mean": 691.333,
+        "stdev": 5.508,
+        "ci95_half_width": 6.232,
+        "min": 685.0,
+        "max": 695.0,
+        "samples": [
+          685.0,
+          694.0,
+          695.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_push_ms": {
+        "n": 3,
+        "median": 921.0,
+        "p25": 920.5,
+        "p75": 934.5,
+        "iqr": 14.0,
+        "mean": 929.667,
+        "stdev": 15.885,
+        "ci95_half_width": 17.976,
+        "min": 920.0,
+        "max": 948.0,
+        "samples": [
+          920.0,
+          948.0,
+          921.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_fetch_ms": {
+        "n": 3,
+        "median": 49.0,
+        "p25": 48.5,
+        "p75": 49.0,
+        "iqr": 0.5,
+        "mean": 48.667,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 48.0,
+        "max": 49.0,
+        "samples": [
+          49.0,
+          49.0,
+          48.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_clone_ms": {
+        "n": 3,
+        "median": 646.0,
+        "p25": 640.5,
+        "p75": 650.0,
+        "iqr": 9.5,
+        "mean": 645.0,
+        "stdev": 9.539,
+        "ci95_half_width": 10.795,
+        "min": 635.0,
+        "max": 654.0,
+        "samples": [
+          635.0,
+          646.0,
+          654.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "push_overhead_x": 1.0738,
+      "fetch_overhead_x": 0.5918,
+      "clone_overhead_x": 1.0743
+    },
+    {
+      "corpus": "synth-compressible-48mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": true,
+      "status": "measured",
+      "clone_depth": 1,
+      "files": 13483,
+      "tree_bytes": 50333613,
+      "tree_gzip_bytes": 1730569,
+      "tree_gzip_ratio": 0.0344,
+      "compressible": true,
+      "server_ciphertext_bytes": 4107863,
+      "plain_git_pack_bytes": 4598681,
+      "ciphertext_over_tree": 0.0816,
+      "ciphertext_over_plain_git_pack": 0.8933,
+      "safehub_push_ms": {
+        "n": 3,
+        "median": 1398.0,
+        "p25": 1381.0,
+        "p75": 1478.5,
+        "iqr": 97.5,
+        "mean": 1440.333,
+        "stdev": 104.165,
+        "ci95_half_width": 117.874,
+        "min": 1364.0,
+        "max": 1559.0,
+        "samples": [
+          1559.0,
+          1364.0,
+          1398.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_fetch_ms": {
+        "n": 3,
+        "median": 25.0,
+        "p25": 24.5,
+        "p75": 27.5,
+        "iqr": 3.0,
+        "mean": 26.333,
+        "stdev": 3.215,
+        "ci95_half_width": 3.638,
+        "min": 24.0,
+        "max": 30.0,
+        "samples": [
+          30.0,
+          25.0,
+          24.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_clone_ms": {
+        "n": 3,
+        "median": 993.0,
+        "p25": 966.0,
+        "p75": 1146.0,
+        "iqr": 180.0,
+        "mean": 1077.0,
+        "stdev": 194.144,
+        "ci95_half_width": 219.695,
+        "min": 939.0,
+        "max": 1299.0,
+        "samples": [
+          1299.0,
+          939.0,
+          993.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_push_ms": {
+        "n": 3,
+        "median": 1399.0,
+        "p25": 1390.5,
+        "p75": 1400.5,
+        "iqr": 10.0,
+        "mean": 1394.333,
+        "stdev": 10.786,
+        "ci95_half_width": 12.205,
+        "min": 1382.0,
+        "max": 1402.0,
+        "samples": [
+          1402.0,
+          1382.0,
+          1399.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_fetch_ms": {
+        "n": 3,
+        "median": 38.0,
+        "p25": 37.5,
+        "p75": 39.0,
+        "iqr": 1.5,
+        "mean": 38.333,
+        "stdev": 1.528,
+        "ci95_half_width": 1.729,
+        "min": 37.0,
+        "max": 40.0,
+        "samples": [
+          40.0,
+          37.0,
+          38.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_clone_ms": {
+        "n": 3,
+        "median": 957.0,
+        "p25": 947.5,
+        "p75": 990.5,
+        "iqr": 43.0,
+        "mean": 973.0,
+        "stdev": 45.177,
+        "ci95_half_width": 51.123,
+        "min": 938.0,
+        "max": 1024.0,
+        "samples": [
+          1024.0,
+          957.0,
+          938.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "push_overhead_x": 0.9993,
+      "fetch_overhead_x": 0.6579,
+      "clone_overhead_x": 1.0376
+    },
+    {
+      "corpus": "synth-compressible-64mib",
+      "class": "synthetic-compressible",
+      "origin": "generated source-shaped tree",
+      "corpus_kind": "synthetic-compressible",
+      "measured": true,
+      "status": "measured",
+      "clone_depth": 1,
+      "files": 17961,
+      "tree_bytes": 67114742,
+      "tree_gzip_bytes": 2310570,
+      "tree_gzip_ratio": 0.0344,
+      "compressible": true,
+      "server_ciphertext_bytes": 5482093,
+      "plain_git_pack_bytes": 6141265,
+      "ciphertext_over_tree": 0.0817,
+      "ciphertext_over_plain_git_pack": 0.8927,
+      "safehub_push_ms": {
+        "n": 3,
+        "median": 1938.0,
+        "p25": 1887.5,
+        "p75": 1939.0,
+        "iqr": 51.5,
+        "mean": 1905.0,
+        "stdev": 58.898,
+        "ci95_half_width": 66.65,
+        "min": 1837.0,
+        "max": 1940.0,
+        "samples": [
+          1837.0,
+          1938.0,
+          1940.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_fetch_ms": {
+        "n": 3,
+        "median": 27.0,
+        "p25": 26.0,
+        "p75": 28.0,
+        "iqr": 2.0,
+        "mean": 27.0,
+        "stdev": 2.0,
+        "ci95_half_width": 2.263,
+        "min": 25.0,
+        "max": 29.0,
+        "samples": [
+          25.0,
+          27.0,
+          29.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "safehub_clone_ms": {
+        "n": 3,
+        "median": 1470.0,
+        "p25": 1456.0,
+        "p75": 1482.5,
+        "iqr": 26.5,
+        "mean": 1469.0,
+        "stdev": 26.514,
+        "ci95_half_width": 30.004,
+        "min": 1442.0,
+        "max": 1495.0,
+        "samples": [
+          1470.0,
+          1442.0,
+          1495.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_push_ms": {
+        "n": 3,
+        "median": 1949.0,
+        "p25": 1935.0,
+        "p75": 1966.5,
+        "iqr": 31.5,
+        "mean": 1951.333,
+        "stdev": 31.565,
+        "ci95_half_width": 35.719,
+        "min": 1921.0,
+        "max": 1984.0,
+        "samples": [
+          1921.0,
+          1984.0,
+          1949.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_fetch_ms": {
+        "n": 3,
+        "median": 40.0,
+        "p25": 39.0,
+        "p75": 43.0,
+        "iqr": 4.0,
+        "mean": 41.333,
+        "stdev": 4.163,
+        "ci95_half_width": 4.711,
+        "min": 38.0,
+        "max": 46.0,
+        "samples": [
+          40.0,
+          46.0,
+          38.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "plain_git_clone_ms": {
+        "n": 3,
+        "median": 1469.0,
+        "p25": 1442.0,
+        "p75": 1470.0,
+        "iqr": 28.0,
+        "mean": 1451.667,
+        "stdev": 31.77,
+        "ci95_half_width": 35.951,
+        "min": 1415.0,
+        "max": 1471.0,
+        "samples": [
+          1415.0,
+          1471.0,
+          1469.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "push_overhead_x": 0.9944,
+      "fetch_overhead_x": 0.675,
+      "clone_overhead_x": 1.0007
+    }
+  ],
+  "synthetic_model_rows": [
+    {
+      "class": "additive_100MiB_1k",
+      "objects": 1000,
+      "bytes": 104857600,
+      "chunks": 25,
+      "cold_clone_s_est": 0.67,
+      "measured": false,
+      "status": "model",
+      "note": "multi-push E2E lives in additive-scale-latest.json"
+    },
+    {
+      "class": "additive_200MiB_1k",
+      "objects": 1000,
+      "bytes": 209715200,
+      "chunks": 50,
+      "cold_clone_s_est": 1.28,
+      "measured": false,
+      "status": "model",
+      "note": "multi-push E2E lives in additive-scale-latest.json"
+    },
+    {
+      "class": "git_git_full_history",
+      "objects": 350000,
+      "bytes": 262144000,
+      "chunks": 63,
+      "cold_clone_s_est": 1.92,
+      "measured": false,
+      "status": "model",
+      "note": "full-history class; measured depth-1 tree is the `git` row above"
+    },
+    {
+      "class": "vscode",
+      "objects": 1200000,
+      "bytes": 524288000,
+      "chunks": 125,
+      "cold_clone_s_est": 4.33,
+      "measured": false,
+      "status": "model",
+      "note": "not measured; class estimate"
+    },
+    {
+      "class": "linux",
+      "objects": 9000000,
+      "bytes": 4831838208,
+      "chunks": 1152,
+      "cold_clone_s_est": 37.66,
+      "measured": false,
+      "status": "model",
+      "note": "excludes pack construction / checkout I/O"
+    }
+  ],
+  "model": {
+    "a_s_per_byte": 3.965020179748535e-09,
+    "b_s_per_chunk": 0.002,
+    "c_rtt_s": 0.05,
+    "d_s_per_object": 1e-06,
+    "P": 8,
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256"
+  },
+  "locked_sweeps_retained": [
+    "4MiB",
+    "8MiB",
+    "12MiB",
+    "16MiB",
+    "24MiB",
+    "32MiB",
+    "48MiB",
+    "64MiB"
+  ],
+  "notes": [
+    "Real corpora are ordinary source trees: gzip ratio is reported per row so the compressibility the review asked for is visible, not asserted.",
+    "ciphertext_over_plain_git_pack is the honest storage comparison: SafeHub ciphertext bytes against a packed plain-git object store on the same content.",
+    "Synthetic model rows are retained additively and are never mixed into the measured tables.",
+    "No real corpus measured on this run (network unavailable or capped); compressible synthetic corpora carry the measured columns."
+  ]
+}

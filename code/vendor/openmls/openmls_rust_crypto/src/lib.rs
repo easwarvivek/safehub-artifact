@@ -1,0 +1,53 @@
+//! # OpenMLS Default Crypto Provider
+//!
+//! This is an implementation of the [`OpenMlsProvider`] trait to use with
+//! OpenMLS.
+
+pub use openmls_memory_storage::{MemoryStorage, MemoryStorageError};
+use openmls_traits::OpenMlsProvider;
+
+mod provider;
+pub use provider::*;
+
+#[cfg(feature = "virtual-clients-draft")]
+mod ff1;
+mod hmac;
+#[cfg(feature = "draft-ietf-mls-pq-ciphersuites")]
+mod rand_shim;
+
+#[derive(Default, Debug)]
+#[cfg_attr(feature = "test-utils", derive(Clone))]
+pub struct OpenMlsRustCrypto {
+    crypto: RustCrypto,
+    key_store: MemoryStorage,
+}
+
+impl OpenMlsRustCrypto {
+    /// Borrow the underlying key store (durable group persistence).
+    pub fn key_store(&self) -> &MemoryStorage {
+        &self.key_store
+    }
+
+    /// Mutable borrow of the key store.
+    pub fn key_store_mut(&mut self) -> &mut MemoryStorage {
+        &mut self.key_store
+    }
+}
+
+impl OpenMlsProvider for OpenMlsRustCrypto {
+    type CryptoProvider = RustCrypto;
+    type RandProvider = RustCrypto;
+    type StorageProvider = MemoryStorage;
+
+    fn storage(&self) -> &Self::StorageProvider {
+        &self.key_store
+    }
+
+    fn crypto(&self) -> &Self::CryptoProvider {
+        &self.crypto
+    }
+
+    fn rand(&self) -> &Self::RandProvider {
+        &self.crypto
+    }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "E10",
+  "title": "Per-invite cost vs current group size n",
+  "meta": {
+    "generated_by": "scripts/gen_per_invite_latest.py",
+    "method": "marginalize measured cumulative OpenMLS join sweep; reconcile 28\u201338 ms",
+    "reps": 5,
+    "machine": "AWS Graviton4 (c8g.8xlarge)",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "AWS Graviton4 (c8g.8xlarge)",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-18T20:35:41.386575+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-18T20:36:01.436981+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "cells": [],
+  "reconciliation": {
+    "claim_28_38_ms": {
+      "range_ms": [
+        28,
+        38
+      ],
+      "refers_to": "Control-plane invite (~36\u201338 ms) and remove-member (~28 ms) on the localhost fullstack harness \u2014 NOT the marginal MLS add_member cost at large n.",
+      "control_plane_invite_ms": {
+        "value": 36.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "control_plane_invite_forward_only_ms": {
+        "value": 38.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "remove_member_ms": {
+        "value": 28.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "source": "fullstack-latest.json"
+    },
+    "why_table_vi_was_misleading": "Table VI reported cumulative grow 1\u2192n. Dividing by n understates late invites (tree grows). Publish marginal_per_invite_ms vs n.",
+    "marginal_at_n100_ms": null,
+    "marginal_at_n10_ms": null
+  },
+  "notes": [
+    "Conclusion language should cite control-plane 28\u201338 ms separately from MLS marginal cost, which increases with n."
+  ]
+}

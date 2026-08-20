@@ -1,0 +1,219 @@
+{
+  "id": "E03",
+  "title": "Measured clone latency versus history depth, to depth 10^4",
+  "meta": {
+    "generated_by": "scripts/e2e_depth_clone.sh",
+    "method": "wall-clock E2E; one monotonically grown lineage; clone timed at log-spaced depth checkpoints on both arms; medians recovered from harness stdout after the run's cleanup trap removed the work directory (harness since hardened to keep rows outside it and to publish before optional steps)",
+    "reps": 3,
+    "machine": "Apple M5 Pro",
+    "machine_detail": {
+      "os": "darwin",
+      "os_release": "25.5.0",
+      "arch": "arm64",
+      "cpu_hint": "Apple M5 Pro",
+      "cpu_count": 18,
+      "ram_bytes": 51539607552,
+      "ram_gib": 48.0,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.6",
+      "measured_at": "2026-08-17T16:44:41.929479+00:00"
+    },
+    "provenance": {
+      "git_commit": "c665477ee05d576da1241dbf3bc0061e3626a202",
+      "git_describe": "c665477-dirty",
+      "git_dirty": true,
+      "rustc": "rustc 1.96.0 (ac68faa20 2026-05-25)",
+      "cargo": "cargo 1.96.0 (30a34c682 2026-05-25)",
+      "git_version": "git version 2.50.1 (Apple Git-155)",
+      "mls_ciphersuite": "MLS_256_MLKEM1024_AES256GCM_SHA512_MLDSA87",
+      "mls_backend": "vendored OpenMLS (draft-ietf-mls-pq-ciphersuites)",
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": [
+        "openmls",
+        "stub"
+      ],
+      "stub_linked": true
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-17T16:44:42.880074+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "axis": {
+    "per_push_delta_kib": 64,
+    "base_tree_mib": 4,
+    "max_depth": 10000,
+    "note": "per-push delta and base tree fixed, so depth is the only axis; both arms carry byte-identical revisions"
+  },
+  "cells": [
+    {
+      "history_depth": 10,
+      "clone_ms": {
+        "median": 154.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "git_clone_ms": {
+        "median": 119.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "clone_ratio_over_git": 1.294,
+      "clone_ms_per_head": 15.4,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "history_depth": 32,
+      "clone_ms": {
+        "median": 348.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "git_clone_ms": {
+        "median": 137.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "clone_ratio_over_git": 2.54,
+      "clone_ms_per_head": 10.875,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "history_depth": 100,
+      "clone_ms": {
+        "median": 1051.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "git_clone_ms": {
+        "median": 199.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "clone_ratio_over_git": 5.281,
+      "clone_ms_per_head": 10.51,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "history_depth": 316,
+      "clone_ms": {
+        "median": 3609.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "git_clone_ms": {
+        "median": 408.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "clone_ratio_over_git": 8.846,
+      "clone_ms_per_head": 11.4209,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "history_depth": 1000,
+      "clone_ms": {
+        "median": 12401.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "git_clone_ms": {
+        "median": 1154.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "clone_ratio_over_git": 10.746,
+      "clone_ms_per_head": 12.401,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "history_depth": 3162,
+      "clone_ms": {
+        "median": 45542.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "git_clone_ms": {
+        "median": 2496.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "clone_ratio_over_git": 18.246,
+      "clone_ms_per_head": 14.4029,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "history_depth": 10000,
+      "clone_ms": {
+        "median": 219813.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "git_clone_ms": {
+        "median": 6207.0,
+        "n": 3,
+        "unit": "ms",
+        "dispersion": "median over 3 reps; per-rep samples not retained"
+      },
+      "clone_ratio_over_git": 35.414,
+      "clone_ms_per_head": 21.9813,
+      "measured": true,
+      "status": "measured"
+    }
+  ],
+  "fit": {
+    "safehub_clone_ms_per_head": 21.904,
+    "git_clone_ms_per_head": 0.6067,
+    "method": "least squares over the measured checkpoints only",
+    "status": "derived-from-measured"
+  },
+  "multi_pack_index_effect": {
+    "before_ms_per_head": {
+      "10": 15.0,
+      "32": 10.5938,
+      "100": 10.2,
+      "316": 12.5854,
+      "1000": 22.469
+    },
+    "after_ms_per_head": {
+      "10": 15.4,
+      "32": 10.875,
+      "100": 10.51,
+      "316": 11.4209,
+      "1000": 12.401,
+      "3162": 14.4029,
+      "10000": 21.9813
+    },
+    "note": "Same harness and fixture before and after adding a periodic multi-pack-index refresh during clone replay. At depth 1000 the cost per head fell from 22.47 to 12.40 ms and the ratio over git from 19.73x to 10.75x. Growth resumes by depth 10^4, where the index itself spans 10^4 packs; consolidation is the mitigation that keeps depth bounded in the first place.",
+    "status": "measured"
+  },
+  "provenance_caveat": "Per-rep samples and server ciphertext byte counts for this run were written inside the work directory and lost when the cleanup trap fired after the optional consolidation step failed. The medians here are the harness's own per-checkpoint output, which is measured, but a re-run is required before these cells carry full dispersion. Every clone in the run passed the tree-hash equality check against the plain-git arm.",
+  "notes": [
+    "Measured only. The previous AEAD-rate model and its synthesized dispersion were removed rather than relabelled.",
+    "Clone is the operation that does not amortize: a blind host cannot repack, so cost tracks head count rather than bytes."
+  ]
+}

@@ -1,0 +1,35 @@
+[package]
+name = "sit-remote-safehub"
+description = "Sit remote helper for sit:// (and safehub://) URLs; speaks the git remote-helper protocol"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+# Branded primary binary.
+[[bin]]
+name = "sit-remote-safehub"
+path = "src/main.rs"
+
+# Vanilla git only auto-discovers helpers named `git-remote-<transport>`.
+# These thin bins are an implementation detail (not user-facing branding)
+# so `sit://` / `safehub://` resolve when the underlying git needs a helper.
+[[bin]]
+name = "git-remote-sit"
+path = "src/bin/git_remote_sit.rs"
+
+[[bin]]
+name = "git-remote-safehub"
+path = "src/bin/git_remote_safehub.rs"
+
+[dependencies]
+safehub-client = { workspace = true, features = ["openmls"] }
+safehub-types.workspace = true
+anyhow.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }

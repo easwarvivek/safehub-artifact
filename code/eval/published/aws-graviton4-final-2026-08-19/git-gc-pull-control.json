@@ -1,0 +1,73 @@
+{
+  "mode": "git-gc-pull-control",
+  "sizes": [
+    {
+      "size_mb": 50,
+      "delta_bytes": 524288,
+      "gc_ms": 2083,
+      "loose_objects_before_gc": 403,
+      "pull_loose_ms": {
+        "n": 20,
+        "mean": 77.9,
+        "median": 70.0
+      },
+      "pull_packed_ms": {
+        "n": 20,
+        "mean": 74.8,
+        "median": 70.0
+      },
+      "maintenance_speedup": 1.042
+    },
+    {
+      "size_mb": 100,
+      "delta_bytes": 1048576,
+      "gc_ms": 4483,
+      "loose_objects_before_gc": 403,
+      "pull_loose_ms": {
+        "n": 20,
+        "mean": 128.7,
+        "median": 146.0
+      },
+      "pull_packed_ms": {
+        "n": 20,
+        "mean": 137.7,
+        "median": 140.0
+      },
+      "maintenance_speedup": 0.934
+    },
+    {
+      "size_mb": 250,
+      "delta_bytes": 2621440,
+      "gc_ms": 11385,
+      "loose_objects_before_gc": 403,
+      "pull_loose_ms": {
+        "n": 20,
+        "mean": 216.2,
+        "median": 220.0
+      },
+      "pull_packed_ms": {
+        "n": 20,
+        "mean": 215.4,
+        "median": 227.0
+      },
+      "maintenance_speedup": 1.004
+    },
+    {
+      "size_mb": 500,
+      "delta_bytes": 5242880,
+      "gc_ms": 25268,
+      "loose_objects_before_gc": 403,
+      "pull_loose_ms": {
+        "n": 20,
+        "mean": 318.8,
+        "median": 310.0
+      },
+      "pull_packed_ms": {
+        "n": 20,
+        "mean": 317,
+        "median": 310.0
+      },
+      "maintenance_speedup": 1.006
+    }
+  ]
+}

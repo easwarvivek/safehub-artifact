@@ -1,0 +1,192 @@
+{
+  "mode": "full",
+  "machine": {
+    "os": "macos",
+    "arch": "aarch64",
+    "hostname": "unknown",
+    "cpu_hint": "Apple M5 Pro",
+    "build_profile": "release",
+    "measured_at": "2026-08-17T01:25:22.018879+00:00",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "hardware_aes_likely": false,
+    "rustc_release": "release: 1.96.0"
+  },
+  "experimental": {
+    "narrative_collaborators": 3,
+    "target_files": 200,
+    "size_sweep_mib": [
+      5,
+      10,
+      50,
+      100,
+      200,
+      250,
+      300
+    ],
+    "join_sweep": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+    ]
+  },
+  "fixtures": [
+    {
+      "path": "eval/results/tmp-full-eval/fixture-8mib",
+      "file_count": 211,
+      "total_bytes": 8404087,
+      "commit_depth": 50,
+      "seed": 1526657229,
+      "content_hash": "62f2ac1db64fc8bfea3d92f81175c288f76b1e678af8a8056968f5c01ffffb8d",
+      "target_files": 200,
+      "target_bytes": 8388608
+    }
+  ],
+  "micro": {
+    "aead_seal_1kib_ns": 7875,
+    "aead_open_1kib_ns": 7833,
+    "aead_seal_1mib_ns": 4073333,
+    "aead_open_1mib_ns": 4077291,
+    "refhead_hash_ns": 583,
+    "head_verify_100_ns": 109667,
+    "runs": 25,
+    "warmups": 3,
+    "median_of": 25,
+    "build_profile": "release",
+    "status": "measured"
+  },
+  "size_ops": [
+    {
+      "size_mib": 8,
+      "plain_git_clone_ms": 40,
+      "plain_git_push_ms": 310,
+      "plain_git_fetch_ms": 21,
+      "safehub_push_ms": 35,
+      "safehub_fetch_ms": 34,
+      "safehub_clone_ms": 69,
+      "overhead_ratio_clone": 1.725,
+      "bytes": 8404369,
+      "status": "measured-proxy",
+      "note": "safehub_* = CommittingAead over full fixture bytes in 1MiB chunks (crypto path; HTTP remote helper not included). plain_git_* = local bare push/fetch/clone."
+    }
+  ],
+  "join_ops": [
+    {
+      "n": 10,
+      "invite_join_full_ms": 88,
+      "invite_join_forward_only_ms": 54,
+      "mls_grow_ms": 54,
+      "history_proxy_ms": 34,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219210: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 8404369 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 20,
+      "invite_join_full_ms": 181,
+      "invite_join_forward_only_ms": 148,
+      "mls_grow_ms": 148,
+      "history_proxy_ms": 33,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219220: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 8404369 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 30,
+      "invite_join_full_ms": 296,
+      "invite_join_forward_only_ms": 264,
+      "mls_grow_ms": 264,
+      "history_proxy_ms": 32,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219230: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 8404369 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 40,
+      "invite_join_full_ms": 454,
+      "invite_join_forward_only_ms": 422,
+      "mls_grow_ms": 422,
+      "history_proxy_ms": 32,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219240: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 8404369 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 50,
+      "invite_join_full_ms": 642,
+      "invite_join_forward_only_ms": 610,
+      "mls_grow_ms": 610,
+      "history_proxy_ms": 32,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219250: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 8404369 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 60,
+      "invite_join_full_ms": 859,
+      "invite_join_forward_only_ms": 827,
+      "mls_grow_ms": 827,
+      "history_proxy_ms": 32,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219260: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 8404369 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 70,
+      "invite_join_full_ms": 1119,
+      "invite_join_forward_only_ms": 1087,
+      "mls_grow_ms": 1087,
+      "history_proxy_ms": 32,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219270: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 8404369 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 80,
+      "invite_join_full_ms": 1412,
+      "invite_join_forward_only_ms": 1380,
+      "mls_grow_ms": 1380,
+      "history_proxy_ms": 32,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219280: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 8404369 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 90,
+      "invite_join_full_ms": 1728,
+      "invite_join_forward_only_ms": 1696,
+      "mls_grow_ms": 1696,
+      "history_proxy_ms": 32,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u219290: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 8404369 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    },
+    {
+      "n": 100,
+      "invite_join_full_ms": 2082,
+      "invite_join_forward_only_ms": 2049,
+      "mls_grow_ms": 2049,
+      "history_proxy_ms": 33,
+      "status": "measured",
+      "note": "OpenMLS Category-5 (ML-KEM-1024 / ML-DSA-87) grow 1\u2192100: identity+KeyPackage+add_member+Welcome join per member. forward-only = MLS only; full = MLS + AEAD open of 8404369 fixture bytes as residual history-decrypt approximation (not durable epoch replay)."
+    }
+  ],
+  "notes": [
+    "Size sweep (this mode): AEAD crypto-path + plain-git; prefer --mode full-stack for sit:// E2E.",
+    "Join sweep: n=10..100 step 10 \u2014 real OpenMLS Category-5 grow; full adds AEAD history-open proxy.",
+    "Residual: durable multi-device Welcome delivery not timed here; history decrypt is AEAD proxy."
+  ],
+  "elapsed_ms": 10361,
+  "_rebaseline_status": {
+    "stale_cells": [
+      "micro",
+      "size_ops"
+    ],
+    "reason": "Measured under the pre-C01 transport (hkdf-sha512-pad+HMAC-SHA-512-256). NOT re-measured here.",
+    "superseded_by": {
+      "micro": "smoke-latest.json (quiet-host, hkdf-sha512-pad+HMAC-SHA-512-256)",
+      "end_to_end_latency_and_storage": "parity-latest.json (12 sizes, 100 ops, new AEAD)"
+    },
+    "still_valid_cells": [
+      "join_ops (OpenMLS Cat-5 grow; transport-AEAD-independent; spot-checked fwd-only n=10=54ms vs table 53ms)",
+      "security scenario outcomes (design-enforced; paper reports outcomes, not these ms)"
+    ]
+  }
+}

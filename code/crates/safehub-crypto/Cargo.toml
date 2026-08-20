@@ -1,0 +1,59 @@
+[package]
+name = "safehub-crypto"
+description = "Crypto traits (ACGKA/MLS, AEAD, DKR) and adapters for SafeHub"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[features]
+default = ["stub"]
+## Development stub that does not provide real MLS security.
+stub = []
+## Path-depend on vendored OpenMLS (wire when the fork exposes Category-5 suite).
+openmls = [
+    "dep:openmls",
+    "dep:openmls_basic_credential",
+    "dep:openmls_rust_crypto",
+    "dep:openmls_traits",
+    "dep:tls_codec",
+]
+
+[dependencies]
+blake3.workspace = true
+hex.workspace = true
+hkdf.workspace = true
+hmac.workspace = true
+ml-dsa = "0.1"
+rand.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+zeroize.workspace = true
+async-trait.workspace = true
+
+openmls = { path = "../../vendor/openmls/openmls", optional = true, features = ["draft-ietf-mls-pq-ciphersuites"] }
+openmls_basic_credential = { path = "../../vendor/openmls/basic_credential", optional = true, features = ["draft-ietf-mls-pq-ciphersuites"] }
+openmls_rust_crypto = { path = "../../vendor/openmls/openmls_rust_crypto", optional = true, features = ["draft-ietf-mls-pq-ciphersuites"] }
+openmls_traits = { path = "../../vendor/openmls/traits", optional = true, features = ["draft-ietf-mls-pq-ciphersuites"] }
+tls_codec = { version = "0.5", optional = true }
+
+[dev-dependencies]
+# Reference AEAD for the backend comparison example only: the deployed
+# transport is the RO-pad construction (see examples/aead_backend_compare.rs).
+aes-gcm = "0.10"
+criterion = "0.5"
+safehub-types = { path = "../safehub-types" }
+
+[[bench]]
+name = "aead_refhead"
+harness = false
+
+[[example]]
+name = "aead_backend_compare"
+path = "examples/aead_backend_compare.rs"
+
+[[example]]
+name = "emit_vectors"
+path = "examples/emit_vectors.rs"

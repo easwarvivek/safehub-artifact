@@ -1,0 +1,317 @@
+{
+  "id": "E08",
+  "title": "Encrypted-Git baselines, measured: sit vs plain git vs git-crypt vs git-remote-gcrypt",
+  "meta": {
+    "generated_by": "scripts/e2e_encrypted_git_baseline.sh",
+    "method": "wall-clock E2E; byte-identical working tree across arms; local remotes so the comparison is transport+crypto rather than network",
+    "reps": 3,
+    "machine": "Apple M5 Pro",
+    "machine_detail": {
+      "os": "darwin",
+      "os_release": "25.5.0",
+      "arch": "arm64",
+      "cpu_hint": "Apple M5 Pro",
+      "cpu_count": 18,
+      "ram_bytes": 51539607552,
+      "ram_gib": 48.0,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.6",
+      "measured_at": "2026-08-17T15:04:31.486079+00:00"
+    },
+    "provenance": {
+      "git_commit": "3eebc9737fa2332515387311ddb58facd9fa3a67",
+      "git_describe": "3eebc97-dirty",
+      "git_dirty": true,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1 (Apple Git-155)",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-17T15:04:31.567282+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "fixture": {
+    "working_tree_mib": 16,
+    "incremental_pushes": 8,
+    "content": "source-shaped compressible Rust, generated once and copied into each arm"
+  },
+  "arms": [
+    {
+      "arm": "plain-git",
+      "available": true,
+      "push_ms": {
+        "n": 8,
+        "median": 55.0,
+        "p25": 54.75,
+        "p75": 55.25,
+        "iqr": 0.5,
+        "mean": 55.0,
+        "stdev": 1.195,
+        "ci95_half_width": 0.828,
+        "min": 53.0,
+        "max": 57.0,
+        "samples": [
+          57.0,
+          56.0,
+          55.0,
+          54.0,
+          53.0,
+          55.0,
+          55.0,
+          55.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "clone_ms": {
+        "n": 3,
+        "median": 83.0,
+        "p25": 82.5,
+        "p75": 86.0,
+        "iqr": 3.5,
+        "mean": 84.667,
+        "stdev": 3.786,
+        "ci95_half_width": 4.284,
+        "min": 82.0,
+        "max": 89.0,
+        "samples": [
+          89.0,
+          82.0,
+          83.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "remote_bytes": 377875,
+      "measured": true,
+      "status": "measured",
+      "note": "local bare remote over file://; no encryption",
+      "protects": {
+        "file_contents": false,
+        "paths": false,
+        "commit_messages": false,
+        "ref_names": false,
+        "graph_shape": false,
+        "dynamic_membership_pcs": false,
+        "history_windows": false,
+        "ref_rollback_detection": false,
+        "post_quantum": false
+      },
+      "vs_plain_git": {
+        "push": 1.0,
+        "clone": 1.0,
+        "remote_bytes": 1.0
+      }
+    },
+    {
+      "arm": "git-crypt",
+      "available": true,
+      "push_ms": {
+        "n": 8,
+        "median": 54.0,
+        "p25": 53.75,
+        "p75": 54.0,
+        "iqr": 0.25,
+        "mean": 53.875,
+        "stdev": 0.641,
+        "ci95_half_width": 0.444,
+        "min": 53.0,
+        "max": 55.0,
+        "samples": [
+          54.0,
+          54.0,
+          54.0,
+          53.0,
+          53.0,
+          54.0,
+          54.0,
+          55.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "clone_ms": {
+        "n": 3,
+        "median": 149.0,
+        "p25": 148.5,
+        "p75": 149.0,
+        "iqr": 0.5,
+        "mean": 148.667,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 148.0,
+        "max": 149.0,
+        "samples": [
+          149.0,
+          148.0,
+          149.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "remote_bytes": 17032160,
+      "measured": true,
+      "status": "measured",
+      "note": "symmetric key, path filters on *.rs; graph and paths remain host-visible",
+      "protects": {
+        "file_contents": true,
+        "paths": false,
+        "commit_messages": false,
+        "ref_names": false,
+        "graph_shape": false,
+        "dynamic_membership_pcs": false,
+        "history_windows": false,
+        "ref_rollback_detection": false,
+        "post_quantum": false
+      },
+      "vs_plain_git": {
+        "push": 0.982,
+        "clone": 1.795,
+        "remote_bytes": 45.074
+      }
+    },
+    {
+      "arm": "git-remote-gcrypt",
+      "available": true,
+      "push_ms": {
+        "n": 8,
+        "median": 407.0,
+        "p25": 407.0,
+        "p75": 408.5,
+        "iqr": 1.5,
+        "mean": 407.875,
+        "stdev": 1.356,
+        "ci95_half_width": 0.94,
+        "min": 407.0,
+        "max": 410.0,
+        "samples": [
+          407.0,
+          407.0,
+          407.0,
+          407.0,
+          407.0,
+          410.0,
+          410.0,
+          408.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "clone_ms": {
+        "n": 3,
+        "median": 1678.0,
+        "p25": 1676.0,
+        "p75": 1678.5,
+        "iqr": 2.5,
+        "mean": 1677.0,
+        "stdev": 2.646,
+        "ci95_half_width": 2.994,
+        "min": 1674.0,
+        "max": 1679.0,
+        "samples": [
+          1679.0,
+          1674.0,
+          1678.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "remote_bytes": 387411,
+      "measured": true,
+      "status": "measured",
+      "note": "whole-remote PGP; no per-member epochs, no ref-rollback protection",
+      "protects": {
+        "file_contents": true,
+        "paths": true,
+        "commit_messages": true,
+        "ref_names": true,
+        "graph_shape": true,
+        "dynamic_membership_pcs": false,
+        "history_windows": false,
+        "ref_rollback_detection": false,
+        "post_quantum": false
+      },
+      "vs_plain_git": {
+        "push": 7.4,
+        "clone": 20.217,
+        "remote_bytes": 1.025
+      }
+    },
+    {
+      "arm": "safehub",
+      "available": true,
+      "push_ms": {
+        "n": 8,
+        "median": 90.0,
+        "p25": 89.0,
+        "p75": 90.5,
+        "iqr": 1.5,
+        "mean": 90.25,
+        "stdev": 1.488,
+        "ci95_half_width": 1.031,
+        "min": 89.0,
+        "max": 93.0,
+        "samples": [
+          93.0,
+          89.0,
+          90.0,
+          89.0,
+          89.0,
+          90.0,
+          92.0,
+          90.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "clone_ms": {
+        "n": 3,
+        "median": 152.0,
+        "p25": 151.5,
+        "p75": 152.5,
+        "iqr": 1.0,
+        "mean": 152.0,
+        "stdev": 1.0,
+        "ci95_half_width": 1.132,
+        "min": 151.0,
+        "max": 153.0,
+        "samples": [
+          152.0,
+          151.0,
+          153.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "remote_bytes": 440732,
+      "measured": true,
+      "status": "measured",
+      "note": "sit:// against safehub-server; contents, paths, refs and graph all sealed",
+      "protects": {
+        "file_contents": true,
+        "paths": true,
+        "commit_messages": true,
+        "ref_names": true,
+        "graph_shape": true,
+        "dynamic_membership_pcs": true,
+        "history_windows": true,
+        "ref_rollback_detection": true,
+        "post_quantum": true
+      },
+      "vs_plain_git": {
+        "push": 1.636,
+        "clone": 1.831,
+        "remote_bytes": 1.166
+      }
+    }
+  ],
+  "arms_not_measured": [],
+  "notes": [
+    "Latency is not the whole comparison: the arms do not protect the same properties. The `protects` map on each arm records what its host still sees, so a faster arm that leaks paths is not a cheaper version of the same guarantee.",
+    "git-crypt encrypts file contents under a static symmetric key via path filters; the object graph, paths and ref names stay readable.",
+    "git-remote-gcrypt encrypts the whole remote under PGP, but has no per-member epochs, no history windows, and no protection against ref rollback by the remote.",
+    "Arms whose binaries are absent are reported as tool-absent with no numbers rather than as modelled bars."
+  ]
+}

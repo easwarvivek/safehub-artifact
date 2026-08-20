@@ -1,0 +1,750 @@
+{
+  "id": "E13-OPS",
+  "title": "Pull, fetch, merge, rebase, force-push, rotate and consolidation versus history depth",
+  "meta": {
+    "generated_by": "scripts/e2e_e13_ops.sh",
+    "method": "wall-clock E2E; every arm on identical history per point; each operation asserts its own postcondition and is corrected only by its own zero-payload floor on the same tool; clients and remotes on separate hosts with every arm over HTTP",
+    "reps": 5,
+    "machine": "unspecified",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "unspecified",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-20T06:05:29.186628+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-20T06:05:49.240174+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "axis": {
+    "axis": "history depth (heads)",
+    "ops": [
+      "fetch",
+      "pull"
+    ],
+    "arms": [
+      "gcrypt",
+      "git",
+      "gitcrypt",
+      "safehub",
+      "sgitchar",
+      "sgitline"
+    ],
+    "reps": 5,
+    "gcrypt_reps": 3,
+    "note": "Cells do not share an n: gcrypt is measured with fewer repetitions, so each cell records its own and every ratio spans two."
+  },
+  "predicted_shape": {
+    "fetch": "flat in depth for every arm; the protocol floor only",
+    "pull": "flat for git; SafeHub cheaper than git, since it serves sealed writer-side ciphertext instead of rebuilding a pack",
+    "merge": "dominated by local Git; arms differ only in the push that follows",
+    "rebase": "as merge, plus a force-push per repetition",
+    "forcepush": "git flat; SafeHub pays an admin co-signature per push; gcrypt re-encrypts the repository. Undefined for the SGit arms, whose ciphertext repository only appends, so a host cannot distinguish a rewrite from an ordinary push",
+    "rotate": "flat in depth; MLS epoch cost only. SafeHub alone",
+    "consolidate": "rises with the span consolidated; per-epoch compaction, so no window widens. SafeHub alone"
+  },
+  "predictions_contradicted": {
+    "pull": "Predicted SafeHub cheaper than git; measured ~2.2x git at depth 10 (200 ms against 89). The prediction mis-attributed the push-side advantage to the read direction. `sit fetch` and `sit pull` share one code path and SafeHub has no ref-advertisement-only operation: a client cannot learn what changed without decrypting, so fetch downloads, verifies and replays bundles. The write direction is cheaper than git because the host serves sealed writer-side ciphertext; the read direction is dearer because the client decrypts. Both follow from the same design.",
+    "fetch": "Predicted 'the protocol floor only'. True for the git-family arms; false for SafeHub, whose fetch is a decrypt-and-replay and lands within 3 ms of its own pull. Whether it is flat in depth is the separate question the axis answers: fetch_bundles_since asks only for heads after the last applied sequence, so flat is expected.",
+    "merge": "Predicted 'dominated by local Git'. The 47-399 ms spread across arms at one depth shows it is dominated by the push that follows, since the local merge is identical work on every arm. The measurements stand; the emphasis was wrong.",
+    "forcepush": "Predicted SafeHub 'pays an admin co-signature per push'. It pays it and is still the fastest arm (43 ms against git's 97). One ML-DSA-87 signature is small next to the transport it saves. The force path is confirmed taken by the postcondition, not assumed."
+  },
+  "cells": [
+    {
+      "arm": "git",
+      "op": "pull",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 5,
+      "op_ms": {
+        "n": 5,
+        "median": 112.0,
+        "p25": 112.0,
+        "p75": 113.0,
+        "iqr": 1.0,
+        "mean": 109.6,
+        "stdev": 12.934,
+        "ci95_half_width": 11.338,
+        "min": 88.0,
+        "max": 123.0,
+        "samples": [
+          112.0,
+          112.0,
+          113.0,
+          123.0,
+          88.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 28.0,
+        "p25": 28.0,
+        "p75": 28.5,
+        "iqr": 0.5,
+        "mean": 28.333,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 28.0,
+        "max": 29.0,
+        "samples": [
+          28.0,
+          29.0,
+          28.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "pull_noop",
+      "op_corrected_ms": 84.0,
+      "n_op": 5,
+      "thin_dispersion": false,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "arm": "git",
+      "op": "fetch",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 5,
+      "op_ms": {
+        "n": 5,
+        "median": 83.0,
+        "p25": 81.0,
+        "p75": 91.0,
+        "iqr": 10.0,
+        "mean": 85.6,
+        "stdev": 5.459,
+        "ci95_half_width": 4.785,
+        "min": 81.0,
+        "max": 92.0,
+        "samples": [
+          92.0,
+          81.0,
+          91.0,
+          83.0,
+          81.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 25.0,
+        "p25": 24.5,
+        "p75": 26.0,
+        "iqr": 1.5,
+        "mean": 25.333,
+        "stdev": 1.528,
+        "ci95_half_width": 1.729,
+        "min": 24.0,
+        "max": 27.0,
+        "samples": [
+          25.0,
+          27.0,
+          24.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "fetch_noop",
+      "op_corrected_ms": 58.0,
+      "n_op": 5,
+      "thin_dispersion": false,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "arm": "gitcrypt",
+      "op": "pull",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 5,
+      "op_ms": {
+        "n": 5,
+        "median": 55.0,
+        "p25": 51.0,
+        "p75": 59.0,
+        "iqr": 8.0,
+        "mean": 55.0,
+        "stdev": 6.964,
+        "ci95_half_width": 6.104,
+        "min": 46.0,
+        "max": 64.0,
+        "samples": [
+          46.0,
+          51.0,
+          55.0,
+          59.0,
+          64.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 28.0,
+        "p25": 28.0,
+        "p75": 28.5,
+        "iqr": 0.5,
+        "mean": 28.333,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 28.0,
+        "max": 29.0,
+        "samples": [
+          29.0,
+          28.0,
+          28.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "pull_noop",
+      "op_corrected_ms": 27.0,
+      "n_op": 5,
+      "thin_dispersion": false,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "arm": "gitcrypt",
+      "op": "fetch",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 5,
+      "op_ms": {
+        "n": 5,
+        "median": 36.0,
+        "p25": 36.0,
+        "p75": 37.0,
+        "iqr": 1.0,
+        "mean": 36.4,
+        "stdev": 0.548,
+        "ci95_half_width": 0.48,
+        "min": 36.0,
+        "max": 37.0,
+        "samples": [
+          37.0,
+          36.0,
+          37.0,
+          36.0,
+          36.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 25.0,
+        "p25": 24.5,
+        "p75": 25.0,
+        "iqr": 0.5,
+        "mean": 24.667,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 24.0,
+        "max": 25.0,
+        "samples": [
+          24.0,
+          25.0,
+          25.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "fetch_noop",
+      "op_corrected_ms": 11.0,
+      "n_op": 5,
+      "thin_dispersion": false,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "arm": "gcrypt",
+      "op": "pull",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 3,
+      "op_ms": {
+        "n": 3,
+        "median": 469.0,
+        "p25": 468.5,
+        "p75": 476.0,
+        "iqr": 7.5,
+        "mean": 473.333,
+        "stdev": 8.386,
+        "ci95_half_width": 9.49,
+        "min": 468.0,
+        "max": 483.0,
+        "samples": [
+          483.0,
+          468.0,
+          469.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 146.0,
+        "p25": 134.5,
+        "p75": 146.5,
+        "iqr": 12.0,
+        "mean": 138.667,
+        "stdev": 13.577,
+        "ci95_half_width": 15.364,
+        "min": 123.0,
+        "max": 147.0,
+        "samples": [
+          123.0,
+          146.0,
+          147.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "pull_noop",
+      "op_corrected_ms": 323.0,
+      "n_op": 3,
+      "thin_dispersion": true,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "arm": "gcrypt",
+      "op": "fetch",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 3,
+      "op_ms": {
+        "n": 3,
+        "median": 482.0,
+        "p25": 467.0,
+        "p75": 487.0,
+        "iqr": 20.0,
+        "mean": 475.333,
+        "stdev": 20.817,
+        "ci95_half_width": 23.556,
+        "min": 452.0,
+        "max": 492.0,
+        "samples": [
+          492.0,
+          482.0,
+          452.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 123.0,
+        "p25": 120.0,
+        "p75": 125.0,
+        "iqr": 5.0,
+        "mean": 122.333,
+        "stdev": 5.033,
+        "ci95_half_width": 5.696,
+        "min": 117.0,
+        "max": 127.0,
+        "samples": [
+          123.0,
+          117.0,
+          127.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "fetch_noop",
+      "op_corrected_ms": 359.0,
+      "n_op": 3,
+      "thin_dispersion": true,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "arm": "safehub",
+      "op": "pull",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 5,
+      "op_ms": {
+        "n": 5,
+        "median": 60.0,
+        "p25": 59.0,
+        "p75": 62.0,
+        "iqr": 3.0,
+        "mean": 60.2,
+        "stdev": 1.789,
+        "ci95_half_width": 1.568,
+        "min": 58.0,
+        "max": 62.0,
+        "samples": [
+          62.0,
+          60.0,
+          59.0,
+          58.0,
+          62.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 18.0,
+        "p25": 18.0,
+        "p75": 18.5,
+        "iqr": 0.5,
+        "mean": 18.333,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 18.0,
+        "max": 19.0,
+        "samples": [
+          18.0,
+          18.0,
+          19.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "pull_noop",
+      "op_corrected_ms": 42.0,
+      "n_op": 5,
+      "thin_dispersion": false,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "arm": "safehub",
+      "op": "fetch",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 5,
+      "op_ms": {
+        "n": 5,
+        "median": 30.0,
+        "p25": 29.0,
+        "p75": 30.0,
+        "iqr": 1.0,
+        "mean": 29.6,
+        "stdev": 0.548,
+        "ci95_half_width": 0.48,
+        "min": 29.0,
+        "max": 30.0,
+        "samples": [
+          30.0,
+          29.0,
+          30.0,
+          29.0,
+          30.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 18.0,
+        "p25": 18.0,
+        "p75": 18.5,
+        "iqr": 0.5,
+        "mean": 18.333,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 18.0,
+        "max": 19.0,
+        "samples": [
+          19.0,
+          18.0,
+          18.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "fetch_noop",
+      "op_corrected_ms": 12.0,
+      "n_op": 5,
+      "thin_dispersion": false,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "arm": "sgitchar",
+      "op": "pull",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 5,
+      "op_ms": {
+        "n": 5,
+        "median": 157.0,
+        "p25": 156.0,
+        "p75": 157.0,
+        "iqr": 1.0,
+        "mean": 162.4,
+        "stdev": 13.202,
+        "ci95_half_width": 11.572,
+        "min": 156.0,
+        "max": 186.0,
+        "samples": [
+          186.0,
+          156.0,
+          156.0,
+          157.0,
+          157.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 137.0,
+        "p25": 136.0,
+        "p75": 158.5,
+        "iqr": 22.5,
+        "mean": 150.667,
+        "stdev": 25.423,
+        "ci95_half_width": 28.769,
+        "min": 135.0,
+        "max": 180.0,
+        "samples": [
+          180.0,
+          137.0,
+          135.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "pull_noop",
+      "op_corrected_ms": 20.0,
+      "n_op": 5,
+      "thin_dispersion": false,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "arm": "sgitchar",
+      "op": "fetch",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 5,
+      "op_ms": {
+        "n": 5,
+        "median": 40.0,
+        "p25": 39.0,
+        "p75": 40.0,
+        "iqr": 1.0,
+        "mean": 39.6,
+        "stdev": 0.548,
+        "ci95_half_width": 0.48,
+        "min": 39.0,
+        "max": 40.0,
+        "samples": [
+          39.0,
+          40.0,
+          39.0,
+          40.0,
+          40.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 25.0,
+        "p25": 25.0,
+        "p75": 25.5,
+        "iqr": 0.5,
+        "mean": 25.333,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 25.0,
+        "max": 26.0,
+        "samples": [
+          26.0,
+          25.0,
+          25.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "fetch_noop",
+      "op_corrected_ms": 15.0,
+      "n_op": 5,
+      "thin_dispersion": false,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "arm": "sgitline",
+      "op": "pull",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 5,
+      "op_ms": {
+        "n": 5,
+        "median": 662.0,
+        "p25": 655.0,
+        "p75": 662.0,
+        "iqr": 7.0,
+        "mean": 666.8,
+        "stdev": 18.887,
+        "ci95_half_width": 16.555,
+        "min": 655.0,
+        "max": 700.0,
+        "samples": [
+          700.0,
+          655.0,
+          655.0,
+          662.0,
+          662.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 625.0,
+        "p25": 625.0,
+        "p75": 646.5,
+        "iqr": 21.5,
+        "mean": 639.333,
+        "stdev": 24.826,
+        "ci95_half_width": 28.093,
+        "min": 625.0,
+        "max": 668.0,
+        "samples": [
+          668.0,
+          625.0,
+          625.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "pull_noop",
+      "op_corrected_ms": 37.0,
+      "n_op": 5,
+      "thin_dispersion": false,
+      "measured": true,
+      "status": "measured"
+    },
+    {
+      "arm": "sgitline",
+      "op": "fetch",
+      "point": 100,
+      "delta_kib": 50,
+      "reps_requested": 5,
+      "op_ms": {
+        "n": 5,
+        "median": 42.0,
+        "p25": 42.0,
+        "p75": 42.0,
+        "iqr": 0.0,
+        "mean": 41.8,
+        "stdev": 0.447,
+        "ci95_half_width": 0.392,
+        "min": 41.0,
+        "max": 42.0,
+        "samples": [
+          42.0,
+          41.0,
+          42.0,
+          42.0,
+          42.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "op_floor_ms": {
+        "n": 3,
+        "median": 25.0,
+        "p25": 24.5,
+        "p75": 25.0,
+        "iqr": 0.5,
+        "mean": 24.667,
+        "stdev": 0.577,
+        "ci95_half_width": 0.653,
+        "min": 24.0,
+        "max": 25.0,
+        "samples": [
+          25.0,
+          25.0,
+          24.0
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "floor_kind": "fetch_noop",
+      "op_corrected_ms": 17.0,
+      "n_op": 5,
+      "thin_dispersion": false,
+      "measured": true,
+      "status": "measured"
+    }
+  ],
+  "fit": {
+    "fetch": {
+      "gcrypt": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "git": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "gitcrypt": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "safehub": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "sgitchar": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "sgitline": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      }
+    },
+    "pull": {
+      "gcrypt": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "git": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "gitcrypt": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "safehub": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "sgitchar": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      },
+      "sgitline": {
+        "status": "insufficient-measured-points",
+        "n": 1
+      }
+    }
+  },
+  "integrity": {
+    "failed_cells": [],
+    "undefined_cells": [],
+    "note": "An undefined cell is published as undefined, with the reason, and is never a zero: an operation a design cannot express and an operation that costs nothing are opposite claims. force-push is undefined for the SGit arms because their ciphertext repository only appends, so a host cannot distinguish a history rewrite from an ordinary push and therefore cannot enforce branch protection. rotate and consolidation exist only for SafeHub; git-crypt has no rekey mechanism at all."
+  },
+  "notes": [
+    "Measured only; no modelled or extrapolated cell appears here.",
+    "This sweep covers the operations absent from the push/clone/storage matrix; the two are read together, not merged.",
+    "Predicted shapes were recorded before the run and are preserved verbatim; where measurement contradicted one, the contradiction and its cause are recorded alongside rather than by editing the prediction."
+  ]
+}

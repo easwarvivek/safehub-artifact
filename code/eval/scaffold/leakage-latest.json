@@ -1,0 +1,70 @@
+{
+  "trace_events": [
+    {
+      "t": 0.0,
+      "op": "append_head",
+      "ciphertext_size": 1200,
+      "repo_id_hash": "8498378fc4efb449",
+      "auth_device": "dev0",
+      "seq": 0
+    },
+    {
+      "t": 0.05,
+      "op": "append_head",
+      "ciphertext_size": 4096,
+      "repo_id_hash": "8498378fc4efb449",
+      "auth_device": "dev0",
+      "seq": 1
+    },
+    {
+      "t": 0.1,
+      "op": "put_blob",
+      "ciphertext_size": 4194304,
+      "repo_id_hash": "8498378fc4efb449",
+      "auth_device": "dev0",
+      "seq": 2
+    },
+    {
+      "t": 0.15000000000000002,
+      "op": "append_head",
+      "ciphertext_size": 8200,
+      "repo_id_hash": "8498378fc4efb449",
+      "auth_device": "dev0",
+      "seq": 3
+    },
+    {
+      "t": 0.2,
+      "op": "put_blob",
+      "ciphertext_size": 4194304,
+      "repo_id_hash": "8498378fc4efb449",
+      "auth_device": "dev0",
+      "seq": 4
+    }
+  ],
+  "inference": [
+    {
+      "game": "distinguish_known_commit_size",
+      "k": 3,
+      "guess": 1200,
+      "correct": true,
+      "advantage_note": "honest size leakage alone wins this game without ciphertext content"
+    }
+  ],
+  "countermeasures": [
+    {
+      "name": "size_bucketing_64KiB",
+      "extra_bytes": 183112,
+      "latency_cost_note": "upload bytes increase; RTT count unchanged"
+    },
+    {
+      "name": "delayed_batching",
+      "latency_cost_note": "adds cover delay; reduces timing/timezone inference"
+    },
+    {
+      "name": "cover_pushes",
+      "bandwidth_cost_note": "periodic dummy ciphertext of bucketed size"
+    }
+  ],
+  "status": "scaffold",
+  "generated_at": "2026-08-15T02:43:55.976436+00:00"
+}

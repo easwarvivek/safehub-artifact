@@ -1,0 +1,40 @@
+{
+  "id": "E16",
+  "title": "Transport AEAD backend comparison: deployed RO-pad vs standard AES-256-GCM",
+  "method": "3 warmups, median of 25 runs, same process, same machine, identical payloads",
+  "deployed_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+  "reference_backend": "AES-256-GCM (aes-gcm crate, software AES on this build)",
+  "why_not_aes": "AES-256-GCM is committing on the message, so the UC simulator cannot reopen a published ciphertext to the plaintext F_safehub discloses on adaptive Corrupt (Lemma 1 case (a)). The RO-pad transport is deployed to make that hop go through; these AES figures are reported as the standard-primitive reference point.",
+  "cells": [
+    {
+      "payload": "1KiB",
+      "payload_bytes": 1024,
+      "ro_pad_seal_ns": 11787, "ro_pad_seal_min_ns": 11687, "ro_pad_seal_max_ns": 12154,
+      "ro_pad_open_ns": 11791, "ro_pad_open_min_ns": 11708, "ro_pad_open_max_ns": 19691,
+      "aes256gcm_seal_ns": 8334, "aes256gcm_seal_min_ns": 8299, "aes256gcm_seal_max_ns": 8376,
+      "aes256gcm_open_ns": 8328, "aes256gcm_open_min_ns": 8277, "aes256gcm_open_max_ns": 8364,
+      "ro_pad_seal_ms_per_mib": 12.0699,
+      "aes256gcm_seal_ms_per_mib": 8.5340,
+      "seal_slowdown_ro_over_aes": 1.414,
+      "open_slowdown_ro_over_aes": 1.416,
+      "ciphertext_expansion_ro_pad_bytes": 92,
+      "ciphertext_expansion_aes256gcm_bytes": 16,
+      "measured": true
+    },
+    {
+      "payload": "1MiB",
+      "payload_bytes": 1048576,
+      "ro_pad_seal_ns": 7921312, "ro_pad_seal_min_ns": 7888367, "ro_pad_seal_max_ns": 8113885,
+      "ro_pad_open_ns": 7313965, "ro_pad_open_min_ns": 7295676, "ro_pad_open_max_ns": 7331681,
+      "aes256gcm_seal_ns": 7996831, "aes256gcm_seal_min_ns": 7991999, "aes256gcm_seal_max_ns": 8006812,
+      "aes256gcm_open_ns": 7984286, "aes256gcm_open_min_ns": 7974906, "aes256gcm_open_max_ns": 7991552,
+      "ro_pad_seal_ms_per_mib": 7.9213,
+      "aes256gcm_seal_ms_per_mib": 7.9968,
+      "seal_slowdown_ro_over_aes": 0.991,
+      "open_slowdown_ro_over_aes": 0.916,
+      "ciphertext_expansion_ro_pad_bytes": 92,
+      "ciphertext_expansion_aes256gcm_bytes": 16,
+      "measured": true
+    }
+  ]
+}

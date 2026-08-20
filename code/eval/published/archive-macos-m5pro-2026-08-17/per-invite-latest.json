@@ -1,0 +1,444 @@
+{
+  "id": "E10",
+  "title": "Per-invite cost vs current group size n",
+  "meta": {
+    "generated_by": "scripts/gen_per_invite_latest.py",
+    "method": "marginalize measured cumulative OpenMLS join sweep; reconcile 28\u201338 ms",
+    "reps": 5,
+    "machine": "Apple M5 Pro",
+    "machine_detail": {
+      "os": "darwin",
+      "os_release": "25.5.0",
+      "arch": "arm64",
+      "cpu_hint": "Apple M5 Pro",
+      "cpu_count": 18,
+      "ram_bytes": 51539607552,
+      "ram_gib": 48.0,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.6",
+      "measured_at": "2026-08-17T00:17:21.041998+00:00"
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-17T00:17:21.042245+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "cells": [
+    {
+      "n": 10,
+      "cumulative_grow_1_to_n_ms": 53.0,
+      "marginal_per_invite_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 5.9134,
+        "p25": 5.8849,
+        "p75": 5.9707,
+        "iqr": 0.0858,
+        "mean": 5.9092,
+        "stdev": 0.0735,
+        "ci95_half_width": 0.0644,
+        "min": 5.7982,
+        "max": 5.979,
+        "samples": [
+          5.979,
+          5.9134,
+          5.9707,
+          5.8849,
+          5.7982
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 20,
+      "cumulative_grow_1_to_n_ms": 147.0,
+      "marginal_per_invite_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 9.3349,
+        "p25": 9.2612,
+        "p75": 9.5107,
+        "iqr": 0.2494,
+        "mean": 9.3767,
+        "stdev": 0.2005,
+        "ci95_half_width": 0.1758,
+        "min": 9.1359,
+        "max": 9.641,
+        "samples": [
+          9.5107,
+          9.641,
+          9.3349,
+          9.1359,
+          9.2612
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 30,
+      "cumulative_grow_1_to_n_ms": 272.0,
+      "marginal_per_invite_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 12.442,
+        "p25": 12.0568,
+        "p75": 12.5556,
+        "iqr": 0.4987,
+        "mean": 12.343,
+        "stdev": 0.2828,
+        "ci95_half_width": 0.2479,
+        "min": 12.028,
+        "max": 12.6325,
+        "samples": [
+          12.5556,
+          12.442,
+          12.028,
+          12.0568,
+          12.6325
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 40,
+      "cumulative_grow_1_to_n_ms": 452.0,
+      "marginal_per_invite_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 17.6359,
+        "p25": 17.5514,
+        "p75": 17.6753,
+        "iqr": 0.1239,
+        "mean": 17.6652,
+        "stdev": 0.1902,
+        "ci95_half_width": 0.1668,
+        "min": 17.4848,
+        "max": 17.9788,
+        "samples": [
+          17.4848,
+          17.6753,
+          17.6359,
+          17.9788,
+          17.5514
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 50,
+      "cumulative_grow_1_to_n_ms": 642.0,
+      "marginal_per_invite_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 18.9238,
+        "p25": 18.9157,
+        "p75": 19.2583,
+        "iqr": 0.3426,
+        "mean": 19.0699,
+        "stdev": 0.4644,
+        "ci95_half_width": 0.407,
+        "min": 18.5031,
+        "max": 19.7486,
+        "samples": [
+          19.7486,
+          18.5031,
+          19.2583,
+          18.9157,
+          18.9238
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 60,
+      "cumulative_grow_1_to_n_ms": 866.0,
+      "marginal_per_invite_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 22.2078,
+        "p25": 22.0653,
+        "p75": 22.9976,
+        "iqr": 0.9322,
+        "mean": 22.4568,
+        "stdev": 0.643,
+        "ci95_half_width": 0.5636,
+        "min": 21.7512,
+        "max": 23.262,
+        "samples": [
+          22.0653,
+          23.262,
+          22.9976,
+          21.7512,
+          22.2078
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 70,
+      "cumulative_grow_1_to_n_ms": 1138.0,
+      "marginal_per_invite_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 26.9279,
+        "p25": 26.6703,
+        "p75": 27.4719,
+        "iqr": 0.8016,
+        "mean": 27.1134,
+        "stdev": 0.7464,
+        "ci95_half_width": 0.6543,
+        "min": 26.2912,
+        "max": 28.2058,
+        "samples": [
+          27.4719,
+          26.2912,
+          26.9279,
+          28.2058,
+          26.6703
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 80,
+      "cumulative_grow_1_to_n_ms": 1428.0,
+      "marginal_per_invite_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 29.2464,
+        "p25": 28.3433,
+        "p75": 29.4647,
+        "iqr": 1.1214,
+        "mean": 29.0217,
+        "stdev": 0.7703,
+        "ci95_half_width": 0.6752,
+        "min": 28.1142,
+        "max": 29.9398,
+        "samples": [
+          29.4647,
+          28.3433,
+          29.9398,
+          28.1142,
+          29.2464
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 90,
+      "cumulative_grow_1_to_n_ms": 1764.0,
+      "marginal_per_invite_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 33.2354,
+        "p25": 32.5086,
+        "p75": 33.9376,
+        "iqr": 1.429,
+        "mean": 33.3305,
+        "stdev": 1.013,
+        "ci95_half_width": 0.8879,
+        "min": 32.26,
+        "max": 34.7109,
+        "samples": [
+          32.26,
+          34.7109,
+          33.2354,
+          33.9376,
+          32.5086
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    },
+    {
+      "n": 100,
+      "cumulative_grow_1_to_n_ms": 2117.0,
+      "marginal_per_invite_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 35.9546,
+        "p25": 34.7457,
+        "p75": 36.2902,
+        "iqr": 1.5445,
+        "mean": 35.5679,
+        "stdev": 0.8706,
+        "ci95_half_width": 0.7631,
+        "min": 34.5181,
+        "max": 36.3311,
+        "samples": [
+          36.3311,
+          35.9546,
+          36.2902,
+          34.5181,
+          34.7457
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Marginal \u2248 \u0394(mls_grow_ms)/\u0394n between join-sweep points (OpenMLS Category-5). Derived from cumulative table, not a separate N=1 shot.",
+      "source": "fullstack-latest.json join_ops"
+    }
+  ],
+  "reconciliation": {
+    "claim_28_38_ms": {
+      "range_ms": [
+        28,
+        38
+      ],
+      "refers_to": "Control-plane invite (~36\u201338 ms) and remove-member (~28 ms) on the localhost fullstack harness \u2014 NOT the marginal MLS add_member cost at large n.",
+      "control_plane_invite_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 35.9692,
+        "p25": 35.7459,
+        "p75": 36.4509,
+        "iqr": 0.705,
+        "mean": 36.051,
+        "stdev": 0.4105,
+        "ci95_half_width": 0.3598,
+        "min": 35.5894,
+        "max": 36.4996,
+        "samples": [
+          36.4509,
+          35.5894,
+          35.7459,
+          35.9692,
+          36.4996
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "control_plane_invite_forward_only_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 38.2584,
+        "p25": 38.0592,
+        "p75": 38.2631,
+        "iqr": 0.204,
+        "mean": 37.9582,
+        "stdev": 0.5976,
+        "ci95_half_width": 0.5238,
+        "min": 36.903,
+        "max": 38.3074,
+        "samples": [
+          36.903,
+          38.3074,
+          38.2631,
+          38.2584,
+          38.0592
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "remove_member_ms": {
+        "n": 5,
+        "unit": "ms",
+        "median": 28.0659,
+        "p25": 27.7969,
+        "p75": 28.1911,
+        "iqr": 0.3942,
+        "mean": 28.0036,
+        "stdev": 0.2405,
+        "ci95_half_width": 0.2108,
+        "min": 27.7093,
+        "max": 28.2547,
+        "samples": [
+          28.1911,
+          27.7969,
+          27.7093,
+          28.0659,
+          28.2547
+        ],
+        "dispersion": "median+IQR over n reps"
+      },
+      "status": "measured",
+      "label": "measured",
+      "source": "fullstack-latest.json"
+    },
+    "why_table_vi_was_misleading": "Table VI reported cumulative grow 1\u2192n. Dividing by n understates late invites (tree grows). Publish marginal_per_invite_ms vs n.",
+    "marginal_at_n100_ms": {
+      "n": 5,
+      "unit": "ms",
+      "median": 35.9546,
+      "p25": 34.7457,
+      "p75": 36.2902,
+      "iqr": 1.5445,
+      "mean": 35.5679,
+      "stdev": 0.8706,
+      "ci95_half_width": 0.7631,
+      "min": 34.5181,
+      "max": 36.3311,
+      "samples": [
+        36.3311,
+        35.9546,
+        36.2902,
+        34.5181,
+        34.7457
+      ],
+      "dispersion": "median+IQR over n reps"
+    },
+    "marginal_at_n10_ms": {
+      "n": 5,
+      "unit": "ms",
+      "median": 5.9134,
+      "p25": 5.8849,
+      "p75": 5.9707,
+      "iqr": 0.0858,
+      "mean": 5.9092,
+      "stdev": 0.0735,
+      "ci95_half_width": 0.0644,
+      "min": 5.7982,
+      "max": 5.979,
+      "samples": [
+        5.979,
+        5.9134,
+        5.9707,
+        5.8849,
+        5.7982
+      ],
+      "dispersion": "median+IQR over n reps"
+    }
+  },
+  "notes": [
+    "Conclusion language should cite control-plane 28\u201338 ms separately from MLS marginal cost, which increases with n."
+  ]
+}

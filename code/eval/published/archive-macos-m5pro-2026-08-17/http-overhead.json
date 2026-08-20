@@ -1,0 +1,93 @@
+{
+  "requests_per_batch": 200,
+  "batches": 5,
+  "reps_per_batch": 30,
+  "http_request_us": {
+    "label": "one HTTP round trip to safehub-server",
+    "batches": 5,
+    "mean_us": 220.3,
+    "sd_us": 26.8,
+    "spread_pct": 12.14,
+    "min_us": 201.0,
+    "max_us": 266.9,
+    "samples_us": [
+      208.3,
+      218.3,
+      207.2,
+      266.9,
+      201.0
+    ]
+  },
+  "sit_spawn_us": {
+    "label": "sit process spawn",
+    "batches": 5,
+    "mean_us": 2931.0,
+    "sd_us": 101.9,
+    "spread_pct": 3.48,
+    "min_us": 2823.4,
+    "max_us": 3072.7,
+    "samples_us": [
+      2923.2,
+      2986.7,
+      2823.4,
+      3072.7,
+      2849.0
+    ]
+  },
+  "sit_noop_fetch_us": {
+    "label": "sit fetch, nothing to transfer",
+    "batches": 5,
+    "mean_us": 6204.5,
+    "sd_us": 333.5,
+    "spread_pct": 5.38,
+    "min_us": 5668.3,
+    "max_us": 6509.9,
+    "samples_us": [
+      6241.8,
+      6449.7,
+      6152.9,
+      6509.9,
+      5668.3
+    ]
+  },
+  "git_spawn_us": {
+    "label": "git process spawn",
+    "batches": 5,
+    "mean_us": 7303.7,
+    "sd_us": 1047.3,
+    "spread_pct": 14.34,
+    "min_us": 6691.0,
+    "max_us": 9169.0,
+    "samples_us": [
+      6867.9,
+      6826.1,
+      6964.7,
+      9169.0,
+      6691.0
+    ]
+  },
+  "git_lsremote_us": {
+    "label": "git ls-remote over git://",
+    "batches": 5,
+    "mean_us": 14507.3,
+    "sd_us": 949.0,
+    "spread_pct": 6.54,
+    "min_us": 13660.6,
+    "max_us": 15905.5,
+    "samples_us": [
+      13862.0,
+      13660.6,
+      15905.5,
+      14049.6,
+      15058.9
+    ]
+  },
+  "derived": {
+    "note": "transport = no-op operation minus that client's process spawn",
+    "sit_transport_us": 3273.5,
+    "git_transport_us": 7203.6,
+    "delta_us": -3930.1,
+    "delta_ms": -3.93,
+    "interpretation": "positive: SafeHub's transport is dearer and should be discounted; negative: SafeHub's is already the cheaper"
+  }
+}

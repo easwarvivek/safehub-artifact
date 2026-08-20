@@ -1,0 +1,18 @@
+# Rust build output
+code/target/
+**/target/
+
+# Generated figures (regenerate with scripts/make_*_figures.py)
+paper/
+
+# Local run output (harnesses recreate this)
+code/eval/results/
+code/data/
+**/data-local/
+.safehub/
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/

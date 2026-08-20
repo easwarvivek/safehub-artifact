@@ -1,0 +1,81 @@
+{
+  "note": "concurrency harness: real N concurrent pushers on distinct branches",
+  "measured_at": "2026-08-18T23:05:02.497001+00:00",
+  "cells": [
+    {
+      "pushers": 1,
+      "wall_s": 0.031,
+      "ok": 1,
+      "fail": 0,
+      "cas_retry_hints": 0,
+      "throughput_pushes_per_s": 32.258,
+      "upload_window": 8,
+      "note": "real concurrent sit push to distinct branches; CAS serializes tip append",
+      "measured": true
+    },
+    {
+      "pushers": 2,
+      "wall_s": 0.056,
+      "ok": 2,
+      "fail": 0,
+      "cas_retry_hints": 1,
+      "throughput_pushes_per_s": 35.714,
+      "upload_window": 8,
+      "note": "real concurrent sit push to distinct branches; CAS serializes tip append",
+      "measured": true
+    },
+    {
+      "pushers": 4,
+      "wall_s": 0.149,
+      "ok": 4,
+      "fail": 0,
+      "cas_retry_hints": 4,
+      "throughput_pushes_per_s": 26.846,
+      "upload_window": 8,
+      "note": "real concurrent sit push to distinct branches; CAS serializes tip append",
+      "measured": true
+    },
+    {
+      "pushers": 8,
+      "wall_s": 0.26,
+      "ok": 8,
+      "fail": 0,
+      "cas_retry_hints": 12,
+      "throughput_pushes_per_s": 30.769,
+      "upload_window": 8,
+      "note": "real concurrent sit push to distinct branches; CAS serializes tip append",
+      "measured": true
+    },
+    {
+      "pushers": 16,
+      "wall_s": 0.486,
+      "ok": 16,
+      "fail": 0,
+      "cas_retry_hints": 29,
+      "throughput_pushes_per_s": 32.922,
+      "upload_window": 8,
+      "note": "real concurrent sit push to distinct branches; CAS serializes tip append",
+      "measured": true
+    },
+    {
+      "pushers": 32,
+      "wall_s": 0.637,
+      "ok": 32,
+      "fail": 0,
+      "cas_retry_hints": 69,
+      "throughput_pushes_per_s": 50.235,
+      "upload_window": 8,
+      "note": "real concurrent sit push to distinct branches; CAS serializes tip append",
+      "measured": true
+    }
+  ],
+  "starvation": {
+    "large_completed": true,
+    "wall_s": 1.019,
+    "budget_s": 30,
+    "small_pushers": 4,
+    "large_push_mib": 8,
+    "measured": true,
+    "note": "one 8 MiB push against 4 concurrent small pushes under the CAS retry budget; large_completed=false means the large push was still retrying when the budget expired"
+  }
+}

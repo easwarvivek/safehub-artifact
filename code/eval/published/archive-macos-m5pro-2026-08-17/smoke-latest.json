@@ -1,0 +1,75 @@
+{
+  "mode": "smoke",
+  "machine": {
+    "os": "macos",
+    "arch": "aarch64",
+    "hostname": "unknown",
+    "cpu_hint": "Apple M5 Pro",
+    "build_profile": "release",
+    "measured_at": "2026-08-17T01:15:52.011600+00:00",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "hardware_aes_likely": false,
+    "rustc_release": "release: 1.96.0",
+    "quiet_host": true
+  },
+  "experimental": {
+    "narrative_collaborators": 3,
+    "target_files": 200,
+    "size_sweep_mib": [
+      5,
+      10,
+      50,
+      100,
+      200,
+      250,
+      300
+    ],
+    "join_sweep": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+    ]
+  },
+  "fixtures": [
+    {
+      "path": "eval/results/tmp-smoke-eval/fixture-smoke",
+      "file_count": 22,
+      "total_bytes": 1050250,
+      "commit_depth": 5,
+      "seed": 1526657037,
+      "content_hash": "2902eccbcfce930394048a77b6d138c07f7b2f1af7c9c1c23f6b4f75e9b95c41",
+      "target_files": 20,
+      "target_bytes": 1048576
+    }
+  ],
+  "micro": {
+    "aead_seal_1kib_ns": 6709,
+    "aead_open_1kib_ns": 6584,
+    "aead_seal_1mib_ns": 4157625,
+    "aead_open_1mib_ns": 4133792,
+    "refhead_hash_ns": 583,
+    "head_verify_100_ns": 115084,
+    "runs": 25,
+    "warmups": 3,
+    "median_of": 25,
+    "build_profile": "release",
+    "status": "measured"
+  },
+  "size_ops": [],
+  "join_ops": [],
+  "notes": [
+    "Smoke uses reduced fixture (20 files / 1 MiB).",
+    "Micro is median of 25 in-process runs, 3 warmups, on a quiet host (no leftover safehub-server/git daemon listeners; no competing cargo/eval).",
+    "Transport AEAD = hkdf-sha512-pad+HMAC-SHA-512-256 (C01, CommittingAead); ~4.16 ms/MiB seal, ~4.15 ms/MiB open \u2014 essentially unchanged from the AES-GCM-era transport.",
+    "Supersedes the 2026-08-17T00:02 smoke (11.6 ms/MiB) which was a contended-host anomaly.",
+    "Full size sweep is in parity-latest.json; join sweep n=10..100 via OpenMLS Category-5 in fullstack-latest.json."
+  ],
+  "elapsed_ms": 262
+}

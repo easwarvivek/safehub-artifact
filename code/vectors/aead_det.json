@@ -1,0 +1,8 @@
+{
+  "aad": "aad",
+  "ciphertext_hex": "0000000000000000000000001f26016ce9a883edeb20e198c2f9cace8b62edc7c2efe6204366b4bd4a49be6fe5f263d8583ef2320dde82e098347ad77d0e87557c70bde9883f2b90071e3d665ae25458141d07f2889d031c0dd0cb991552",
+  "counter": 0,
+  "key_hex": "1111111111111111111111111111111111111111111111111111111111111111",
+  "note": "deterministic nonce under explicit seal key; use derive_head_seal_key(K_e, seq) on the wire",
+  "plaintext": "pt"
+}

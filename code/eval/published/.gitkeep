@@ -1,0 +1,3 @@
+# Published eval summaries (committed)
+
+Copies of latest smoke/full JSON for paper tables. Raw multi-run artifacts stay under `../results/` (gitignored).

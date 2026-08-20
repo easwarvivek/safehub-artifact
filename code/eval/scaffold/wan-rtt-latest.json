@@ -1,0 +1,157 @@
+{
+  "measured_at": "2026-08-15T02:43:50.870052+00:00",
+  "formula": "push_round_trips = 2 + ceil(chunks/P)",
+  "rows": [
+    {
+      "rtt_ms": 10,
+      "chunks": 1,
+      "P": 8,
+      "expected_rts": 3,
+      "model_wall_s": 0.03,
+      "portable_sleep_wall_s": 0.0337,
+      "ratio_wall_over_model": 1.125,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 10,
+      "chunks": 3,
+      "P": 8,
+      "expected_rts": 3,
+      "model_wall_s": 0.03,
+      "portable_sleep_wall_s": 0.0322,
+      "ratio_wall_over_model": 1.074,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 10,
+      "chunks": 8,
+      "P": 8,
+      "expected_rts": 3,
+      "model_wall_s": 0.03,
+      "portable_sleep_wall_s": 0.035,
+      "ratio_wall_over_model": 1.167,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 10,
+      "chunks": 16,
+      "P": 8,
+      "expected_rts": 4,
+      "model_wall_s": 0.04,
+      "portable_sleep_wall_s": 0.045,
+      "ratio_wall_over_model": 1.126,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 10,
+      "chunks": 32,
+      "P": 8,
+      "expected_rts": 6,
+      "model_wall_s": 0.06,
+      "portable_sleep_wall_s": 0.065,
+      "ratio_wall_over_model": 1.084,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 50,
+      "chunks": 1,
+      "P": 8,
+      "expected_rts": 3,
+      "model_wall_s": 0.15,
+      "portable_sleep_wall_s": 0.1506,
+      "ratio_wall_over_model": 1.004,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 50,
+      "chunks": 3,
+      "P": 8,
+      "expected_rts": 3,
+      "model_wall_s": 0.15,
+      "portable_sleep_wall_s": 0.1524,
+      "ratio_wall_over_model": 1.016,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 50,
+      "chunks": 8,
+      "P": 8,
+      "expected_rts": 3,
+      "model_wall_s": 0.15,
+      "portable_sleep_wall_s": 0.155,
+      "ratio_wall_over_model": 1.033,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 50,
+      "chunks": 16,
+      "P": 8,
+      "expected_rts": 4,
+      "model_wall_s": 0.2,
+      "portable_sleep_wall_s": 0.205,
+      "ratio_wall_over_model": 1.025,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 50,
+      "chunks": 32,
+      "P": 8,
+      "expected_rts": 6,
+      "model_wall_s": 0.3,
+      "portable_sleep_wall_s": 0.3012,
+      "ratio_wall_over_model": 1.004,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 150,
+      "chunks": 1,
+      "P": 8,
+      "expected_rts": 3,
+      "model_wall_s": 0.45,
+      "portable_sleep_wall_s": 0.455,
+      "ratio_wall_over_model": 1.011,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 150,
+      "chunks": 3,
+      "P": 8,
+      "expected_rts": 3,
+      "model_wall_s": 0.45,
+      "portable_sleep_wall_s": 0.455,
+      "ratio_wall_over_model": 1.011,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 150,
+      "chunks": 8,
+      "P": 8,
+      "expected_rts": 3,
+      "model_wall_s": 0.45,
+      "portable_sleep_wall_s": 0.4521,
+      "ratio_wall_over_model": 1.005,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 150,
+      "chunks": 16,
+      "P": 8,
+      "expected_rts": 4,
+      "model_wall_s": 0.6,
+      "portable_sleep_wall_s": 0.6037,
+      "ratio_wall_over_model": 1.006,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    },
+    {
+      "rtt_ms": 150,
+      "chunks": 32,
+      "P": 8,
+      "expected_rts": 6,
+      "model_wall_s": 0.9,
+      "portable_sleep_wall_s": 0.905,
+      "ratio_wall_over_model": 1.006,
+      "note": "portable delay injection validating 2+ceil(n/P); Linux tc netem optional"
+    }
+  ],
+  "status": "measured-model-validated"
+}

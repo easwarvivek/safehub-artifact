@@ -1,0 +1,46 @@
+{
+  "events": 200,
+  "note": "Modeled churn scaffold; set SAFEHUB_CHURN_LIVE=1 for partial live sample",
+  "reinit_necessary_at_n": 1000,
+  "treekem_blanking": "increases with leave rate; periodic re-init recommended",
+  "series_tail": [
+    {
+      "event": 195,
+      "op": "leave",
+      "members": 10,
+      "commit_kb_est": 11.2,
+      "welcome_kb_est": 12.5
+    },
+    {
+      "event": 196,
+      "op": "join",
+      "members": 11,
+      "commit_kb_est": 11.52,
+      "welcome_kb_est": 12.55
+    },
+    {
+      "event": 197,
+      "op": "leave",
+      "members": 10,
+      "commit_kb_est": 11.2,
+      "welcome_kb_est": 12.5
+    },
+    {
+      "event": 198,
+      "op": "join",
+      "members": 11,
+      "commit_kb_est": 11.52,
+      "welcome_kb_est": 12.55
+    },
+    {
+      "event": 199,
+      "op": "leave",
+      "members": 10,
+      "commit_kb_est": 11.2,
+      "welcome_kb_est": 12.5
+    }
+  ],
+  "steady_state_commit_kb_est": 11.2,
+  "status": "scaffold",
+  "generated_at": "2026-08-15T02:43:56.007526+00:00"
+}

@@ -1,0 +1,92 @@
+{
+  "id": "E11",
+  "title": "Branch/merge and force-push+cosig workloads",
+  "meta": {
+    "generated_by": "scripts/gen_vcs_workload_latest.py",
+    "method": "merge-heavy modeled; force-push cosig from measured policy timing",
+    "reps": 5,
+    "machine": "unspecified",
+    "machine_detail": {
+      "os": "linux",
+      "os_release": "6.1.177-224.371.amzn2023.aarch64",
+      "arch": "aarch64",
+      "cpu_hint": "unspecified",
+      "cpu_count": 32,
+      "ram_bytes": null,
+      "ram_gib": null,
+      "storage_hint": "local SSD (APFS/ext4)",
+      "hardware_aes_on_transport": false,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+      "build_profile": "release",
+      "python": "3.9.25",
+      "measured_at": "2026-08-18T21:01:01.595661+00:00"
+    },
+    "provenance": {
+      "git_commit": null,
+      "git_describe": null,
+      "git_dirty": false,
+      "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+      "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+      "git_version": "git version 2.50.1",
+      "mls_ciphersuite": null,
+      "mls_backend": null,
+      "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+      "crypto_features": null
+    },
+    "aes_note": "Transport AEAD is HKDF-SHA-512 RO-pad + HMAC-SHA-512-256 (CommittingAead); hardware AES is unused on the application transport hot path. MLS suite AEAD is independent.",
+    "aead_backend": "hkdf-sha512-pad+HMAC-SHA-512-256",
+    "date": "2026-08-18T21:01:21.644616+00:00",
+    "quiet_host": true,
+    "host_note": "Measurements taken after confirming no leftover safehub-server/safehub-browse/safehub-local-ui listeners and no competing cargo eval builds owned by this harness."
+  },
+  "cells": [
+    {
+      "workload": "merge-heavy",
+      "description": "8 branches \u00d7 4 commits, then merge to main",
+      "branches": 8,
+      "commits_per_branch": 4,
+      "bytes_touched": 1048576,
+      "wall_ms": {
+        "value": 112.9232,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "model",
+      "label": "model",
+      "note": "Modeled from measured AEAD seal rate \u00d7 bytes + per-branch control-plane constants. Preserves merge commits in history."
+    },
+    {
+      "workload": "force-push-cosig",
+      "description": "Non-fast-forward tip rewrite with ML-DSA-87 admin cosig",
+      "rewrite_bytes": 65536,
+      "admin_cosig_verify_ms": {
+        "value": 154.0,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "wall_ms": {
+        "value": 166.4952,
+        "unit": "ms",
+        "n": 1,
+        "dispersion": null,
+        "kind": "analytic",
+        "note": "analytically derived; no replicates, no synthesized spread"
+      },
+      "status": "measured",
+      "label": "measured",
+      "note": "Cosig verify measured in fullstack security.force_push_policy; seal portion from AEAD micro.",
+      "missing_cosig_outcome": "rejected"
+    }
+  ],
+  "notes": [
+    "Sequential size sweep remains primary; these workloads are additive.",
+    "Grafted blame still needs abstract qualification (E04)."
+  ]
+}
